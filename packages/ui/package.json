@@ -1,0 +1,39 @@
+{
+  "name": "@do-ob/mild",
+  "version": "0.0.0",
+  "description": "A mild TailwindCSS component library for React 19+",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./*": {
+      "import": "./dist/*.js",
+      "types": "./dist/*.d.ts"
+    },
+    "./index": null
+  },
+  "keywords": [
+    "component",
+    "library",
+    "react",
+    "tailwindcss",
+    "typescript",
+    "mild",
+    "minimal",
+    "unstyled"
+  ],
+  "author": "Eric Crowell <eric@do-ob.io> (https://do-ob.io)",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc"
+  },
+  "dependencies": {
+    "@headlessui/react": "2",
+    "@heroicons/react": "2"
+  },
+  "peerDependencies": {
+    "react": "rc"
+  }
+}

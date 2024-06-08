@@ -1,0 +1,14 @@
+{
+  "extends": "@do-ob/ts-config",
+  "compilerOptions": {
+      "outDir": "./dist",
+      "jsx": "react-jsx",
+      "baseUrl": ".",
+      "emitDeclarationOnly": false,
+      "paths": {
+        "@do-ob/ui": ["src/index.ts"],
+        "@do-ob/ui/*": ["src/*.ts"]
+      }
+  },
+  "include": ["src"],
+}
