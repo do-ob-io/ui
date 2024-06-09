@@ -4,7 +4,9 @@
       "outDir": "./dist",
       "jsx": "react-jsx",
       "baseUrl": ".",
-      "emitDeclarationOnly": false,
+      "declaration": false,
+      "declarationDir": null,
+      "skipLibCheck": true,
       "paths": {
         "@do-ob/ui": ["src/index.ts"],
         "@do-ob/ui/*": ["src/*.ts"]

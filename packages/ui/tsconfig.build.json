@@ -1,0 +1,13 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "declaration": true,
+    "allowImportingTsExtensions": false,
+    "emitDeclarationOnly": false,
+    "noEmit": false,
+    "declarationDir": "./dist",
+    "outDir": "./dist",
+  },
+  "include": ["src"],
+  "exclude": ["src/**/*.stories.tsx"]
+}
