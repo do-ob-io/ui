@@ -1,5 +1,7 @@
+import React from 'react';
 import type { Preview } from '@storybook/react';
 import { withThemeByClassName } from '@storybook/addon-themes';
+import { DoobProvider } from '../packages/ui/src/provider';
 import '../global.css';
 
 const preview: Preview = {
@@ -10,7 +12,7 @@ const preview: Preview = {
         date: /Date$/i,
       },
     },
-  },
+  }
 };
 
 export const decorators = [
@@ -21,6 +23,11 @@ export const decorators = [
     },
     defaultTheme: 'light',
   }),
+  (Story) => (
+    <DoobProvider>
+      <Story />
+    </DoobProvider>
+  ),
 ];
 
 export default preview;
