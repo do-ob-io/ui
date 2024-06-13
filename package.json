@@ -10,6 +10,7 @@
   },
   "scripts": {
     "build": "pnpm --filter './packages/*' build",
+    "test": "pnpm --filter './packages/*' test",
     "lint": "eslint ./packages",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
@@ -38,6 +39,7 @@
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.0",
     "autoprefixer": "^10.4.19",
+    "cssnano": "^7.0.2",
     "eslint": "^9.2.0",
     "framer-motion": "^11.2.10",
     "postcss": "^8.4.38",
