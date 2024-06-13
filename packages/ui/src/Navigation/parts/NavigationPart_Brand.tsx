@@ -1,4 +1,4 @@
-import { NavbarBrand } from '@nextui-org/react';
+import { NavbarBrand, Link } from '@nextui-org/react';
 
 /**
  * Navigation Brand properties
@@ -18,7 +18,7 @@ export function NavigationPart_Brand({
 }: NavigationPart_BrandProps) {
   return (
     <NavbarBrand>
-      <h1 className="text-2xl">{title}</h1>
+      <Link href="/" className="text-lg text-inherit">{title}</Link>
     </NavbarBrand>
   );
 }

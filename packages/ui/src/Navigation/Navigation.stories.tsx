@@ -26,6 +26,20 @@ const links: Link[] = [
   {
     title: 'Contact',
     url: '#contact',
+    links: [
+      {
+        title: 'Location',
+        url: '#location',
+      },
+      {
+        title: 'Email',
+        url: '#email',
+      },
+      {
+        title: 'Phone',
+        url: '#phone',
+      },
+    ],
   },
 ];
 

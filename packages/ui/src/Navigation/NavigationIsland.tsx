@@ -15,8 +15,8 @@ export function NavigationIsland({
   const [ colors ] = twColors(color);
 
   return (
-    <Navbar>
-      <NavbarContent justify="start" className="py-3">
+    <Navbar className="items-center justify-center">
+      <NavbarContent justify="start" className="flex items-center">
         <NavigationPart_Brand title={title} />
       </NavbarContent>
       <NavbarContent justify="center">
@@ -24,7 +24,7 @@ export function NavigationIsland({
           <NavigationPart_Links links={links} />
         </div>
       </NavbarContent>
-      <NavbarContent justify="start">
+      <NavbarContent justify="end">
 
       </NavbarContent>
     </Navbar>
