@@ -19,6 +19,7 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
+    "@do-ob/core": "^1.0.0",
     "@do-ob/eslint-config": "^2.3.0",
     "@do-ob/ts-config": "^2.0.0",
     "@do-ob/ui": "workspace:*",

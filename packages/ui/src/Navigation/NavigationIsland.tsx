@@ -1,11 +1,15 @@
 import { Navbar, NavbarContent } from '@nextui-org/react';
-import { twColors, clsx } from '@do-ob/ui/utility';
+import { twColors } from '@do-ob/ui/utility';
+import { clsx } from '@do-ob/core';
+
 import type { NavigationProps } from './Navigation';
 import { NavigationPart_Brand } from './parts/NavigationPart_Brand';
+import { NavigationPart_Links } from './parts/NavigationPart_Links';
 
 export function NavigationIsland({
   title,
   color,
+  links,
 }: NavigationProps) {
 
   const [ colors ] = twColors(color);
@@ -16,13 +20,8 @@ export function NavigationIsland({
         <NavigationPart_Brand title={title} />
       </NavbarContent>
       <NavbarContent justify="center">
-        <div className={clsx(color && colors, 'rounded-full px-8 py-3')}>
-          <div className="flex space-x-4">
-            <a href="#" className="text-base">Home</a>
-            <a href="#" className="text-base">About</a>
-            <a href="#" className="text-base">Services</a>
-            <a href="#" className="text-base">Contact</a>
-          </div>
+        <div className={clsx(color && colors, 'flex gap-1 rounded-full px-4 py-1')}>
+          <NavigationPart_Links links={links} />
         </div>
       </NavbarContent>
       <NavbarContent justify="start">

@@ -1,4 +1,4 @@
-import type { ThemeColor } from '../types';
+import type { Link, ThemeColor } from '../types';
 
 import { NavigationStandard } from './NavigationStandard';
 import { NavigationIsland } from './NavigationIsland';
@@ -13,6 +13,11 @@ export interface NavigationProps {
    * The theme color of the navigation
    */
   color?: ThemeColor;
+
+  /**
+   * The links of the navigation
+   */
+  links?: Link[];
 }
 
 export interface NavigationVariantProps extends NavigationProps {
