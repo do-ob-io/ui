@@ -42,6 +42,7 @@
     "autoprefixer": "^10.4.19",
     "cssnano": "^7.0.2",
     "eslint": "^9.2.0",
+    "eslint-plugin-react-compiler": "0.0.0-experimental-51a85ea-20240601",
     "framer-motion": "^11.2.10",
     "postcss": "^8.4.38",
     "react": "18.3.1",
