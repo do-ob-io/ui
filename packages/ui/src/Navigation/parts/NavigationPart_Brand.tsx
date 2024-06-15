@@ -1,4 +1,6 @@
-import { NavbarBrand, Link } from '@nextui-org/react';
+import React from 'react';
+import { NavbarBrand, Link, Image } from '@nextui-org/react';
+import { DoobUiContext } from '@do-ob/ui/context'; 
 
 /**
  * Navigation Brand properties
@@ -8,6 +10,11 @@ export interface NavigationPart_BrandProps {
    * The branding title to display.
    */
   title?: string;
+
+  /**
+   * The branding image to display.
+   */
+  image?: string;
 }
 
 /**
@@ -15,10 +22,23 @@ export interface NavigationPart_BrandProps {
  */
 export function NavigationPart_Brand({
   title,
+  image,
 }: NavigationPart_BrandProps) {
+
+  const { image: imageNode } = React.useContext(DoobUiContext);
+
   return (
     <NavbarBrand>
-      <Link href="/" className="text-lg text-inherit">{title}</Link>
+      {image ? (
+        <Image
+          as={imageNode}
+          src={image}
+          alt={title}
+          width={40}
+          height={40}
+        />
+      ) : null}
+      <Link href="/" className="text-xl text-inherit">{title}</Link>
     </NavbarBrand>
   );
 }

@@ -1,4 +1,9 @@
 /**
+ * Theme mode.
+ */
+export type ThemeMode = 'light' | 'dark';
+
+/**
  * Theem colors.
  */
 export type ThemeColor = 'background' | 'foreground' | 'default' | 'primary' | 'secondary' | 'success' | 'danger' | 'warning' | 'info';

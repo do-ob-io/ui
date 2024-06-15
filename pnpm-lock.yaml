@@ -9,17 +9,14 @@ importers:
   .:
     devDependencies:
       '@do-ob/core':
-        specifier: ^1.0.0
-        version: 1.0.0
+        specifier: link:../core/packages/core
+        version: link:../core/packages/core
       '@do-ob/eslint-config':
         specifier: ^2.3.0
         version: 2.3.0(eslint@9.4.0)(tailwindcss@3.4.4)(typescript@5.4.5)
       '@do-ob/ts-config':
         specifier: ^2.0.0
         version: 2.0.0(typescript@5.4.5)
-      '@do-ob/ui':
-        specifier: workspace:*
-        version: link:packages/ui
       '@do-ob/vite-lib-config':
         specifier: ^3.0.1
         version: 3.0.1(@types/node@20.14.2)(rollup@4.18.0)(typescript@5.4.5)(vite@5.2.13(@types/node@20.14.2)(terser@5.31.1))
@@ -793,9 +790,6 @@ packages:
   '@discoveryjs/json-ext@0.5.7':
     resolution: {integrity: sha512-dBVuXR082gk3jsFp7Rd/JI4kytwGHecnCoTtXFb7DB6CNHp4rg5k1bhg0nWdLGLnOV71lmDzGQaLMy8iPLY0pw==}
     engines: {node: '>=10.0.0'}
-
-  '@do-ob/core@1.0.0':
-    resolution: {integrity: sha512-QO6V4GwZ3AOVp/DEwBz82CpsdCZVgFRfnfms7ZMK07fpUzD/7R39jWkULy5rqGZnxhps11dhKLGbQmI6LX/wlg==}
 
   '@do-ob/eslint-config@2.3.0':
     resolution: {integrity: sha512-jezw0GnatrViICC8tauRJDAh1qVmwMHL6VTgwJ12HGuYRlwKCRTW0EJuU73IFekR8z7bro0FAaGY9n9MinbJcQ==}
@@ -6900,8 +6894,6 @@ snapshots:
     optional: true
 
   '@discoveryjs/json-ext@0.5.7': {}
-
-  '@do-ob/core@1.0.0': {}
 
   '@do-ob/eslint-config@2.3.0(eslint@9.4.0)(tailwindcss@3.4.4)(typescript@5.4.5)':
     dependencies:

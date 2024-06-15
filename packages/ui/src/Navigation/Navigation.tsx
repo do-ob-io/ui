@@ -5,9 +5,14 @@ import { NavigationIsland } from './NavigationIsland';
 
 export interface NavigationProps {
   /**
-   * Title of the navigation
+   * The brand title to display
    */
   title?: string;
+
+  /**
+   * The brand image to display
+   */
+  image?: string;
 
   /**
    * The theme color of the navigation
@@ -18,6 +23,16 @@ export interface NavigationProps {
    * The links of the navigation
    */
   links?: Link[];
+
+  /**
+   * Class name for the navigation
+   */
+  className?: string;
+
+  /**
+   * The search form action URL
+   */
+  search?: string;
 }
 
 export interface NavigationVariantProps extends NavigationProps {
@@ -39,5 +54,3 @@ export function Navigation({
       return <NavigationStandard {...props} />;
   }
 }
-
-export default Navigation;

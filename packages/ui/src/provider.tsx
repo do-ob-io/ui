@@ -1,22 +1,23 @@
 import { NextUIProvider, NextUIProviderProps } from '@nextui-org/react';
-import React from 'react';
+import { DoobUiContext } from '@do-ob/ui/context';
+import type { ThemeMode } from '@do-ob/ui/types';
+import { useMode } from '@do-ob/ui/hooks';
 
-export interface doobContextProps {
+export interface DoobUiProviderProps {
   /**
-   * The image component to utilize for optimization
-   * 
-   * This is useful in NextJS to pass in the Image component.
+   * Set the image component to utilize for optimization
    */
-  imageNode?: React.ReactNode;
-}
+  image?: React.ElementType<any>;
 
-export const doobContextDefaultProps: doobContextProps = {
-  imageNode: undefined
-};
+  /**
+   * Set the initial theme mode to use for the application.
+   * 
+   * Changing this value later will not change the theme mode.
+   * 
+   * @default 'light'
+   */
+  mode?: ThemeMode;
 
-export const DoobContext = React.createContext<doobContextProps>(doobContextDefaultProps);
-
-export interface DoobProviderProps extends doobContextProps {
   /**
    * NextUI Provider properties.
    * 
@@ -25,20 +26,27 @@ export interface DoobProviderProps extends doobContextProps {
   nextui?: NextUIProviderProps;
 }
 
+'use client';
 /**
  * The provider for the doob context
  */
-export function DoobProvider({
-  children,
+export function DoobUiProvider({
   nextui,
+  children,
   ...contextValue
-}: React.PropsWithChildren<DoobProviderProps>) {
+}: React.PropsWithChildren<DoobUiProviderProps>) {
+
+  const { mode, modeToggle } = useMode(contextValue.mode);
 
   return (
     <NextUIProvider {...nextui} >
-      <DoobContext.Provider value={contextValue}>
+      <DoobUiContext.Provider value={{
+        ...contextValue,
+        mode,
+        modeToggle
+      }}>
         {children}
-      </DoobContext.Provider>
+      </DoobUiContext.Provider>
     </NextUIProvider>
   );
 }

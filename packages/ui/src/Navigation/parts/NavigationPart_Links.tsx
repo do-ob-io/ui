@@ -1,4 +1,4 @@
-import { NavbarMenuItem, Link, Button, Popover, PopoverTrigger, PopoverContent } from '@nextui-org/react';
+import { NavbarMenuItem, Link, Button, Popover, PopoverTrigger, PopoverContent, Divider } from '@nextui-org/react';
 import { ChevronDownIcon } from '@heroicons/react/24/solid';
 import { Link as LinkType } from '@do-ob/ui/types';
 import { clsx } from '@do-ob/core';
@@ -20,12 +20,12 @@ export interface NavigationPart_LinksProps {
 
 function LinkLeaf({ link }: { link: LinkType }) {
   return (
-    <NavbarMenuItem>
+    <NavbarMenuItem className="border-y-4 border-transparent hover:border-b-primary-500">
       <Button
         as={Link}
         href={link.url}
         variant="light"
-        className="text-inherit"
+        className="text-base text-inherit"
       >
         {link.title}
       </Button>
@@ -38,27 +38,34 @@ function LinkBranch({ links, level }: { links: LinkType[], level: number }) {
   const classes: string[] = [];
   if (level === 1) {
     classes.push('font-bold');
-    classes.push('text-sm');
   }
 
-  if (level === 2) {
-    classes.push('text-sm');
-  }
+  const pl = level * 1;
 
-  if(level > 2) {
-    classes.push('text-xs');
-  }
-
-  return links.map((link) => (<>
-    <Link href={link.url} className={clsx(...classes, 'box-border w-full rounded px-4 py-2 text-inherit hover:bg-black/10 dark:hover:bg-white/10')}>
+  return links.map((link) => (<div className="relative w-full">
+    <Divider
+      orientation="vertical"
+      className="absolute top-0 h-full"
+      style={{
+        display: level === 1 ? 'none' : 'block',
+        left: `${pl - 1}rem`,
+      }}
+    />
+    <Link
+      href={link.url}
+      className={clsx(...classes, 'box-border w-full rounded py-2 pr-4 text-inherit hover:bg-black/10 hover:underline dark:hover:bg-white/10')}
+      style={{
+        paddingLeft: `${pl}rem`,
+      }}
+    >
       {link.title}
     </Link>
     {link.links?.length && (
-      <div className="w-full border-l-1 border-black/50 pl-4 dark:border-white/50 [&:last-child]:mb-0">
+      <div className="w-full [&:last-child]:mb-0">
         <LinkBranch links={link.links} level={level + 1} />
       </div>
     )}
-  </>));
+  </div>));
 }
 
 function LinkTrunk({ link, colors }: { link: LinkType, colors?: string }) {
@@ -66,21 +73,22 @@ function LinkTrunk({ link, colors }: { link: LinkType, colors?: string }) {
     <Popover
       placement="bottom"
     >
-      <NavbarMenuItem>
+      <NavbarMenuItem className="border-y-4 border-transparent hover:border-b-primary-500">
         <PopoverTrigger>
           <Button
             variant="light"
-            className="text-inherit"
+            className="text-base text-inherit"
             endContent={<ChevronDownIcon className="size-4" />}
           >
             {link.title}
           </Button>
         </PopoverTrigger>
       </NavbarMenuItem>
-      <PopoverContent className={clsx(colors, 'min-w-56 items-start p-4')}>
-        <Link href={link.url} className="flex flex-col items-start rounded p-2 font-bold text-inherit">
+      <PopoverContent className={clsx(colors, 'min-w-64 items-start p-4')}>
+        <Button as={Link} href={link.url} className="w-full justify-start rounded bg-transparent px-4 py-2 text-lg font-bold text-inherit hover:bg-black/10 hover:underline dark:hover:bg-white/10">
           {link.title}
-        </Link>
+        </Button>
+        <Divider className="my-1" />
         <LinkBranch links={link.links ?? []} level={1} />
       </PopoverContent>
     </Popover>
@@ -104,5 +112,3 @@ export function NavigationPart_Links({
     </NavbarMenuItem>
   );
 }
-
-export default NavigationPart_Links;

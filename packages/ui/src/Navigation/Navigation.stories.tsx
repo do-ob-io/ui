@@ -22,6 +22,16 @@ const links: Link[] = [
   {
     title: 'About',
     url: '#about',
+    links: [
+      {
+        title: 'Company',
+        url: '#company',
+      },
+      {
+        title: 'Team',
+        url: '#team',
+      },
+    ],
   },
   {
     title: 'Contact',
@@ -67,6 +77,8 @@ export const Standard: Story = {
   args: {
     title: 'Navigation',
     links,
+    search: '#search',
+    className: 'bg-foreground/10',
   },
 };
 
@@ -74,6 +86,17 @@ export const Island: Story = {
   args: {
     title: 'Navigation',
     variant: 'island',
+    links,
+    search: '#search',
+    className: 'bg-foreground/10',
+  },
+};
+
+export const WithClassName: Story = {
+  args: {
+    title: 'Navigation',
+    variant: 'standard',
+    className: 'bg-red-500',
     links,
   },
 };

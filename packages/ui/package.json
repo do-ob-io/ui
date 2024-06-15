@@ -12,7 +12,8 @@
       "import": "./dist/*.js",
       "types": "./dist/*.d.ts"
     },
-    "./index": null
+    "./index": null,
+    "./package.json": "./package.json"
   },
   "keywords": [
     "component",
