@@ -1,4 +1,4 @@
-import type { Link, ThemeColor } from '../types';
+import type { Link, ThemeColor } from '@do-ob/ui/types';
 
 import { NavigationStandard } from './NavigationStandard';
 import { NavigationIsland } from './NavigationIsland';

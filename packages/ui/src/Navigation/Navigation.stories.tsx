@@ -30,6 +30,26 @@ const links: Link[] = [
       {
         title: 'Location',
         url: '#location',
+        links: [
+          {
+            title: 'Address',
+            url: '#address',
+          },
+          {
+            title: 'Map',
+            url: '#map',
+            links: [
+              {
+                title: 'Google Map',
+                url: '#google-map',
+              },
+              {
+                title: 'Apple Map',
+                url: '#apple-map',
+              },
+            ]
+          },
+        ],
       },
       {
         title: 'Email',

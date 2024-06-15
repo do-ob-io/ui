@@ -21,7 +21,7 @@ export function NavigationIsland({
       </NavbarContent>
       <NavbarContent justify="center">
         <div className={clsx(color && colors, 'flex gap-1 rounded-full px-4 py-1')}>
-          <NavigationPart_Links links={links} />
+          <NavigationPart_Links links={links} colors={colors} />
         </div>
       </NavbarContent>
       <NavbarContent justify="end">

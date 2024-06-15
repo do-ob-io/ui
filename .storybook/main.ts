@@ -1,4 +1,6 @@
 import type { StorybookConfig } from '@storybook/react-vite';
+import { resolve } from 'node:path';
+import { mergeConfig } from 'vite';
 
 const config: StorybookConfig = {
   stories: [
@@ -16,6 +18,18 @@ const config: StorybookConfig = {
   framework: {
     name: '@storybook/react-vite',
     options: {},
+  },
+  viteFinal: (config) => {
+    return mergeConfig(config, {
+      resolve: {
+        alias: [
+          {
+            find: /^@do-ob\/ui(\/?.*)/,
+            replacement: resolve('packages/ui/src$1'),
+          },
+        ],
+      },
+    });
   },
 };
 export default config;

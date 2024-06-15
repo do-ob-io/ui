@@ -20,7 +20,7 @@ export function NavigationStandard({
       </NavbarContent>
 
       <NavbarContent justify="center">
-        <NavigationPart_Links links={links} />
+        <NavigationPart_Links links={links} colors={colors} />
       </NavbarContent>
 
     </Navbar>
