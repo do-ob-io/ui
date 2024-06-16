@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ThemeMode } from '@do-ob/ui/types';
 import { nop } from '@do-ob/core';
 import { createContext } from 'react';

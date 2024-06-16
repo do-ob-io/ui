@@ -38,7 +38,7 @@ export function NavigationPart_Brand({
           height={40}
         />
       ) : null}
-      <Link href="/" className="text-xl text-inherit">{title}</Link>
+      <Link href="/" className="text-2xl tracking-tight text-inherit">{title}</Link>
     </NavbarBrand>
   );
 }

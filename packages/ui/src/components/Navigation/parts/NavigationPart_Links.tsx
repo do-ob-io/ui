@@ -20,7 +20,7 @@ export interface NavigationPart_LinksProps {
 
 function LinkLeaf({ link }: { link: LinkType }) {
   return (
-    <NavbarMenuItem className="border-y-4 border-transparent hover:border-b-primary-200">
+    <NavbarMenuItem className="border-y-4 border-transparent py-1 hover:border-b-primary-200">
       <Button
         as={Link}
         href={link.url}
@@ -75,7 +75,7 @@ function LinkTrunk({ link, colors }: { link: LinkType, colors?: string }) {
     <Popover
       placement="bottom"
     >
-      <NavbarMenuItem className="border-y-4 border-transparent hover:border-b-primary-200">
+      <NavbarMenuItem className="border-y-4 border-transparent py-1 hover:border-b-primary-200">
         <PopoverTrigger>
           <Button
             variant="light"

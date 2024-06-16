@@ -2,6 +2,7 @@ import type { Link, ThemeColor } from '@do-ob/ui/types';
 
 import { NavigationStandard } from './NavigationStandard';
 import { NavigationIsland } from './NavigationIsland';
+import { NavigationExtended } from './NavigationExtended';
 
 export interface NavigationProps {
   /**
@@ -39,7 +40,7 @@ export interface NavigationVariantProps extends NavigationProps {
   /**
    * The variant of the navigation
    */
-  variant?: 'standard' | 'island';
+  variant?: 'standard' | 'island' | 'extended';
 }
 
 export function Navigation({
@@ -50,6 +51,8 @@ export function Navigation({
   switch (variant) {
     case 'island':
       return <NavigationIsland {...props} />;
+    case 'extended':
+      return <NavigationExtended {...props} />;
     default:
       return <NavigationStandard {...props} />;
   }

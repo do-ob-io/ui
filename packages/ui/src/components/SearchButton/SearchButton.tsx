@@ -4,21 +4,39 @@ import { Button, Modal, ModalHeader, ModalBody, useDisclosure, ModalContent, Inp
 /**
  * Navigation Brand properties
  */
-export interface NavigationPart_SearchProps {
+export interface SearchButtonProps {
   /**
    * The search form action URL.
+   * 
+   * @default '#'
    */
-  search?: string;
+  action?: string;
+
+  /**
+   * The search form method.
+   * 
+   * @default 'get'
+   */
+  method?: 'post' | 'get';
+
+  /**
+   * The size of the search button.
+   * 
+   * @default 'md'
+   */
+  size?: 'sm' | 'md' | 'lg';
 }
 
 /**
  * Navigation Search component
  */
-export function NavigationPart_Search({
-  search = '#'
-}: NavigationPart_SearchProps) {
+export function SearchButton({
+  action = '#',
+  method = 'get',
+  size = 'md',
+}: SearchButtonProps) {
 
-  const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   return (<>
     <Button isIconOnly onPress={onOpen} size="sm">
@@ -28,12 +46,12 @@ export function NavigationPart_Search({
       isOpen={isOpen}
       onOpenChange={onOpenChange}
       title="Search"
-      size="md"
+      size={size}
       hideCloseButton
     >
       <ModalContent>
         <ModalHeader className="p-1">
-          <form action={search} method="get" className="w-full">
+          <form action={action} method={method} className="w-full">
             <Input
               classNames={{
                 base: 'max-w-full h-12',
@@ -44,7 +62,9 @@ export function NavigationPart_Search({
               placeholder="Search website..."
               size="lg"
               startContent={<MagnifyingGlassIcon className="size-7" />}
-              endContent={<Kbd onClick={onClose} className="cursor-pointer">ESC</Kbd>}
+              endContent={
+                <Kbd>ESC</Kbd>
+              }
               type="search"
             />
           </form>

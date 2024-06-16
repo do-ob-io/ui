@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { Navigation } from './Navigation';
-import { Link } from '../types';
+import { Link } from '@do-ob/ui/types';
 
 const meta = {
   component: Navigation,
@@ -85,6 +85,15 @@ export const Island: Story = {
   args: {
     title: 'Navigation',
     variant: 'island',
+    links,
+    search: '#search',
+  },
+};
+
+export const Extended: Story = {
+  args: {
+    title: 'Navigation',
+    variant: 'extended',
     links,
     search: '#search',
   },
