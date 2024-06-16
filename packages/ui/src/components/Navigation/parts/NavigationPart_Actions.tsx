@@ -1,36 +1,15 @@
 import { ThemeSwitch, SearchButton } from '@do-ob/ui/components';
-import type { SocialLinks } from '@do-ob/ui/types';
 import { SocialIcons } from '@do-ob/ui/icons';
 import { Link, Button, Divider } from '@nextui-org/react';
-
-/**
- * Navigation Brand properties
- */
-export interface NavigationPart_ActionsProps {
-  /**
-   * The search form action URL.
-   */
-  search?: string;
-
-  /**
-   * Enable the dark mode toggle.
-   */
-  modeToggle?: boolean;
-
-  /**
-   * The social links of the navigation.
-   */
-  socials?: SocialLinks;
-}
+import { NavigationContext } from '../data/NavigationContext';
+import { useContext } from 'react';
 
 /**
  * Navigation Search component
  */
-export function NavigationPart_Actions({
-  search,
-  modeToggle,
-  socials = [],
-}: NavigationPart_ActionsProps) {
+export function NavigationPart_Actions() {
+
+  const { socials = [], search, modeToggle } = useContext(NavigationContext);
 
   return (
     <div className="flex h-full flex-row items-end justify-center gap-2">
