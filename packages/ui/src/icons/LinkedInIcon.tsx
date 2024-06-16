@@ -7,5 +7,3 @@ export const LinkedInIcon: React.FC<React.HTMLAttributes<SVGElement>> = (props) 
     </svg>
   );
 };
-
-export default LinkedInIcon;

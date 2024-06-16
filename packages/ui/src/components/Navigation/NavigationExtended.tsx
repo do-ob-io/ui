@@ -11,29 +11,29 @@ export function NavigationExtended({
   color,
   links,
   className,
-  search
+  search,
+  modeToggle,
+  socials,
 }: NavigationProps) {
 
   const [ colors ] = twColors(color);
 
   return (
     <Navbar
-      className={clmg(clsx(color && colors, 'border-b-1 border-b-foreground-200/50', className))}
+      className={clmg(clsx(color && colors, 'relative border-b-1 border-b-foreground-200/50', className))}
       height="4rem"
     >
       <NavbarContent justify="start">
         <NavigationPart_Brand title={title} />
       </NavbarContent>
 
-      <NavbarContent justify="center">
+      <NavbarContent justify="start">
         <NavigationPart_Links links={links} colors={colors} />
       </NavbarContent>
 
       <NavbarContent justify="end">
         <div className="max-w-64">
-          {search ? (
-            <NavigationPart_Actions search={search} />
-          ) : null}
+          <NavigationPart_Actions search={search} modeToggle={modeToggle} socials={socials} />
         </div>
       </NavbarContent>
 

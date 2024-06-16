@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { Navigation } from './Navigation';
-import { Link } from '@do-ob/ui/types';
+import { Link, SocialLinks } from '@do-ob/ui/types';
 
 const meta = {
   component: Navigation,
@@ -73,11 +73,36 @@ const links: Link[] = [
   },
 ];
 
+const socials: SocialLinks = [
+  {
+    type: 'facebook',
+    url: 'https://facebook.com',
+  },
+  {
+    type: 'instagram',
+    url: 'https://instagram.com',
+  },
+  {
+    type: 'linkedin',
+    url: 'https://linkedin.com',
+  },
+  {
+    type: 'x',
+    url: 'https://x.com',
+  },
+  {
+    type: 'youtube',
+    url: 'https://youtube.com',
+  },
+];
+
 export const Standard: Story = {
   args: {
     title: 'Navigation',
     links,
     search: '#search',
+    modeToggle: true,
+    socials,
   },
 };
 
@@ -87,6 +112,8 @@ export const Island: Story = {
     variant: 'island',
     links,
     search: '#search',
+    modeToggle: true,
+    socials,
   },
 };
 
@@ -96,6 +123,8 @@ export const Extended: Story = {
     variant: 'extended',
     links,
     search: '#search',
+    modeToggle: true,
+    socials,
   },
 };
 

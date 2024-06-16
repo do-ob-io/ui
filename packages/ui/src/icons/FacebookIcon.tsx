@@ -9,5 +9,3 @@ export const FacebookIcon: React.FC<React.HTMLAttributes<SVGElement>> = (props) 
     </svg>
   );
 };
-
-export default FacebookIcon;

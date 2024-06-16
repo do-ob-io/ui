@@ -27,3 +27,13 @@ export interface Link {
    */
   links?: Link[];
 }
+
+export type Socials = 'facebook' | 'x' | 'instagram' | 'linkedin' | 'youtube';
+
+/**
+ * An object of socials.
+ */
+export type SocialLinks = {
+  type: Socials;
+  url: string;
+}[];

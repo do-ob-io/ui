@@ -11,7 +11,9 @@ export function NavigationStandard({
   color,
   links,
   className,
-  search
+  search,
+  modeToggle,
+  socials
 }: NavigationProps) {
 
   const [ colors ] = twColors(color);
@@ -31,9 +33,7 @@ export function NavigationStandard({
 
       <NavbarContent justify="end">
         <div className="max-w-64">
-          {search ? (
-            <NavigationPart_Actions search={search} />
-          ) : null}
+          <NavigationPart_Actions search={search} modeToggle={modeToggle} socials={socials} />
         </div>
       </NavbarContent>
 

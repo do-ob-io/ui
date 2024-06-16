@@ -1,4 +1,4 @@
-import type { Link, ThemeColor } from '@do-ob/ui/types';
+import type { Link, ThemeColor, SocialLinks } from '@do-ob/ui/types';
 
 import { NavigationStandard } from './NavigationStandard';
 import { NavigationIsland } from './NavigationIsland';
@@ -13,7 +13,7 @@ export interface NavigationProps {
   /**
    * The brand image to display
    */
-  image?: string;
+  logo?: string;
 
   /**
    * The theme color of the navigation
@@ -34,6 +34,26 @@ export interface NavigationProps {
    * The search form action URL
    */
   search?: string;
+
+  /**
+   * Enable the dark mode toggle
+   */
+  modeToggle?: boolean;
+
+  /**
+   * The social links of the navigation
+   */
+  socials?: SocialLinks;
+
+  /**
+   * Class names to modify.
+   */
+  classNames?: {
+    /**
+     * The logo image class name
+     */
+    logo?: string;
+  }
 }
 
 export interface NavigationVariantProps extends NavigationProps {

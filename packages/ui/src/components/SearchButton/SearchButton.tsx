@@ -1,23 +1,18 @@
 import { MagnifyingGlassIcon } from '@heroicons/react/24/solid';
-import { Button, Modal, ModalHeader, ModalBody, useDisclosure, ModalContent, Input, Kbd } from '@nextui-org/react';
+import { Button, Modal, ModalHeader, ModalBody, useDisclosure, ModalContent } from '@nextui-org/react';
+import { SearchAction, search } from '@do-ob/ui/actions';
+import { SearchForm } from '../SearchForm/SearchForm';
 
 /**
  * Navigation Brand properties
  */
 export interface SearchButtonProps {
   /**
-   * The search form action URL.
+   * The search action
    * 
    * @default '#'
    */
-  action?: string;
-
-  /**
-   * The search form method.
-   * 
-   * @default 'get'
-   */
-  method?: 'post' | 'get';
+  action?: SearchAction;
 
   /**
    * The size of the search button.
@@ -31,16 +26,15 @@ export interface SearchButtonProps {
  * Navigation Search component
  */
 export function SearchButton({
-  action = '#',
-  method = 'get',
+  action = search,
   size = 'md',
 }: SearchButtonProps) {
 
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   return (<>
-    <Button isIconOnly onPress={onOpen} size="sm">
-      <MagnifyingGlassIcon className="size-5" />
+    <Button isIconOnly onPress={onOpen} size="sm" aria-label="Search website" variant="faded">
+      <MagnifyingGlassIcon className="size-5"  />
     </Button>
     <Modal
       isOpen={isOpen}
@@ -51,23 +45,7 @@ export function SearchButton({
     >
       <ModalContent>
         <ModalHeader className="p-1">
-          <form action={action} method={method} className="w-full">
-            <Input
-              classNames={{
-                base: 'max-w-full h-12',
-                mainWrapper: 'h-full',
-                input: 'text-xl',
-                inputWrapper: 'h-full font-normal text-default-500 bg-transparent shadow-none',
-              }}
-              placeholder="Search website..."
-              size="lg"
-              startContent={<MagnifyingGlassIcon className="size-7" />}
-              endContent={
-                <Kbd>ESC</Kbd>
-              }
-              type="search"
-            />
-          </form>
+          <SearchForm action={action} />
         </ModalHeader>
         <ModalBody className="p-2">
           &nbsp;

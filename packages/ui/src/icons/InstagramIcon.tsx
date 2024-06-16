@@ -7,5 +7,3 @@ export const InstagramIcon: React.FC<React.HTMLAttributes<SVGElement>> = (props)
     </svg>
   );
 };
-
-export default InstagramIcon;
