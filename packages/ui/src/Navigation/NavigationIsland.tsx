@@ -24,7 +24,7 @@ export function NavigationIsland({
         <NavigationPart_Brand title={title} image={image} />
       </NavbarContent>
       <NavbarContent justify="center">
-        <div className={clmg(clsx(color && colors, 'flex rounded-full px-4', className))}>
+        <div className={clmg(clsx(color && colors, 'flex rounded-full border-1 border-foreground-200 px-4', className))}>
           <NavigationPart_Links links={links} colors={colors} />
         </div>
       </NavbarContent>

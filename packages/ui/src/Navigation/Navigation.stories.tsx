@@ -78,7 +78,6 @@ export const Standard: Story = {
     title: 'Navigation',
     links,
     search: '#search',
-    className: 'bg-foreground/10',
   },
 };
 
@@ -88,7 +87,6 @@ export const Island: Story = {
     variant: 'island',
     links,
     search: '#search',
-    className: 'bg-foreground/10',
   },
 };
 

@@ -20,7 +20,7 @@ export interface NavigationPart_LinksProps {
 
 function LinkLeaf({ link }: { link: LinkType }) {
   return (
-    <NavbarMenuItem className="border-y-4 border-transparent hover:border-b-primary-500">
+    <NavbarMenuItem className="border-y-4 border-transparent hover:border-b-primary-200">
       <Button
         as={Link}
         href={link.url}
@@ -42,30 +42,32 @@ function LinkBranch({ links, level }: { links: LinkType[], level: number }) {
 
   const pl = level * 1;
 
-  return links.map((link) => (<div className="relative w-full">
-    <Divider
-      orientation="vertical"
-      className="absolute top-0 h-full"
-      style={{
-        display: level === 1 ? 'none' : 'block',
-        left: `${pl - 1}rem`,
-      }}
-    />
-    <Link
-      href={link.url}
-      className={clsx(...classes, 'box-border w-full rounded py-2 pr-4 text-inherit hover:bg-black/10 hover:underline dark:hover:bg-white/10')}
-      style={{
-        paddingLeft: `${pl}rem`,
-      }}
-    >
-      {link.title}
-    </Link>
-    {link.links?.length && (
-      <div className="w-full [&:last-child]:mb-0">
-        <LinkBranch links={link.links} level={level + 1} />
-      </div>
-    )}
-  </div>));
+  return links.map((link) => (
+    <div key={link.title} className="relative w-full">
+      <Divider
+        orientation="vertical"
+        className="absolute top-0 h-full"
+        style={{
+          display: level === 1 ? 'none' : 'block',
+          left: `${pl - 1}rem`,
+        }}
+      />
+      <Link
+        href={link.url}
+        className={clsx(...classes, 'box-border w-full rounded py-2 pr-4 text-inherit hover:bg-black/10 hover:underline dark:hover:bg-white/10')}
+        style={{
+          paddingLeft: `${pl}rem`,
+        }}
+      >
+        {link.title}
+      </Link>
+      {link.links?.length && (
+        <div className="w-full [&:last-child]:mb-0">
+          <LinkBranch links={link.links} level={level + 1} />
+        </div>
+      )}
+    </div>
+  ));
 }
 
 function LinkTrunk({ link, colors }: { link: LinkType, colors?: string }) {
@@ -73,7 +75,7 @@ function LinkTrunk({ link, colors }: { link: LinkType, colors?: string }) {
     <Popover
       placement="bottom"
     >
-      <NavbarMenuItem className="border-y-4 border-transparent hover:border-b-primary-500">
+      <NavbarMenuItem className="border-y-4 border-transparent hover:border-b-primary-200">
         <PopoverTrigger>
           <Button
             variant="light"

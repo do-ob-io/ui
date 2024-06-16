@@ -17,7 +17,7 @@ export function NavigationStandard({
   const [ colors ] = twColors(color);
 
   return (
-    <Navbar className={clmg(clsx(color && colors, className))}>
+    <Navbar className={clmg(clsx(color && colors, 'border-b-1 border-b-foreground-200', className))}>
       <NavbarContent justify="start">
         <NavigationPart_Brand title={title} />
       </NavbarContent>
