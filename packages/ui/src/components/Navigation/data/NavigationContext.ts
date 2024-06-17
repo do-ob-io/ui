@@ -13,6 +13,11 @@ export interface NavigationProps {
   title?: string;
 
   /**
+   * A shortened version of the brand title
+   */
+  titleShort?: string;
+
+  /**
    * The brand image to display
    */
   logo?: string;
@@ -46,6 +51,11 @@ export interface NavigationProps {
    * The social links of the navigation
    */
   socials?: SocialLinks;
+
+  /**
+   * The navigation position attribute
+   */
+  position?: 'static' | 'sticky';
 
   /**
    * Class names to modify.

@@ -14,6 +14,8 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
+const logo = 'https://via.placeholder.com/100';
+
 const links: Link[] = [
   {
     title: 'Home',
@@ -99,6 +101,7 @@ const socials: SocialLinks = [
 export const Standard: Story = {
   args: {
     title: 'Navigation',
+    logo,
     links,
     search: '#search',
     modeToggle: true,
@@ -109,6 +112,7 @@ export const Standard: Story = {
 export const Island: Story = {
   args: {
     title: 'Navigation',
+    logo,
     variant: 'island',
     links,
     search: '#search',
@@ -120,6 +124,7 @@ export const Island: Story = {
 export const Extended: Story = {
   args: {
     title: 'Navigation',
+    logo,
     variant: 'extended',
     links,
     search: '#search',

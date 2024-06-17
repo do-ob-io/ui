@@ -11,15 +11,26 @@ import { NavigationContext } from '../data/NavigationContext';
 export function NavigationPart_Brand() {
 
   const { image: imageNode } = React.useContext(DoobUiContext);
-  const { title, logo, classNames } = React.useContext(NavigationContext);
+  const { title, titleShort, logo, classNames } = React.useContext(NavigationContext);
 
   return (
     <NavbarBrand>
       <Link href="/" className="flex flex-row gap-4 rounded p-2 text-inherit">
         {logo ? (
-          <Image as={imageNode} src={logo} alt={title} width={40} height={40} className={classNames?.logo} />
+          <Image
+            as={imageNode}
+            src={logo}
+            alt={title}
+            width={40}
+            height={40}
+            className={classNames?.logo}
+            classNames={{
+              wrapper: 'w-[40px] h-[40px]',
+            }}
+          />
         ) : null}
-        <h1 className="hidden text-2xl tracking-tight sm:inline">{title}</h1>
+        <h1 className="hidden text-3xl tracking-tight md:inline">{title}</h1>
+        <h1 className="text-3xl tracking-tight md:hidden">{titleShort ?? title}</h1>
       </Link>
     </NavbarBrand>
   );

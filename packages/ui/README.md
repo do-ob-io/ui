@@ -12,27 +12,37 @@ A TailwindCSS and NextUI-(Open Source) components library for React projects. Th
 
 Indended for use with modern ESM TypeScript in other do-ob projects. Documentation is limited at this time.
 
-## Installation
-
-To use the components from this library in your project, follow these steps:
-
-1.	Install TailwindCSS and NextUI:
-
-Make sure you have TailwindCSS and NextUI set up in your project. If not, follow their respective installation guides:
+# Libraries Leveraged
 
 * [TailwindCSS Installation Guide](https://tailwindcss.com/docs/installation)
 *	[NextUI Installation Guide](https://nextui.org/docs/guide/installation)
 
-2.	Install the component library:
+## Installation
 
-```bash
-npm install @do-ob/ui
+1.	Install the required dependencies using `npm`, `pnpm`, or `yarn`:
+
+```
+'@do-ob/ui' 'react' 'react-dom' '@nextui-org/react' 'framer-motion' 'tailwindcss' 'tailwindcss' '@tailwindcss/typography' '@heroicons/react'
 ```
 
-```bash
-pnpm add @do-ob/ui
-```
+2. Add the following to your `tailwind.config.ts` file:
 
-```bash
-yarn add @do-ob/ui
+```typescript
+import type { Config } from 'tailwindcss';
+import { nextui } from '@nextui-org/react';
+import tailwindTypography from '@tailwindcss/typography';
+
+const config: Config = {
+  darkMode: 'class',
+  content: [
+    './node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}',
+    './node_modules/@do-ob/ui/dist/**/*.{js,ts,jsx,tsx}',
+    './app/**/*.{js,ts,jsx,tsx,mdx}',
+  ],
+  plugins: [
+    nextui(),
+    tailwindTypography,
+  ],
+};
+export default config;
 ```

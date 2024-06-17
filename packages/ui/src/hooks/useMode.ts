@@ -7,27 +7,6 @@ import type { ThemeMode } from '@do-ob/ui/types';
 export function useMode(prefer: ThemeMode = 'light') {
   const [ mode, modeSet ] = React.useState<ThemeMode>(prefer);
 
-  React.useLayoutEffect(() => {
-    // Observe the theme mode class name of the html element
-    const observer = new MutationObserver(() => {
-      const next = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
-      if (next !== mode) {
-        modeSet(next);
-      }
-    });
-    // Start observing the theme mode class name of the html element
-    observer.observe(document.documentElement, { attributes: true, attributeFilter: [ 'class' ] });
-
-    // Check if the html element already has a mode class name.
-    if (document.documentElement.classList.contains('light') || document.documentElement.classList.contains('dark')) {
-      const documentTheme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
-      modeSet(documentTheme);
-    }
-
-    // Clean up the observer
-    return () => observer.disconnect();
-  }, [ mode ]);
-
   const modeToggle = () => {
     const next = mode === 'light' ? 'dark' : 'light';
     modeSet(next);
