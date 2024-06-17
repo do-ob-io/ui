@@ -98,46 +98,38 @@ const socials: SocialLinks = [
   },
 ];
 
+const args = {
+  title: 'Navigation Component',
+  titleShort: 'Navigation',
+  logo,
+  links,
+  search: '#search',
+  modeToggle: true,
+  socials,
+};
+
 export const Standard: Story = {
-  args: {
-    title: 'Navigation',
-    logo,
-    links,
-    search: '#search',
-    modeToggle: true,
-    socials,
-  },
+  args,
 };
 
 export const Island: Story = {
   args: {
-    title: 'Navigation',
-    logo,
+    ...args,
     variant: 'island',
-    links,
-    search: '#search',
-    modeToggle: true,
-    socials,
   },
 };
 
 export const Extended: Story = {
   args: {
-    title: 'Navigation',
-    logo,
+    ...args,
     variant: 'extended',
-    links,
-    search: '#search',
-    modeToggle: true,
-    socials,
   },
 };
 
 export const WithClassName: Story = {
   args: {
-    title: 'Navigation',
+    ...args,
     variant: 'standard',
     className: 'bg-red-500',
-    links,
   },
 };
