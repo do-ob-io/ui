@@ -37,5 +37,3 @@ export function ThemeSwitch({
     </Switch>
   );
 }
-
-export default ThemeSwitch;

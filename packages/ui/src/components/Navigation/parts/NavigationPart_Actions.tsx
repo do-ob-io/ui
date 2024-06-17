@@ -1,4 +1,4 @@
-import { ThemeSwitch, SearchButton } from '@do-ob/ui/components';
+import { ThemeButton, SearchButton } from '@do-ob/ui/components';
 import { SocialIcons } from '@do-ob/ui/icons';
 import { Link, Button, Divider } from '@nextui-org/react';
 import { NavigationContext } from '../data/NavigationContext';
@@ -24,6 +24,7 @@ export function NavigationPart_Actions() {
                 variant="light"
                 aria-label={social.type}
                 href={social.url}
+                isExternal={true}
                 isIconOnly
               >
                 <Icon className="size-5 dark:fill-white" />
@@ -39,12 +40,12 @@ export function NavigationPart_Actions() {
       <section className="flex h-full flex-row items-center justify-center gap-2 [&>div]:flex [&>div]:items-center">
         {search ? (
           <div>
-            <SearchButton />
+            <SearchButton size="sm" variant="flat" />
           </div>
         ) : null}
         {modeToggle ? (
           <div>
-            <ThemeSwitch />
+            <ThemeButton size="sm" variant="flat" />
           </div>
         ) : null}
       </section>

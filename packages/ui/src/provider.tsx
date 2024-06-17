@@ -1,9 +1,11 @@
 'use client';
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { NextUIProvider, NextUIProviderProps } from '@nextui-org/react';
+import { NextUIProvider, NextUIProviderProps as NextUIProviderPropsOriginal } from '@nextui-org/react';
 import { DoobUiContext } from '@do-ob/ui/context';
 import type { ThemeMode } from '@do-ob/ui/types';
 import { useMode } from '@do-ob/ui/hooks';
+
+export type NextUIProviderProps = Omit<NextUIProviderPropsOriginal, 'children'>;
 
 export interface DoobUiProviderProps {
   /**

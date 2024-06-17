@@ -55,6 +55,11 @@ export interface NavigationProps {
      * The logo image class name
      */
     logo?: string;
+
+    /**
+     * The popover content container class name
+     */
+    popover?: string;
   }
 }
 

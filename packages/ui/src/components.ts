@@ -6,3 +6,4 @@ export { SearchButton } from './components/SearchButton/SearchButton';
 export { SearchForm } from './components/SearchForm/SearchForm';
 export { SearchInput } from './components/SearchInput/SearchInput';
 export { ThemeSwitch } from './components/ThemeSwitch/ThemeSwitch';
+export { ThemeButton } from './components/ThemeButton/ThemeButton';

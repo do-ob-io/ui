@@ -37,7 +37,7 @@ function LinkBranch({ links, level }: { links: LinkType[], level: number }) {
         orientation="vertical"
         className="absolute top-0 h-full"
         style={{
-          display: level === 1 ? 'none' : 'block',
+          display: level <= 2 ? 'none' : 'block',
           left: `${pl - 1}rem`,
         }}
       />
@@ -59,7 +59,8 @@ function LinkBranch({ links, level }: { links: LinkType[], level: number }) {
   ));
 }
 
-function LinkTrunk({ link, colors }: { link: LinkType, colors?: string }) {
+function LinkTrunk({ link, colors, className }: { link: LinkType, colors?: string, className?: string }) {
+
   return (
     <Popover
       placement="bottom"
@@ -75,11 +76,15 @@ function LinkTrunk({ link, colors }: { link: LinkType, colors?: string }) {
           </Button>
         </PopoverTrigger>
       </NavbarMenuItem>
-      <PopoverContent className={clsx(colors, 'min-w-64 items-start p-4')}>
-        <Button as={Link} href={link.url} className="w-full justify-start rounded bg-transparent px-4 py-2 text-lg font-bold text-inherit hover:bg-black/10 hover:underline dark:hover:bg-white/10">
+      <PopoverContent className={clsx(colors, 'min-w-64 items-start p-4', className)}>
+        <Button
+          as={Link}
+          href={link.url}
+          className="w-full justify-start rounded bg-transparent px-4 py-2 text-xl font-bold text-inherit hover:bg-black/10 hover:underline dark:hover:bg-white/10"
+        >
           {link.title}
         </Button>
-        <Divider className="my-1" />
+        <Divider className="my-2" />
         <LinkBranch links={link.links ?? []} level={1} />
       </PopoverContent>
     </Popover>
@@ -91,12 +96,12 @@ function LinkTrunk({ link, colors }: { link: LinkType, colors?: string }) {
  */
 export function NavigationPart_Links() {
 
-  const { links = [], colors } = useContext(NavigationContext);
+  const { links = [], colors, classNames } = useContext(NavigationContext);
 
   return links.length ? links.map((link) => !link.links?.length ? (
     <LinkLeaf key={link.title} link={link} />
   ) : (
-    <LinkTrunk key={link.title} link={link} colors={colors[0]} />
+    <LinkTrunk key={link.title} link={link} colors={colors[0]} className={classNames?.popover} />
   )) : (
     <NavbarMenuItem>
       &nbsp;
