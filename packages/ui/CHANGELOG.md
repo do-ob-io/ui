@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.2](https://github.com/do-ob-io/ui/compare/ui-v1.0.1...ui-v1.0.2) (2024-06-17)
+
+
+### Bug Fixes
+
+* Resolved issues with server components ([0df2e65](https://github.com/do-ob-io/ui/commit/0df2e650cdb8e76385a3326790dd4686e071836c))
+
 ## [1.0.1](https://github.com/do-ob-io/ui/compare/ui-v1.0.0...ui-v1.0.1) (2024-06-17)
 
 
