@@ -2,6 +2,7 @@ import type { Config } from 'tailwindcss';
 import path from 'node:path';
 import fs from 'node:fs';
 import { nextui }  from '@nextui-org/react';
+import tailwindTypography from '@tailwindcss/typography';
 
 const nextuiContent = path.join(
   fs.realpathSync('./node_modules/@nextui-org/theme'),
@@ -18,6 +19,7 @@ const config: Config = {
   ],
   plugins: [
     nextui(),
+    tailwindTypography,
   ],
 };
 export default config;
