@@ -1,3 +1,4 @@
+'use client';
 
 import { ThemeButton, SearchButton } from '@do-ob/ui/components';
 import { SocialIcons } from '@do-ob/ui/icons';
