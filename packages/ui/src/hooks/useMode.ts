@@ -26,7 +26,7 @@ export function useMode(prefer: ThemeMode = 'light') {
 
     // Clean up the observer
     return () => observer.disconnect();
-  }, []);
+  }, [ mode ]);
 
   const modeToggle = () => {
     const next = mode === 'light' ? 'dark' : 'light';

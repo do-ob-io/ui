@@ -51,7 +51,7 @@ export function Form({
     debounceTimeout.current = setTimeout(() => {
       currentTarget.requestSubmit();
     }, changeDefer);
-  }, [ changeDefer, onChange ]);
+  }, [ changeDefer, changeSubmit, onChange ]);
 
   return (
     <form

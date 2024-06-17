@@ -1,13 +1,15 @@
 import doob from '@do-ob/eslint-config';
 import react from 'eslint-plugin-react';
 import reactHooks from 'eslint-plugin-react-hooks';
+import reactCompiler from 'eslint-plugin-react-compiler';
+import { fixupPluginRules } from '@eslint/compat';
 
 export default [
   ...doob.configs.recommended,
   {
     files: [ '**/*.{jsx,tsx}' ],
     plugins: {
-      react,
+      'react': fixupPluginRules(react),
     },
     languageOptions: {
       parserOptions: {
@@ -23,10 +25,18 @@ export default [
   },
   {
     plugins: {
-      'react-hooks': reactHooks,
+      'react-hooks': fixupPluginRules(reactHooks),
     },
     rules: {
       ...reactHooks.configs.recommended.rules,
     },
-  }
+  },
+  {
+    plugins: {
+      'react-compiler': fixupPluginRules(reactCompiler),
+    },
+    rules: {
+      'react-compiler/react-compiler': 'error',
+    },
+  },
 ];
