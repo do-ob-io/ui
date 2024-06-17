@@ -1,8 +1,11 @@
 {
   "name": "@do-ob/ui",
   "version": "1.0.0",
-  "description": "A TailwindCSS and NextUI (Open Source) components library for React.",
+  "description": "A TailwindCSS and NextUI (Open Source) components library for React projects.",
   "type": "module",
+  "files": [
+    "dist"
+  ],
   "exports": {
     ".": {
       "import": "./dist/index.js",
