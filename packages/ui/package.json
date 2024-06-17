@@ -31,6 +31,9 @@
   "scripts": {
     "build": "tsc --project tsconfig.build.json"
   },
+  "dependencies": {
+    "@do-ob/core": "^1.1.0"
+  },
   "peerDependencies": {
     "@heroicons/react": "^2.1.3",
     "@nextui-org/react": "^2.4.1",

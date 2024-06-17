@@ -9,8 +9,8 @@ importers:
   .:
     devDependencies:
       '@do-ob/core':
-        specifier: link:../core/packages/core
-        version: link:../core/packages/core
+        specifier: ^1.1.0
+        version: 1.1.0
       '@do-ob/eslint-config':
         specifier: ^2.3.0
         version: 2.3.0(eslint@9.4.0)(tailwindcss@3.4.4)(typescript@5.4.5)
@@ -786,6 +786,9 @@ packages:
   '@discoveryjs/json-ext@0.5.7':
     resolution: {integrity: sha512-dBVuXR082gk3jsFp7Rd/JI4kytwGHecnCoTtXFb7DB6CNHp4rg5k1bhg0nWdLGLnOV71lmDzGQaLMy8iPLY0pw==}
     engines: {node: '>=10.0.0'}
+
+  '@do-ob/core@1.1.0':
+    resolution: {integrity: sha512-Ew/f6Twj6Z4TzFW1ii4CDFtzpSGfuSn/FMo43By6QbcZ9MdA7U9jxPFBkDcgHlU3dVIZIfPol6aWN7V59SQPyQ==}
 
   '@do-ob/eslint-config@2.3.0':
     resolution: {integrity: sha512-jezw0GnatrViICC8tauRJDAh1qVmwMHL6VTgwJ12HGuYRlwKCRTW0EJuU73IFekR8z7bro0FAaGY9n9MinbJcQ==}
@@ -7348,6 +7351,8 @@ snapshots:
     optional: true
 
   '@discoveryjs/json-ext@0.5.7': {}
+
+  '@do-ob/core@1.1.0': {}
 
   '@do-ob/eslint-config@2.3.0(eslint@9.4.0)(tailwindcss@3.4.4)(typescript@5.4.5)':
     dependencies:
