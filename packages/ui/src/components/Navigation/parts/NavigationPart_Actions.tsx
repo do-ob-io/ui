@@ -1,3 +1,5 @@
+'use client';
+
 import { ThemeButton, SearchButton } from '@do-ob/ui/components';
 import { SocialIcons } from '@do-ob/ui/icons';
 import { Link, Button, Divider } from '@nextui-org/react';

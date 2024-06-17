@@ -1,16 +1,13 @@
 'use client';
 
 import { twColors } from '@do-ob/ui/utility';
-import { NavigationContext, NavigationContextProps, NavigationProps } from './NavigationContext';
-
-export interface NavigationProviderProps extends NavigationProps {
-  children: ((props: NavigationContextProps) => React.ReactNode )| React.ReactNode;
-}
+import { NavigationContext, NavigationProps } from './NavigationContext';
+import { PropsWithChildren } from 'react';
 
 export function NavigationProvider({
   children,
   ...props
-}: NavigationProviderProps) {
+}: PropsWithChildren<NavigationProps>) {
 
   const value = {
     ...props,
@@ -19,7 +16,7 @@ export function NavigationProvider({
 
   return (
     <NavigationContext.Provider value={value}>
-      {typeof children === 'function' ? children(value) : children}
+      {children}
     </NavigationContext.Provider>
   );
 }

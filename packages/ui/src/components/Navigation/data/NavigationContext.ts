@@ -76,11 +76,11 @@ export interface NavigationContextProps extends NavigationProps {
 /**
  * Default properties for the do-ob ui context
  */
-export const NavigationProps: NavigationContextProps = {
+export const navigationContextProps: NavigationContextProps = {
   colors: [ '', '', '' ],
 };
 
 /**
  * The do-ob user interface (ui) context
  */
-export const NavigationContext = createContext<NavigationContextProps>(NavigationProps);
+export const NavigationContext = createContext<NavigationContextProps>(navigationContextProps);
