@@ -1,6 +1,6 @@
 import { Locale, LocaleCode } from '@do-ob/ui/types';
 
-import {enUs} from './locale/en-us';
+import { enUs } from './locale/en-us';
 
 const library: Record<LocaleCode, Locale> = {
   'en-US': enUs,
@@ -45,8 +45,8 @@ const library: Record<LocaleCode, Locale> = {
   'am-ET': {},
   'hi-IN': {},
   'th-TH': {}
-}
+};
 
 export function localeLibrary(code: LocaleCode) {
-  return library[code]
+  return library[code];
 }
