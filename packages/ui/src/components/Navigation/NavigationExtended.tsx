@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Navbar, NavbarContent, NavbarMenuToggle } from '@nextui-org/react';
+import { Navbar, NavbarContent } from '@nextui-org/react';
 import { clsx, clmg } from '@do-ob/core';
 import type { NavigationProps } from './data/NavigationContext';
 import { NavigationPart_Brand } from './parts/NavigationPart_Brand';
@@ -10,6 +10,7 @@ import { NavigationPart_Actions } from './parts/NavigationPart_Actions';
 import { NavigationProvider } from './data/NavigationProvider';
 import { twColors } from '@do-ob/ui/utility';
 import { NavigationPart_Menu } from './parts/NavigationPart_Menu';
+import { NavigationPart_MenuToggle } from './parts/NavigationPart_MenuToggle';
 
 export function NavigationExtended(props: NavigationProps) {
 
@@ -40,8 +41,8 @@ export function NavigationExtended(props: NavigationProps) {
           <div className="hidden max-w-64 p-2 md:block">
             <NavigationPart_Actions />
           </div>
-          <NavbarMenuToggle
-            aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+          <NavigationPart_MenuToggle
+            isMenuOpen={isMenuOpen}
             className="md:hidden"
           />
         </NavbarContent>
