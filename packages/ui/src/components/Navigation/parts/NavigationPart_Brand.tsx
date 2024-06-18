@@ -1,8 +1,5 @@
-'use client';
-
-import React from 'react';
-import { NavbarBrand, Link, Image } from '@nextui-org/react';
-import { DoobUiContext } from '@do-ob/ui/context'; 
+import { NavbarBrand, Link } from '@nextui-org/react';
+import { Image } from '@do-ob/ui/components';
 import { NavigationProps } from '../data/NavigationProps';
 
 /**
@@ -15,14 +12,11 @@ export function NavigationPart_Brand({ base: {
   classNames,
 } }: { base: NavigationProps }) {
 
-  const { image: imageNode } = React.useContext(DoobUiContext);
-
   return (
     <NavbarBrand>
       <Link href="/" className="flex flex-row gap-4 rounded p-2 text-inherit">
         {logo ? (
           <Image
-            as={imageNode}
             src={logo}
             alt={title}
             width={40}

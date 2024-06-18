@@ -1,4 +1,3 @@
-import React from 'react';
 import { Navbar, NavbarContent } from '@nextui-org/react';
 import { clsx, clmg } from '@do-ob/core';
 import type { NavigationProps } from './data/NavigationProps';
@@ -11,15 +10,12 @@ import { NavigationPart_MenuToggle } from './parts/NavigationPart_MenuToggle';
 
 export function NavigationStandard(props: NavigationProps) {
 
-  const [ isMenuOpen, setIsMenuOpen ] = React.useState(false);
-
   const colors = twColors(props.color);
 
   return (
     <Navbar
       position={props.position}
       height="4rem"
-      onMenuOpenChange={setIsMenuOpen}
       className={clmg(clsx(props.color && colors, 'border-b-1 border-b-foreground-200/50', props.className))}
     >
       <NavbarContent justify="start">
@@ -35,7 +31,6 @@ export function NavigationStandard(props: NavigationProps) {
           <NavigationPart_Actions base={props} />
         </div>
         <NavigationPart_MenuToggle
-          isMenuOpen={isMenuOpen}
           className="md:hidden"
         />
       </NavbarContent>

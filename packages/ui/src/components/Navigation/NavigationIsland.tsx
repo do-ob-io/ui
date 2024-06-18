@@ -1,4 +1,3 @@
-import React from 'react';
 import { Navbar, NavbarContent } from '@nextui-org/react';
 import { clsx, clmg } from '@do-ob/core';
 
@@ -12,16 +11,13 @@ import { NavigationPart_MenuToggle } from './parts/NavigationPart_MenuToggle';
 
 export function NavigationIsland(props: NavigationProps) {
 
-  const [ isMenuOpen, setIsMenuOpen ] = React.useState(false);
-
   const colors = twColors(props.color);
 
   return (
     <Navbar
       position={props.position}
       isBlurred={false}
-      onMenuOpenChange={setIsMenuOpen}
-      className="items-center justify-center"
+      className="items-center justify-center bg-transparent bg-none"
       height="5rem"
     >
       <NavbarContent justify="start" className="flex items-center">
@@ -41,7 +37,6 @@ export function NavigationIsland(props: NavigationProps) {
           <NavigationPart_Actions base={props} />
         </div>
         <NavigationPart_MenuToggle
-          isMenuOpen={isMenuOpen}
           className="md:hidden"
         />
       </NavbarContent>

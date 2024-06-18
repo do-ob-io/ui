@@ -1,21 +1,18 @@
+import { HeroPrompt } from './HeroPrompt';
+import { HeroStandard } from './HeroStandard';
+import { HeroProps } from './data/HeroProps';
 
-import { HeroProps, HeroProvider } from './data/HeroProvider';
-import { clsx, clmg } from '@do-ob/core';
+export type HeroVariant = 'standard' | 'prompt';
 
-export function Hero(props: HeroProps) {
+export function Hero({
+  variant = 'standard',
+  ...props
+}: HeroProps & { variant: HeroVariant }) {
 
-  const { title, subtitle, className } = props;
-
-  return (
-    <HeroProvider {...props}>
-      <section
-        aria-label="Introduction"
-        className={clmg(clsx('flex w-full flex-col items-center justify-center', className))}>
-        <div>
-          <h1 className="text-center text-4xl font-bold">{title}</h1>
-          <p className="text-center text-lg">{subtitle}</p>
-        </div>
-      </section>
-    </HeroProvider>
-  );
+  switch (variant) {
+    case 'prompt':
+      return <HeroPrompt {...props} />;
+    default:
+      return <HeroStandard {...props} />;
+  }
 };
