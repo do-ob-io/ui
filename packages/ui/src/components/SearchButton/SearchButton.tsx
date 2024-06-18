@@ -1,3 +1,5 @@
+'use client';
+
 import { MagnifyingGlassIcon } from '@heroicons/react/24/solid';
 import { Button, ButtonProps, Modal, ModalHeader, ModalBody, useDisclosure, ModalContent } from '@nextui-org/react';
 import { SearchAction, search } from '@do-ob/ui/actions';

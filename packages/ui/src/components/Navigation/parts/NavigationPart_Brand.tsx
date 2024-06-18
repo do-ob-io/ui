@@ -10,6 +10,7 @@ export function NavigationPart_Brand({ base: {
   title,
   titleShort,
   logo,
+  logoSize,
   classNames,
 } }: { base: NavigationProps }) {
 
@@ -23,11 +24,12 @@ export function NavigationPart_Brand({ base: {
             width={0}
             height={0}
             loading="eager"
-            className={clsx('h-[40px] w-auto',classNames?.logo)}
+            className={classNames?.logo}
+            style={{ width: 'auto', height: logoSize ?? 40 }}
           />
         ) : null}
-        <h1 className="hidden text-3xl tracking-tight md:inline">{title}</h1>
-        <h1 className="text-3xl tracking-tight md:hidden">{titleShort ?? title}</h1>
+        <h1 className={clsx('hidden text-3xl tracking-tight md:inline', classNames?.title)}>{title}</h1>
+        <h1 className={clsx('text-3xl tracking-tight md:hidden', classNames?.title)}>{titleShort ?? title}</h1>
       </Link>
     </NavbarBrand>
   );

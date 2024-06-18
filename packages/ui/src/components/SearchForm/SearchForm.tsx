@@ -1,3 +1,5 @@
+'use client';
+
 import { SearchAction, search } from '@do-ob/ui/actions';
 import { SearchFormInputs } from './SearchFormInputs';
 import { useActionState } from '@do-ob/ui/hooks';

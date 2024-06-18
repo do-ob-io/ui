@@ -5,8 +5,6 @@ export function Image(props: ImageProps) {
 
   const image = configUI.get('image');
 
-  console.log('image', image);
-
   return (
     <NextUIImage
       as={image}

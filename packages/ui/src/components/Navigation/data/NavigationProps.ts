@@ -20,6 +20,13 @@ export interface NavigationProps {
   logo?: string;
 
   /**
+   * Logo size
+   * 
+   * @default 40
+   */
+  logoSize?: number;
+
+  /**
    * The theme color of the navigation
    */
   color?: ThemeColor;
@@ -58,6 +65,11 @@ export interface NavigationProps {
    * Class names to modify.
    */
   classNames?: {
+    /**
+     * The title class name
+     */
+    title?: string;
+    
     /**
      * The logo image class name
      */
