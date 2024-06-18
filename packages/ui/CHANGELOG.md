@@ -1,5 +1,21 @@
 # Changelog
 
+## [1.1.0](https://github.com/do-ob-io/ui/compare/ui-v1.0.2...ui-v1.1.0) (2024-06-18)
+
+
+### Features
+
+* Added additional variants to hero component ([ce05b6f](https://github.com/do-ob-io/ui/commit/ce05b6f2cba409bdeb8c694159ddf4e3b32c66f1))
+* Added new Image component ([067a5cc](https://github.com/do-ob-io/ui/commit/067a5ccee025ceac8e78281afba78be9b98488ca))
+* Added new Typewriter component ([b76037a](https://github.com/do-ob-io/ui/commit/b76037a9f0320e8a8ee512ab7814663e868540de))
+* Added responsiveness to user interface components ([ca7eec1](https://github.com/do-ob-io/ui/commit/ca7eec1927ec47ee0c61cdf922686b4f6c2f518d))
+
+
+### Bug Fixes
+
+* added client directive to typewriter components ([e218a10](https://github.com/do-ob-io/ui/commit/e218a101776758705074d192a8050ae8540619a8))
+* Navigation now prop drills to maintain server component status ([9f9ef37](https://github.com/do-ob-io/ui/commit/9f9ef37eaaeb731e470652260776683463af53f9))
+
 ## [1.0.2](https://github.com/do-ob-io/ui/compare/ui-v1.0.1...ui-v1.0.2) (2024-06-17)
 
 
