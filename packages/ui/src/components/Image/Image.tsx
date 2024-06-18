@@ -1,12 +1,11 @@
-'use client';
-
-import React from 'react';
-import { DoobUiContext } from '@do-ob/ui/context';
+import { configUI } from '@do-ob/ui/config';
 import { Image as NextUIImage, ImageProps } from '@nextui-org/react';
 
 export function Image(props: ImageProps) {
 
-  const { image } = React.useContext(DoobUiContext);
+  const image = configUI.get('image');
+
+  console.log('image', image);
 
   return (
     <NextUIImage

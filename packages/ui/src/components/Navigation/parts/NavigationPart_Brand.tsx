@@ -1,6 +1,7 @@
 import { NavbarBrand, Link } from '@nextui-org/react';
 import { Image } from '@do-ob/ui/components';
 import { NavigationProps } from '../data/NavigationProps';
+import { clsx } from '@do-ob/core';
 
 /**
  * Navigation Brand component
@@ -19,12 +20,10 @@ export function NavigationPart_Brand({ base: {
           <Image
             src={logo}
             alt={title}
-            width={40}
-            height={40}
-            className={classNames?.logo}
-            classNames={{
-              wrapper: 'w-[40px] h-[40px]',
-            }}
+            width={0}
+            height={0}
+            loading="eager"
+            className={clsx('h-[40px] w-auto',classNames?.logo)}
           />
         ) : null}
         <h1 className="hidden text-3xl tracking-tight md:inline">{title}</h1>
