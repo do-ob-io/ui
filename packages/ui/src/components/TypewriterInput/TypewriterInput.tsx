@@ -1,3 +1,5 @@
+'use client';
+
 import { useTypewriter } from '@do-ob/ui/hooks';
 import { Input, InputProps } from '@nextui-org/react';
 

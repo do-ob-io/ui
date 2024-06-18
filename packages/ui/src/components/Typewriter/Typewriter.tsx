@@ -1,3 +1,5 @@
+'use client';
+
 import { useTypewriter } from '@do-ob/ui/hooks';
 
 export interface TypewriterProps extends React.HTMLAttributes<HTMLParagraphElement> {
