@@ -1,7 +1,4 @@
-'use client';
-
 import { Link, SocialLinks, ThemeColor } from '@do-ob/ui/types';
-import { createContext } from 'react';
 
 /**
  * Context properties for the do-ob ui provider
@@ -72,25 +69,3 @@ export interface NavigationProps {
     popover?: string;
   }
 }
-
-/**
- * The context interface
- */
-export interface NavigationContextProps extends NavigationProps {
-  /**
-   * Compiled tailwind color classes
-   */
-  colors: [full: string, bg: string, text: string];
-}
-
-/**
- * Default properties for the do-ob ui context
- */
-export const navigationContextProps: NavigationContextProps = {
-  colors: [ '', '', '' ],
-};
-
-/**
- * The do-ob user interface (ui) context
- */
-export const NavigationContext = createContext<NavigationContextProps>(navigationContextProps);

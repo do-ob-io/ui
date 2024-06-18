@@ -1,17 +1,16 @@
-'use client';
-
 import { ThemeButton, SearchButton } from '@do-ob/ui/components';
 import { SocialIcons } from '@do-ob/ui/icons';
 import { Link, Button, Divider } from '@nextui-org/react';
-import { NavigationContext } from '../data/NavigationContext';
-import { useContext } from 'react';
+import { NavigationProps } from '../data/NavigationProps';
 
 /**
  * Navigation Search component
  */
-export function NavigationPart_Actions() {
-
-  const { socials = [], search, modeToggle } = useContext(NavigationContext);
+export function NavigationPart_Actions({ base: {
+  socials = [],
+  search,
+  modeToggle,
+} }: { base: NavigationProps }) {
 
   return (
     <div className="flex h-full flex-row items-end justify-center gap-2">

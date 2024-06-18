@@ -1,4 +1,4 @@
-import type { NavigationProps } from './data/NavigationContext';
+import type { NavigationProps } from './data/NavigationProps';
 
 import { NavigationStandard } from './NavigationStandard';
 import { NavigationIsland } from './NavigationIsland';

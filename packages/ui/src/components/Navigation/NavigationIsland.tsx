@@ -1,11 +1,8 @@
-'use client';
-
 import React from 'react';
 import { Navbar, NavbarContent } from '@nextui-org/react';
 import { clsx, clmg } from '@do-ob/core';
 
-import type { NavigationProps } from './data/NavigationContext';
-import { NavigationProvider } from './data/NavigationProvider';
+import type { NavigationProps } from './data/NavigationProps';
 import { NavigationPart_Brand } from './parts/NavigationPart_Brand';
 import { NavigationPart_Links } from './parts/NavigationPart_Links';
 import { NavigationPart_Actions } from './parts/NavigationPart_Actions';
@@ -20,39 +17,37 @@ export function NavigationIsland(props: NavigationProps) {
   const colors = twColors(props.color);
 
   return (
-    <NavigationProvider {...props}>
-      <Navbar
-        position={props.position}
-        isBlurred={false}
-        onMenuOpenChange={setIsMenuOpen}
-        className="items-center justify-center"
-        height="5rem"
-      >
-        <NavbarContent justify="start" className="flex items-center">
-          <NavigationPart_Brand />
-        </NavbarContent>
+    <Navbar
+      position={props.position}
+      isBlurred={false}
+      onMenuOpenChange={setIsMenuOpen}
+      className="items-center justify-center"
+      height="5rem"
+    >
+      <NavbarContent justify="start" className="flex items-center">
+        <NavigationPart_Brand base={props} />
+      </NavbarContent>
 
-        {props.links && props.links.length > 0 && (
-          <NavbarContent justify="center" className="hidden lg:flex">
-            <div className={clmg(clsx(props.color && colors, 'flex rounded-full border-1 border-foreground-200/50 px-4', props.className))}>
-              <NavigationPart_Links />
-            </div>
-          </NavbarContent>
-        )}
-
-        <NavbarContent justify="end">
-          <div className="hidden max-w-64 lg:block">
-            <NavigationPart_Actions />
+      {props.links && props.links.length > 0 && (
+        <NavbarContent justify="center" className="hidden lg:flex">
+          <div className={clmg(clsx(props.color && colors, 'flex rounded-full border-1 border-foreground-200/50 px-4', props.className))}>
+            <NavigationPart_Links base={props} />
           </div>
-          <NavigationPart_MenuToggle
-            isMenuOpen={isMenuOpen}
-            className="md:hidden"
-          />
         </NavbarContent>
+      )}
 
-        <NavigationPart_Menu />
+      <NavbarContent justify="end">
+        <div className="hidden max-w-64 lg:block">
+          <NavigationPart_Actions base={props} />
+        </div>
+        <NavigationPart_MenuToggle
+          isMenuOpen={isMenuOpen}
+          className="md:hidden"
+        />
+      </NavbarContent>
 
-      </Navbar>
-    </NavigationProvider>
+      <NavigationPart_Menu base={props} />
+
+    </Navbar>
   );
 }

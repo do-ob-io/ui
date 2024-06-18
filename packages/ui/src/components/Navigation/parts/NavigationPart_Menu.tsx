@@ -1,21 +1,20 @@
-'use client';
-
-import React from 'react';
 import { NavbarMenu, NavbarMenuItem, Link, NavbarItem } from '@nextui-org/react';
-import { NavigationContext, NavigationProps } from '../data/NavigationContext';
+import { NavigationProps } from '../data/NavigationProps';
 import { NavigationPart_Actions } from './NavigationPart_Actions';
 
 /**
  * Navigation Menu component
  */
-export function NavigationPart_Menu() {
+export function NavigationPart_Menu({
+  base
+}: { base: NavigationProps }) {
 
-  const { links = [] } = React.useContext(NavigationContext);
+  const { links = [] } = base;
 
   return (
     <NavbarMenu className="divide-y">
       <NavbarItem>
-        <NavigationPart_Actions />
+        <NavigationPart_Actions base={base} />
       </NavbarItem>
       {links.map((link) => (
         <NavbarMenuItem key={link.url} className="p-2">

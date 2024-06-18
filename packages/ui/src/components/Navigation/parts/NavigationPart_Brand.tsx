@@ -3,15 +3,19 @@
 import React from 'react';
 import { NavbarBrand, Link, Image } from '@nextui-org/react';
 import { DoobUiContext } from '@do-ob/ui/context'; 
-import { NavigationContext } from '../data/NavigationContext';
+import { NavigationProps } from '../data/NavigationProps';
 
 /**
  * Navigation Brand component
  */
-export function NavigationPart_Brand() {
+export function NavigationPart_Brand({ base: {
+  title,
+  titleShort,
+  logo,
+  classNames,
+} }: { base: NavigationProps }) {
 
   const { image: imageNode } = React.useContext(DoobUiContext);
-  const { title, titleShort, logo, classNames } = React.useContext(NavigationContext);
 
   return (
     <NavbarBrand>

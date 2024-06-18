@@ -1,11 +1,9 @@
-'use client';
-
 import { NavbarMenuItem, Link, Button, Popover, PopoverTrigger, PopoverContent, Divider } from '@nextui-org/react';
 import { ChevronDownIcon } from '@heroicons/react/24/solid';
 import { Link as LinkType } from '@do-ob/ui/types';
 import { clsx } from '@do-ob/core';
-import { useContext } from 'react';
-import { NavigationContext } from '../data/NavigationContext';
+import { NavigationProps } from '../data/NavigationProps';
+import { twColors } from '@do-ob/ui/utility';
 
 function LinkLeaf({ link }: { link: LinkType }) {
   return (
@@ -94,9 +92,13 @@ function LinkTrunk({ link, colors, className }: { link: LinkType, colors?: strin
 /**
  * Navigation Links component
  */
-export function NavigationPart_Links() {
+export function NavigationPart_Links({ base: {
+  links = [],
+  color,
+  classNames,
+} }: { base: NavigationProps }) {
 
-  const { links = [], colors, classNames } = useContext(NavigationContext);
+  const colors = twColors(color);
 
   return links.length ? links.map((link) => !link.links?.length ? (
     <LinkLeaf key={link.title} link={link} />
