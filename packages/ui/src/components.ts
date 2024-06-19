@@ -12,5 +12,6 @@ export { Typewriter } from './components/Typewriter/Typewriter';
 export { TypewriterInput } from './components/TypewriterInput/TypewriterInput';
 export { Image } from './components/Image/Image';
 export { Hero } from './components/Hero/Hero';
+export { HeroArticles } from './components/HeroArticles/HeroArticles';
 export { HeroStandard } from './components/Hero/HeroStandard';
 export { HeroPrompt } from './components/Hero/HeroPrompt';

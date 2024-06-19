@@ -19,7 +19,6 @@ export function NavigationExtended(props: NavigationProps) {
       isBlurred={props.isBlurred}
       maxWidth={props.maxWidth}
       className={clmg(clsx(props.color && colors, 'relative overflow-hidden border-b-1 border-b-foreground/10', props.className))}
-        
     >
       <NavbarContent justify="start" className="lg:items-start lg:pt-2">
         <div className="relative z-10">
