@@ -16,7 +16,8 @@ export function NavigationIsland(props: NavigationProps) {
   return (
     <Navbar
       position={props.position}
-      isBlurred={false}
+      isBlurred={props.isBlurred ?? false}
+      maxWidth={props.maxWidth}
       className="items-center justify-center bg-transparent bg-none"
       height="5rem"
     >

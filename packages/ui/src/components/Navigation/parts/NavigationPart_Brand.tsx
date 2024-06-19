@@ -25,7 +25,7 @@ export function NavigationPart_Brand({ base: {
             height={0}
             loading="eager"
             className={classNames?.logo}
-            style={{ width: 'auto', height: logoSize ?? 40 }}
+            style={{ width: logoSize ?? 40, height: logoSize ?? 40 }}
           />
         ) : null}
         <h1 className={clsx('hidden text-3xl tracking-tight md:inline', classNames?.title)}>{title}</h1>

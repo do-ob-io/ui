@@ -1,4 +1,4 @@
-import { SearchState } from '@do-ob/ui/actions';
+import { SearchState } from '@do-ob/ui/types';
 
 /**
  * Search Form Results properties

@@ -16,7 +16,9 @@ export function NavigationStandard(props: NavigationProps) {
     <Navbar
       position={props.position}
       height="4rem"
-      className={clmg(clsx(props.color && colors, 'border-b-1 border-b-foreground-200/50', props.className))}
+      maxWidth={props.maxWidth}
+      isBlurred={props.isBlurred}
+      className={clmg(clsx(props.color && colors, 'border-b-1 border-b-foreground/10', props.className))}
     >
       <NavbarContent justify="start">
         <NavigationPart_Brand base={props} />

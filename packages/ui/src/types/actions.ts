@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+export type FormAction<S = any, P = any> = (state: S, payload: P) => Promise<S>;
+
 /**
  * Search State type
  */
@@ -31,7 +34,7 @@ export type SearchState = Array<{
 /**
  * Search Payload type
  */
-export type SearchPayload = FormData & {
+export type SearchPayload = {
   /**
    * The search query
    */
@@ -39,17 +42,6 @@ export type SearchPayload = FormData & {
 };
 
 /**
- * Search action type.
- */
-export type SearchAction = (state: SearchState, payload: FormData) => Promise<SearchState>;
-
-/**
  * Search action type
  */
-export const search: SearchAction = async (state, payload) => {
-  const query = payload.get('query');
-
-  console.log(`Searching for: ${query}`);
-
-  return state;
-};
+export type SearchAction = FormAction<SearchState, SearchPayload>;

@@ -15,26 +15,28 @@ export function NavigationExtended(props: NavigationProps) {
   return (
     <Navbar
       position={props.position}
-      height="8rem"
-      className={clmg(clsx(props.color && colors, 'relative border-b-1 border-b-foreground-200/50', props.className))}
+      height="10rem"
+      isBlurred={props.isBlurred}
+      maxWidth={props.maxWidth}
+      className={clmg(clsx(props.color && colors, 'relative overflow-hidden border-b-1 border-b-foreground/10', props.className))}
         
     >
-      <NavbarContent justify="start" className="md:items-start md:pt-2">
+      <NavbarContent justify="start" className="lg:items-start lg:pt-2">
         <div className="relative z-10">
           <NavigationPart_Brand base={props} />
         </div>
       </NavbarContent>
 
-      <NavbarContent justify="start" className="absolute hidden items-end md:flex">
+      <NavbarContent justify="start" className="absolute hidden items-end lg:flex">
         <NavigationPart_Links base={props} />
       </NavbarContent>
 
       <NavbarContent justify="end" className="items-start pt-2">
-        <div className="hidden max-w-64 p-2 md:block">
+        <div className="hidden max-w-64 p-2 lg:block">
           <NavigationPart_Actions base={props} />
         </div>
         <NavigationPart_MenuToggle
-          className="md:hidden"
+          className="lg:hidden"
         />
       </NavbarContent>
 

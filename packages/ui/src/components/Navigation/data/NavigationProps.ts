@@ -25,6 +25,16 @@ export interface NavigationProps {
    * @default 40
    */
   logoSize?: number;
+  
+  /**
+   * Max width of the navigation content.
+   */
+  maxWidth?: 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'full';
+
+  /**
+   * If the navigation should be blurred
+   */
+  isBlurred?: boolean;
 
   /**
    * The theme color of the navigation

@@ -1,9 +1,10 @@
 'use client';
 
-import { SearchAction, search } from '@do-ob/ui/actions';
+import { SearchAction } from '@do-ob/ui/types';
 import { SearchFormInputs } from './SearchFormInputs';
 import { useActionState } from '@do-ob/ui/hooks';
 import { Form } from '@do-ob/ui/components';
+import { nop } from '@do-ob/core';
 
 /**
  * Search Form properties
@@ -12,17 +13,35 @@ export interface SearchFormProps {
   /**
    * The search form action URL.
    */
-  action?: SearchAction;
+  action: SearchAction;
+
+  /**
+   * Callback when the action state is updated.
+   */
+  onResult?: (state: Awaited<ReturnType<SearchAction>> ) => void;
+
 }
 
 /**
  * Search Form component
  */
 export function SearchForm({
-  action = search,
+  action = async () => [],
+  onResult = nop,
 }: SearchFormProps) {
 
-  const [ , formAction ] = useActionState(action, []);
+  const [ state, formAction ] = useActionState(
+    async (state: [], payload: FormData) => {
+      const query = payload.get('query') as string;
+      return await action(state, { query });
+    },
+    []
+  );
+
+  // Call the onResult callback when the state is updated
+  if (state !== undefined) {
+    onResult(state);
+  }
 
   return (
     <Form
