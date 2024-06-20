@@ -67,37 +67,39 @@ export function HeroArticles({
           key={article.title}
           href={article.url}
           aria-label="Read More"
-          className={clsx('group relative block w-full cursor-pointer overflow-hidden border-none hover:opacity-100', index === 0 && 'lg:col-span-2', roundedClass)}    
+          className={clsx('group relative block w-full cursor-pointer text-clip border-none shadow-medium hover:opacity-100', index === 0 && 'lg:col-span-2', roundedClass)}    
         >
-          <Image
-            as={imageNode}
-            width={2048}
-            height={1365}
-            className="aspect-[3/2] h-auto w-full object-cover"
-            radius={radius}
-            src={article.image}
-          />
-          <div className={clsx(index === 0 ? 'w-11/12 lg:w-4/5' : 'w-11/12','absolute top-2 z-20 ml-2 flex flex-col items-start gap-4 overflow-hidden px-8 py-4 lg:gap-6')}>
-            <article className="float-left flex flex-col items-start justify-center gap-4 lg:gap-6">
-              <h1 className={clsx(index === 0 ? 'text-3xl lg:text-5xl' : 'text-3xl lg:text-3xl', 'font-bold tracking-tight text-white drop-shadow-[0_0_2px_rgba(0,0,0,1)]')}>{article.title}</h1>
-              {index === 0 ? (
-                <h2 className={clsx(index === 0 ? 'text-base lg:text-2xl' : 'text-base lg:text-lg', 'hidden text-white/60 drop-shadow-[0_0_2px_rgba(0,0,0,1)] lg:inline')}>{truncateToWordBoundary(article.subtitle) + ' ...'}</h2>
-              ) : null}
-            </article>
-            <Button
-              size="lg"
-              color="primary"
-              variant="ghost"
+          <div className={clsx('relative m-2 overflow-hidden backdrop-blur-md', roundedClass)}>
+            <Image
+              as={imageNode}
+              width={2048}
+              height={1365}
+              className="aspect-[3/2] h-auto w-full object-cover"
               radius={radius}
-              tabIndex={-1}
-              className={clsx(index === 0 && 'lg:text-lg', 'bg-black/30 font-bold group-hover:bg-primary group-hover:text-primary-foreground group-focus:bg-primary group-focus:text-primary-foreground')}
-            >
+              src={article.image}
+            />
+            <div className={clsx(index === 0 ? 'w-11/12 lg:w-4/5' : 'w-11/12','absolute top-2 z-20 ml-2 flex flex-col items-start gap-4 overflow-hidden px-8 py-4 lg:gap-6')}>
+              <article className="float-left flex flex-col items-start justify-center gap-4 lg:gap-6">
+                <h1 className={clsx(index === 0 ? 'text-3xl lg:text-5xl' : 'text-3xl lg:text-3xl', 'font-bold tracking-tight text-white drop-shadow-[0_0_2px_rgba(0,0,0,1)]')}>{article.title}</h1>
+                {index === 0 ? (
+                  <h2 className={clsx(index === 0 ? 'text-base lg:text-2xl' : 'text-base lg:text-lg', 'hidden text-white/60 drop-shadow-[0_0_2px_rgba(0,0,0,1)] lg:inline')}>{truncateToWordBoundary(article.subtitle) + ' ...'}</h2>
+                ) : null}
+              </article>
+              <Button
+                size="lg"
+                color="primary"
+                variant="ghost"
+                radius={radius}
+                tabIndex={-1}
+                className={clsx(index === 0 && 'lg:text-lg', 'bg-black/30 font-bold group-hover:bg-primary group-hover:text-primary-foreground group-focus:bg-primary group-focus:text-primary-foreground')}
+              >
               Read More
-            </Button>
-          </div>
+              </Button>
+            </div>
           
-          <div className="absolute left-0 top-0 z-10 size-full bg-gradient-to-br from-black/80 from-20% to-transparent to-60%" />
-          <div className="absolute left-0 top-0 z-10 size-full bg-black/40 transition-opacity group-hover:opacity-0 group-focus:opacity-0" />
+            <div className="absolute left-0 top-0 z-10 size-full bg-gradient-to-br from-black/80 from-20% to-transparent to-60%" />
+            <div className="absolute left-0 top-0 z-10 size-full bg-black/40 transition-opacity group-hover:opacity-0 group-focus:opacity-0" />
+          </div>
         </Link>
       ))}
 

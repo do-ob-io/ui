@@ -72,6 +72,11 @@ export interface NavigationProps {
   position?: 'static' | 'sticky';
 
   /**
+   * If the border should be hidden
+   */
+  hideBorder?: boolean;
+
+  /**
    * Class names to modify.
    */
   classNames?: {

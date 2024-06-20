@@ -12,6 +12,8 @@ import { NavigationPart_MenuToggle } from './parts/NavigationPart_MenuToggle';
 export function NavigationIsland(props: NavigationProps) {
 
   const colors = twColors(props.color);
+  
+  const additionalClasses = clsx(!props.hideBorder && 'border-1 border-foreground-200/50', props.className);
 
   return (
     <Navbar
@@ -27,7 +29,7 @@ export function NavigationIsland(props: NavigationProps) {
 
       {props.links && props.links.length > 0 && (
         <NavbarContent justify="center" className="hidden lg:flex">
-          <div className={clmg(clsx(props.color && colors, 'flex rounded-full border-1 border-foreground-200/50 px-4', props.className))}>
+          <div className={clmg(clsx(props.color && colors, 'flex rounded-full px-4', additionalClasses))}>
             <NavigationPart_Links base={props} />
           </div>
         </NavbarContent>

@@ -12,13 +12,15 @@ export function NavigationStandard(props: NavigationProps) {
 
   const colors = twColors(props.color);
 
+  const additionalClasses = clsx(!props.hideBorder && 'border-b-1 border-b-foreground/10', props.className);
+
   return (
     <Navbar
       position={props.position}
       height="4rem"
       maxWidth={props.maxWidth}
       isBlurred={props.isBlurred}
-      className={clmg(clsx(props.color && colors, 'border-b-1 border-b-foreground/10', props.className))}
+      className={clmg(clsx(props.color && colors, 'border-b-1 border-b-foreground/10', additionalClasses))}
     >
       <NavbarContent justify="start">
         <NavigationPart_Brand base={props} />
