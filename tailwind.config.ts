@@ -17,6 +17,13 @@ const config: Config = {
     './node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}',
     './packages/ui/src/**/*.{js,ts,jsx,tsx}',
   ],
+  theme: {
+    extend: {
+      aspectRatio: {
+        'photo': '3 / 2',
+      },
+    }
+  },
   plugins: [
     nextui(),
     tailwindTypography,

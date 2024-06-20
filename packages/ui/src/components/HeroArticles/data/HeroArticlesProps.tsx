@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /**
  * A hero aritcle.
  */
@@ -33,6 +34,16 @@ export interface HeroArticlesProps {
    * Custom class name
    */
   className?: string;
+
+  /**
+   * The image node to use.
+   */
+  imageNode?: React.ElementType<any>;
+
+  /**
+   * Radius of images
+   */
+  radius?: 'none' | 'sm' | 'md' | 'lg';
 
   /**
    * Custom classes for slots
