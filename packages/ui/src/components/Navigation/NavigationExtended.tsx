@@ -12,7 +12,7 @@ export function NavigationExtended(props: NavigationProps) {
 
   const colors = twColors(props.color);
 
-  const additionalClasses = clsx(props.showBorder && 'border-b-1 border-b-foreground/10', props.className);
+  const additionalClasses = clsx(!props.hideBorder && 'border-b-1 border-b-foreground/10', props.className);
 
   return (
     <Navbar

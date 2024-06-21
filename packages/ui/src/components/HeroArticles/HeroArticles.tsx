@@ -1,6 +1,7 @@
 import { clsx } from '@do-ob/core';
 import { HeroArticlesProps } from './data/HeroArticlesProps';
 import { Button, Image, Link } from '@nextui-org/react';
+import { ArrowRightIcon } from '@heroicons/react/24/solid';
 // import { configUI } from '@do-ob/ui/config';
 
 function truncateToWordBoundary(text: string, maxLength = 120): string {
@@ -34,6 +35,8 @@ export function HeroArticles({
   const {
     className,
     articles,
+    announcement,
+    latest,
     radius,
     imageNode,
   } = props;
@@ -59,49 +62,80 @@ export function HeroArticles({
 
   return (
     <section
-      aria-label="Latest Articles"
-      className={clsx('grid grid-cols-1 items-center gap-8 lg:grid-cols-2', className)}
+      aria-label="Articles"
+      className="flex flex-col"
     >
-      {articles.map((article, index) => (
-        <Link
-          key={article.title}
-          href={article.url}
-          aria-label="Read More"
-          className={clsx('group relative block w-full cursor-pointer text-clip border-none shadow-medium hover:opacity-100', index === 0 && 'lg:col-span-2', roundedClass)}    
-        >
-          <div className={clsx('relative m-2 overflow-hidden backdrop-blur-md', roundedClass)}>
-            <Image
-              as={imageNode}
-              width={2048}
-              height={1365}
-              className="aspect-[3/2] h-auto w-full object-cover"
+      {announcement || latest ? (
+        <div className="mb-4 flex flex-row gap-4 p-2">
+          {announcement ? (
+            <Button
+              as={Link}
+              variant="flat"
+              color="primary"
               radius={radius}
-              src={article.image}
-            />
-            <div className={clsx(index === 0 ? 'w-11/12 lg:w-4/5' : 'w-11/12','absolute top-2 z-20 ml-2 flex flex-col items-start gap-4 overflow-hidden px-8 py-4 lg:gap-6')}>
-              <article className="float-left flex flex-col items-start justify-center gap-4 lg:gap-6">
-                <h1 className={clsx(index === 0 ? 'text-3xl lg:text-5xl' : 'text-3xl lg:text-3xl', 'font-bold tracking-tight text-white drop-shadow-[0_0_2px_rgba(0,0,0,1)]')}>{article.title}</h1>
-                {index === 0 ? (
-                  <h2 className={clsx(index === 0 ? 'text-base lg:text-2xl' : 'text-base lg:text-lg', 'hidden text-white/60 drop-shadow-[0_0_2px_rgba(0,0,0,1)] lg:inline')}>{truncateToWordBoundary(article.subtitle) + ' ...'}</h2>
-                ) : null}
-              </article>
-              <Button
-                size="lg"
-                color="primary"
-                variant="ghost"
+              href={announcement.url}
+              onClick={announcement.onCall}
+            >
+              {announcement.title}
+            </Button>
+          ): null}
+          {latest ? (
+            <Button
+              as={Link}
+              variant="light"
+              radius={radius}
+              className="flex items-center justify-center"
+              endContent={<ArrowRightIcon className="size-4" />}
+              href={latest.url}
+              onClick={latest.onCall}
+            >
+              {latest.title}
+            </Button>
+          ): null}
+        </div>
+      ) : null}
+      <div className={clsx('grid grid-cols-1 items-center gap-8 lg:grid-cols-2', className)}>
+        {articles.map((article, index) => (
+          <Link
+            key={article.title}
+            href={article.url}
+            aria-label="Read More"
+            className={clsx('group relative block w-full cursor-pointer text-clip border-none shadow-medium hover:opacity-100', index === 0 && 'lg:col-span-2', roundedClass)}    
+          >
+            <div className={clsx('relative m-2 overflow-hidden backdrop-blur-md', roundedClass)}>
+              <Image
+                as={imageNode}
+                width={2048}
+                height={1365}
+                className="aspect-[3/2] h-auto w-full object-cover"
                 radius={radius}
-                tabIndex={-1}
-                className={clsx(index === 0 && 'lg:text-lg', 'bg-black/30 font-bold group-hover:bg-primary group-hover:text-primary-foreground group-focus:bg-primary group-focus:text-primary-foreground')}
-              >
-              Read More
-              </Button>
-            </div>
+                src={article.image}
+              />
+              <div className={clsx(index === 0 ? 'w-11/12 lg:w-4/5' : 'w-11/12','absolute top-2 z-20 ml-2 flex flex-col items-start gap-4 overflow-hidden px-8 py-4 lg:gap-6')}>
+                <article className="float-left flex flex-col items-start justify-center gap-4 lg:gap-6">
+                  <h1 className={clsx(index === 0 ? 'text-3xl lg:text-5xl' : 'text-3xl lg:text-3xl', 'font-bold tracking-tight text-white drop-shadow-[0_0_2px_rgba(0,0,0,1)]')}>{article.title}</h1>
+                  {index === 0 ? (
+                    <h2 className={clsx(index === 0 ? 'text-base lg:text-2xl' : 'text-base lg:text-lg', 'hidden text-white/60 drop-shadow-[0_0_2px_rgba(0,0,0,1)] lg:inline')}>{truncateToWordBoundary(article.subtitle) + ' ...'}</h2>
+                  ) : null}
+                </article>
+                <Button
+                  size="lg"
+                  color="primary"
+                  variant="ghost"
+                  radius={radius}
+                  tabIndex={-1}
+                  className={clsx(index === 0 && 'lg:text-lg', 'bg-black/30 font-bold group-hover:bg-primary group-hover:text-primary-foreground group-focus:bg-primary group-focus:text-primary-foreground')}
+                >
+                Read More
+                </Button>
+              </div>
           
-            <div className="absolute left-0 top-0 z-10 size-full bg-gradient-to-br from-black/80 from-20% to-transparent to-60%" />
-            <div className="absolute left-0 top-0 z-10 size-full bg-black/40 transition-opacity group-hover:opacity-0 group-focus:opacity-0" />
-          </div>
-        </Link>
-      ))}
+              <div className="absolute left-0 top-0 z-10 size-full bg-gradient-to-br from-black/80 from-20% to-transparent to-60%" />
+              <div className="absolute left-0 top-0 z-10 size-full bg-black/40 transition-opacity group-hover:opacity-0 group-focus:opacity-0" />
+            </div>
+          </Link>
+        ))}
+      </div>
 
     </section>
   );

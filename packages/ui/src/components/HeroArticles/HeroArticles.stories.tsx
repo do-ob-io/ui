@@ -43,6 +43,20 @@ const articles = [
 
 const args: HeroArticlesProps = {
   articles,
+  announcement: {
+    title: 'Learn about our mission',
+    url: '#',
+    onCall: () => {
+      console.log('Announcement clicked');
+    },
+  },
+  latest: {
+    title: 'All latest news',
+    url: '#',
+    onCall: () => {
+      console.log('Latest clicked');
+    },
+  },
 };
 
 export const Standard: Story = {

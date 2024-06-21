@@ -3,6 +3,26 @@ export * from './types/actions';
 export * from './types/locale';
 
 /**
+ * A call to some action
+ */
+export interface Call {
+  /**
+   * The title of the call.
+   */
+  title: string;
+
+  /**
+   * The URL of the call.
+   */
+  url?: string;
+
+  /**
+   * The callback of the call.
+   */
+  onCall?: () => void;
+}
+
+/**
  * Theme mode.
  */
 export type ThemeMode = 'light' | 'dark';

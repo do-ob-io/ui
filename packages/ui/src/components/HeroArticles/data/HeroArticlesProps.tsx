@@ -1,4 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+
+import { Call } from '@do-ob/ui/types';
+
 /**
  * A hero aritcle.
  */
@@ -29,6 +32,16 @@ export interface HeroArticlesProps {
    * The articles to display
    */
   articles: HeroArticle[];
+
+  /**
+   * An announcement call to display above the hero.
+   */
+  announcement?: Call;
+
+  /**
+   * A latest event call
+   */
+  latest?: Call;
 
   /**
    * Custom class name
