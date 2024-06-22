@@ -1,32 +1,16 @@
 import type { Config } from 'tailwindcss';
-import path from 'node:path';
-import fs from 'node:fs';
-import { nextui }  from '@nextui-org/react';
-import tailwindTypography from '@tailwindcss/typography';
+import { doobTailwindPreset }  from './packages/ui/src/tailwind';
 
-const nextuiContent = path.join(
-  fs.realpathSync('./node_modules/@nextui-org/theme'),
-  'dist/**/*.{js,ts,jsx,tsx}'
-);
-
-console.log(nextuiContent);
+const doobPreset = doobTailwindPreset({});
 
 const config: Config = {
   darkMode: 'class',
-  content: [
-    './node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}',
-    './packages/ui/src/**/*.{js,ts,jsx,tsx}',
+  presets: [
+    doobPreset,
   ],
-  theme: {
-    extend: {
-      aspectRatio: {
-        'photo': '3 / 2',
-      },
-    }
-  },
-  plugins: [
-    nextui(),
-    tailwindTypography,
+  content: [
+    ...doobPreset.content,
+    './packages/ui/src/**/*.{js,ts,jsx,tsx}',
   ],
 };
 export default config;
