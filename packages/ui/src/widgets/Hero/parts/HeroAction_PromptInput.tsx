@@ -1,5 +1,5 @@
 import { HeroProps } from '../data/HeroProps';
-import { TypewriterInput } from '@do-ob/ui/components';
+import { TypewriterInput } from '@do-ob/ui/widgets';
 
 export function HeroAction_PromptInput({ base: {
   actionText

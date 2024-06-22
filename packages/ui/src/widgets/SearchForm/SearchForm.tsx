@@ -3,7 +3,7 @@
 import { SearchAction } from '@do-ob/ui/types';
 import { SearchFormInputs } from './SearchFormInputs';
 import { useActionState } from '@do-ob/ui/hooks';
-import { Form } from '@do-ob/ui/components';
+import { Form } from '@do-ob/ui/widgets';
 import { nop } from '@do-ob/core';
 
 /**

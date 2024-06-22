@@ -1,5 +1,5 @@
 import { NavbarBrand, Link } from '@nextui-org/react';
-import { Image } from '@do-ob/ui/components';
+import { Image } from '@do-ob/ui/widgets';
 import { NavigationProps } from '../data/NavigationProps';
 import { clsx } from '@do-ob/core';
 

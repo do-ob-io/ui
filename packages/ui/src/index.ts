@@ -1,1 +1,1 @@
-export * from '@do-ob/ui/components';
+export * from '@do-ob/ui/widgets';
