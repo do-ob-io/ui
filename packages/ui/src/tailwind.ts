@@ -58,7 +58,7 @@ export function doobTailwindPreset({
             '950': '#3e131a',
           },
           'primary': {
-            forground: '#fff',
+            foreground: '#fff',
             DEFAULT: '#7194c0',
             '50': '#f4f7fa',
             '100': '#e5ecf4',
@@ -73,7 +73,7 @@ export function doobTailwindPreset({
             '950': '#293142',
           },
           'secondary': {
-            forground: '#fff',
+            foreground: '#fff',
             DEFAULT: '#d16267',
             '50': '#fcf5f4',
             '100': '#faeae9',

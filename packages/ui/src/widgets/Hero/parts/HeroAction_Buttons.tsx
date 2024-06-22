@@ -1,5 +1,5 @@
 import { HeroProps } from '../data/HeroProps';
-import { Button } from '@nextui-org/react';
+import { Button } from '@do-ob/ui/components';
 
 export function HeroAction_Buttons({ base: {
   actionText
