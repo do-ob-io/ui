@@ -1,10 +1,15 @@
-import { Button as ButtonAria, ButtonProps as ButtonAriaProps } from 'react-aria-components';
+import { Button as ButtonAria } from 'react-aria-components';
 import { fillStyles, emptyStyles, twMerge, interactiveStyles } from '@do-ob/ui/utility';
 
-export interface ButtonProps extends ButtonAriaProps {
-  variant?: 'bordered' | 'filled' | 'text';
+export interface ButtonProps<
+  Element extends React.ElementType = typeof ButtonAria
+> {
+  as?: Element;
+  variant?: 'bordered' | 'filled' | 'light';
   size?: 'sm' | 'md' | 'lg';
   color?: 'primary' | 'secondary' | 'success' | 'warning' | 'error';
+  startContent?: React.ReactNode;
+  endContent?: React.ReactNode;
 }
 
 /**
@@ -13,7 +18,7 @@ export interface ButtonProps extends ButtonAriaProps {
 const variantStyles: Record<NonNullable<ButtonProps['variant']>, string> = {
   bordered: 'border-2 bg-transparent hover:brightness-75 active:brightness-50',
   filled: 'border-2 hover:brightness-75 active:brightness-50',
-  text: 'border-2 border-transparent bg-transparent hover:bg-black/10 active::bg-black/20',
+  light: 'border-2 border-transparent bg-transparent hover:bg-black/10 active::bg-black/20',
 };
 
 /**
@@ -28,14 +33,21 @@ const sizeStyles: Record<NonNullable<ButtonProps['size']>, string> = {
 /**
  * Button
  */
-export function Button({
+export function Button<
+  Element extends React.ElementType
+>({
+  as,
   children,
   variant = 'filled',
   size = 'md',
   color = 'primary',
   className,
+  startContent = null,
+  endContent = null,
   ...props
-}: ButtonProps) {
+}: ButtonProps<Element> & React.ComponentPropsWithoutRef<Element>) {
+
+  const Tag = as ?? ButtonAria;
 
   const variantClasses = variantStyles[variant];
   const sizeClasses = sizeStyles[size];
@@ -44,15 +56,15 @@ export function Button({
       case 'filled':
         return fillStyles[color];
       case 'bordered':
-      case 'text':
+      case 'light':
         return emptyStyles[color];
     }
   })();
   
   return (
-    <ButtonAria
+    <Tag
       className={twMerge(
-        'rounded',
+        'rounded flex flex-row justify-center gap-1',
         interactiveStyles.focus,
         interactiveStyles.mouse,
         colorClasses,
@@ -62,7 +74,9 @@ export function Button({
       )}
       {...props}
     >
+      {startContent}
       {children}
-    </ButtonAria>
+      {endContent}
+    </Tag>
   );
 }

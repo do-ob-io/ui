@@ -1,6 +1,7 @@
 import { clsx } from '@do-ob/core';
 import { HeroArticlesProps } from './data/HeroArticlesProps';
-import { Button, Image, Link } from '@nextui-org/react';
+import { Link } from '@nextui-org/react';
+import { Button, Image } from '@do-ob/ui/components';
 import { ArrowRightIcon } from '@heroicons/react/24/solid';
 // import { configUI } from '@do-ob/ui/config';
 
@@ -70,9 +71,9 @@ export function HeroArticles({
           {announcement ? (
             <Button
               as={Link}
-              variant="flat"
+              variant="bordered"
               color="primary"
-              radius={radius}
+              // radius={radius}
               href={announcement.url}
               onClick={announcement.onCall}
             >
@@ -83,7 +84,7 @@ export function HeroArticles({
             <Button
               as={Link}
               variant="light"
-              radius={radius}
+              // radius={radius}
               className="flex items-center justify-center"
               endContent={<ArrowRightIcon className="size-4" />}
               href={latest.url}
@@ -100,11 +101,12 @@ export function HeroArticles({
             key={article.title}
             href={article.url}
             aria-label="Read More"
-            className={clsx('group relative block w-full cursor-pointer text-clip border-none shadow-medium hover:opacity-100', index === 0 && 'lg:col-span-2', roundedClass)}    
+            className={clsx('group relative block w-full cursor-pointer text-clip border-none shadow-md hover:opacity-100', index === 0 && 'lg:col-span-2', roundedClass)}    
           >
             <div className={clsx('relative m-2 overflow-hidden backdrop-blur-md', roundedClass)}>
               <Image
                 as={imageNode}
+                alt={article.title}
                 width={2048}
                 height={1365}
                 className="aspect-[3/2] h-auto w-full object-cover"
@@ -119,12 +121,10 @@ export function HeroArticles({
                   ) : null}
                 </article>
                 <Button
+                  as="div"
                   size="lg"
                   color="primary"
-                  variant="ghost"
-                  radius={radius}
-                  tabIndex={-1}
-                  className={clsx(index === 0 && 'lg:text-lg', 'bg-black/30 font-bold group-hover:bg-primary group-hover:text-primary-foreground group-focus:bg-primary group-focus:text-primary-foreground')}
+                  variant="bordered"
                 >
                 Read More
                 </Button>
