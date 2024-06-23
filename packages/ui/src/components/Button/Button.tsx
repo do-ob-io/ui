@@ -1,8 +1,11 @@
-import { Button as ButtonAria } from 'react-aria-components';
+'use client';
+
+import React from 'react';
+import { Button as AriaButton } from 'react-aria-components';
 import { fillStyles, emptyStyles, twMerge, interactiveStyles } from '@do-ob/ui/utility';
 
 export interface ButtonProps<
-  Element extends React.ElementType = typeof ButtonAria
+  Element extends React.ElementType = typeof AriaButton
 > {
   as?: Element;
   variant?: 'bordered' | 'filled' | 'light';
@@ -10,6 +13,7 @@ export interface ButtonProps<
   color?: 'primary' | 'secondary' | 'success' | 'warning' | 'error';
   startContent?: React.ReactNode;
   endContent?: React.ReactNode;
+  className?: string;
 }
 
 /**
@@ -18,7 +22,7 @@ export interface ButtonProps<
 const variantStyles: Record<NonNullable<ButtonProps['variant']>, string> = {
   bordered: 'border-2 bg-transparent hover:brightness-75 active:brightness-50',
   filled: 'border-2 hover:brightness-75 active:brightness-50',
-  light: 'border-2 border-transparent bg-transparent hover:bg-black/10 active::bg-black/20',
+  light: 'border-2 border-transparent bg-transparent hover:bg-black/10 active::bg-black/20 dark:border-transparent',
 };
 
 /**
@@ -47,7 +51,7 @@ export function Button<
   ...props
 }: ButtonProps<Element> & React.ComponentPropsWithoutRef<Element>) {
 
-  const Tag = as ?? ButtonAria;
+  const Tag = as ?? AriaButton;
 
   const variantClasses = variantStyles[variant];
   const sizeClasses = sizeStyles[size];
@@ -64,7 +68,7 @@ export function Button<
   return (
     <Tag
       className={twMerge(
-        'rounded flex flex-row justify-center gap-1',
+        'rounded inline-flex justify-center',
         interactiveStyles.focus,
         interactiveStyles.mouse,
         colorClasses,
@@ -74,9 +78,9 @@ export function Button<
       )}
       {...props}
     >
-      {startContent}
+      {startContent && <span className="mr-2">{startContent}</span>}
       {children}
-      {endContent}
+      {endContent && <span className="ml-2">{endContent}</span>}
     </Tag>
   );
 }

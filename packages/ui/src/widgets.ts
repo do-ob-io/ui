@@ -10,7 +10,6 @@ export { ThemeSwitch } from './widgets/ThemeSwitch/ThemeSwitch';
 export { ThemeButton } from './widgets/ThemeButton/ThemeButton';
 export { Typewriter } from './widgets/Typewriter/Typewriter';
 export { TypewriterInput } from './widgets/TypewriterInput/TypewriterInput';
-export { Image } from './widgets/Image/Image';
 export { Hero } from './widgets/Hero/Hero';
 export { HeroArticles } from './widgets/HeroArticles/HeroArticles';
 export { HeroStandard } from './widgets/Hero/HeroStandard';

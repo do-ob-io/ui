@@ -1,7 +1,6 @@
 import { clsx } from '@do-ob/core';
 import { HeroArticlesProps } from './data/HeroArticlesProps';
-import { Link } from '@nextui-org/react';
-import { Button, Image } from '@do-ob/ui/components';
+import { Button, Image, Link } from '@do-ob/ui/components';
 import { ArrowRightIcon } from '@heroicons/react/24/solid';
 // import { configUI } from '@do-ob/ui/config';
 
@@ -101,7 +100,7 @@ export function HeroArticles({
             key={article.title}
             href={article.url}
             aria-label="Read More"
-            className={clsx('group relative block w-full cursor-pointer text-clip border-none shadow-md hover:opacity-100', index === 0 && 'lg:col-span-2', roundedClass)}    
+            className={clsx('group relative block w-full cursor-pointer text-clip border-none shadow-[0_0_12px_2px_rgba(0,0,0,0.5)] dark hover:opacity-100 hover:!brightness-100 dark:border dark:border-white', index === 0 && 'lg:col-span-2', roundedClass)}    
           >
             <div className={clsx('relative m-2 overflow-hidden backdrop-blur-md', roundedClass)}>
               <Image

@@ -1,5 +1,7 @@
-import { twMerge } from '@do-ob/ui/utility';
+'use client';
+
 import React from 'react';
+import { twMerge } from '@do-ob/ui/utility';
 
 export interface ImageProps<
   Element extends React.ElementType = 'img'

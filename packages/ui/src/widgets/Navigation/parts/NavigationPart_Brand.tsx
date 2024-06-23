@@ -1,5 +1,5 @@
 import { NavbarBrand, Link } from '@nextui-org/react';
-import { Image } from '@do-ob/ui/widgets';
+import { Image } from '@do-ob/ui/components';
 import { NavigationProps } from '../data/NavigationProps';
 import { clsx } from '@do-ob/core';
 
@@ -20,7 +20,7 @@ export function NavigationPart_Brand({ base: {
         {logo ? (
           <Image
             src={logo}
-            alt={title}
+            alt={title ?? ''}
             width={0}
             height={0}
             loading="eager"
