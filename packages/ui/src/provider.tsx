@@ -1,11 +1,9 @@
 'use client';
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { NextUIProvider, NextUIProviderProps as NextUIProviderPropsOriginal } from '@nextui-org/react';
+import { RouterProvider } from 'react-aria-components';
 import { DoobUiContext, doobUiContextDefaultProps } from '@do-ob/ui/context';
 import type { ThemeMode } from '@do-ob/ui/types';
 import { useMode } from '@do-ob/ui/hooks';
-
-export type NextUIProviderProps = Omit<NextUIProviderPropsOriginal, 'children'>;
 
 export interface DoobUiProviderProps {
   /**
@@ -26,28 +24,21 @@ export interface DoobUiProviderProps {
    * @default 'light'
    */
   mode?: ThemeMode;
-
-  /**
-   * NextUI Provider properties.
-   * 
-   * @see https://nextui.org/docs/api-references/nextui-provider
-   */
-  nextui?: NextUIProviderProps;
 }
 
 /**
  * The provider for the doob context
  */
 export function DoobUiProvider({
-  nextui,
   children,
+  navigate = doobUiContextDefaultProps.navigate,
   ...props
 }: React.PropsWithChildren<DoobUiProviderProps>) {
 
   const { mode, modeToggle } = useMode(props.mode);
 
   return (
-    <NextUIProvider {...nextui} >
+    <RouterProvider navigate={navigate}>
       <DoobUiContext.Provider value={{
         ...doobUiContextDefaultProps,
         ...props,
@@ -56,6 +47,6 @@ export function DoobUiProvider({
       }}>
         {children}
       </DoobUiContext.Provider>
-    </NextUIProvider>
+    </RouterProvider>
   );
 }

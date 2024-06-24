@@ -4,7 +4,7 @@ import React from 'react';
 import { twMerge, interactiveStyles } from '@do-ob/ui/utility';
 import { Link as AriaLink } from 'react-aria-components';
 import { ArrowTopRightOnSquareIcon } from '@do-ob/ui/icons-hero-solid';
-import { DoobUiContext } from '@do-ob/ui/context';
+// import { DoobUiContext } from '@do-ob/ui/context';
 
 export interface LinkProps<
   Element extends React.ElementType = typeof AriaLink
@@ -27,15 +27,15 @@ export function Link<
   ...props
 }: LinkProps<Element> & React.ComponentPropsWithoutRef<Element>) {
 
-  const { navigate } = React.useContext(DoobUiContext);
+  // const { navigate } = React.useContext(DoobUiContext);
 
   const Tag = as ?? AriaLink;
 
   const isExternal = href && (href.startsWith('http://') || href.startsWith('https://'));
 
-  const handlePress = () => {
-    navigate(href || '');
-  };
+  // const handlePress = () => {
+  //   navigate(href || '');
+  // };
 
   return (
     <Tag
@@ -45,11 +45,11 @@ export function Link<
         interactiveStyles.mouse,
         className
       )}
-      href={isExternal ? href : undefined}
+      href={href}
       style={style}
       target={isExternal ? '_blank' : undefined}
       rel={isExternal ? 'noopener noreferrer' : undefined}
-      onPress={isExternal ? undefined : handlePress}
+      // onPress={isExternal ? undefined : handlePress}
       {...props}
     >
       {children}
