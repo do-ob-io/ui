@@ -1,4 +1,5 @@
-import { NavbarMenuItem, Link, Button, Popover, PopoverTrigger, PopoverContent, Divider } from '@nextui-org/react';
+import { NavbarMenuItem, Divider } from '@nextui-org/react';
+import { Popover, Button, Link } from '@do-ob/ui/components';
 import { ChevronDownIcon } from '@heroicons/react/24/solid';
 import { Link as LinkType } from '@do-ob/ui/types';
 import { clsx } from '@do-ob/core';
@@ -12,7 +13,7 @@ function LinkLeaf({ link }: { link: LinkType }) {
         as={Link}
         href={link.url}
         variant="light"
-        className="text-base text-inherit"
+        className="text-base text-inherit no-underline"
       >
         {link.title}
       </Button>
@@ -60,11 +61,11 @@ function LinkBranch({ links, level }: { links: LinkType[], level: number }) {
 function LinkTrunk({ link, colors, className }: { link: LinkType, colors?: string, className?: string }) {
 
   return (
-    <Popover
-      placement="bottom"
-    >
-      <NavbarMenuItem className="border-y-4 border-transparent py-1 hover:border-b-primary-200">
-        <PopoverTrigger>
+    <NavbarMenuItem className="border-y-4 border-transparent py-1 hover:border-b-primary-200">
+      <Popover
+        placement="bottom"
+        trigger={(
+        
           <Button
             variant="light"
             className="text-base text-inherit"
@@ -72,20 +73,23 @@ function LinkTrunk({ link, colors, className }: { link: LinkType, colors?: strin
           >
             {link.title}
           </Button>
-        </PopoverTrigger>
-      </NavbarMenuItem>
-      <PopoverContent className={clsx(colors, 'min-w-64 items-start p-4', className)}>
-        <Button
-          as={Link}
-          href={link.url}
-          className="w-full justify-start rounded bg-transparent px-4 py-2 text-xl font-bold text-inherit hover:bg-black/10 hover:underline dark:hover:bg-white/10"
-        >
-          {link.title}
-        </Button>
-        <Divider className="my-2" />
-        <LinkBranch links={link.links ?? []} level={1} />
-      </PopoverContent>
-    </Popover>
+        )}
+        content={(
+          <div className={clsx(colors, 'min-w-64 items-start p-2', className)}>
+            <Button
+              as={Link}
+              href={link.url}
+              variant="light"
+              className="w-full justify-start rounded bg-transparent px-4 py-2 text-xl font-bold text-inherit hover:bg-black/10 hover:underline dark:hover:bg-white/10"
+            >
+              {link.title}
+            </Button>
+            <Divider className="my-2" />
+            <LinkBranch links={link.links ?? []} level={1} />
+          </div>
+        )}
+      />
+    </NavbarMenuItem>
   );
 }
 

@@ -17,6 +17,11 @@ export interface DoobUiContextProps {
   image?: React.ElementType<any>;
 
   /**
+   * Navigation method.
+   */
+  navigate: (path: string) => void;
+
+  /**
    * The theme to use for the application.
    */
   mode?: ThemeMode;
@@ -32,6 +37,7 @@ export interface DoobUiContextProps {
  */
 export const doobUiContextDefaultProps: DoobUiContextProps = {
   image: undefined,
+  navigate: (path) => window.location.href = path,
   mode: 'light',
   modeToggle: nop,
 };

@@ -1,7 +1,7 @@
 'use client';
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { NextUIProvider, NextUIProviderProps as NextUIProviderPropsOriginal } from '@nextui-org/react';
-import { DoobUiContext } from '@do-ob/ui/context';
+import { DoobUiContext, doobUiContextDefaultProps } from '@do-ob/ui/context';
 import type { ThemeMode } from '@do-ob/ui/types';
 import { useMode } from '@do-ob/ui/hooks';
 
@@ -12,6 +12,11 @@ export interface DoobUiProviderProps {
    * Set the image component to utilize for optimization
    */
   image?: React.ElementType<any>;
+
+  /**
+   * Navigation method.
+   */
+  navigate?: (path: string) => void;
 
   /**
    * Set the initial theme mode to use for the application.
@@ -36,15 +41,16 @@ export interface DoobUiProviderProps {
 export function DoobUiProvider({
   nextui,
   children,
-  ...contextValue
+  ...props
 }: React.PropsWithChildren<DoobUiProviderProps>) {
 
-  const { mode, modeToggle } = useMode(contextValue.mode);
+  const { mode, modeToggle } = useMode(props.mode);
 
   return (
     <NextUIProvider {...nextui} >
       <DoobUiContext.Provider value={{
-        ...contextValue,
+        ...doobUiContextDefaultProps,
+        ...props,
         mode,
         modeToggle
       }}>

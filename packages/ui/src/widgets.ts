@@ -14,3 +14,4 @@ export { Hero } from './widgets/Hero/Hero';
 export { HeroArticles } from './widgets/HeroArticles/HeroArticles';
 export { HeroStandard } from './widgets/Hero/HeroStandard';
 export { HeroPrompt } from './widgets/Hero/HeroPrompt';
+export { Brand } from './widgets/Brand/Brand';

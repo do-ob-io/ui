@@ -31,7 +31,7 @@ export const InText: Story = {
 
 export const External: Story = {
   args: {
-    href: 'https://#',
+    href: 'https://do-ob.io',
     children: 'A link to some resource',
   }
 };

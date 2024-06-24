@@ -10,7 +10,7 @@ export interface ButtonProps<
   as?: Element;
   variant?: 'bordered' | 'filled' | 'light';
   size?: 'sm' | 'md' | 'lg';
-  color?: 'primary' | 'secondary' | 'success' | 'warning' | 'error';
+  color?: 'primary' | 'secondary' | 'success' | 'warning' | 'danger';
   startContent?: React.ReactNode;
   endContent?: React.ReactNode;
   className?: string;
@@ -68,7 +68,7 @@ export function Button<
   return (
     <Tag
       className={twMerge(
-        'rounded inline-flex justify-center',
+        'rounded inline-flex justify-center items-center no-underline',
         interactiveStyles.focus,
         interactiveStyles.mouse,
         colorClasses,

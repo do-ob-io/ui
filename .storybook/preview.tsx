@@ -24,8 +24,10 @@ export const decorators = [
     defaultTheme: 'light',
   }),
   (Story) => (
-    <DoobUiProvider>
-      <Story />
+    <DoobUiProvider navigate={() => { console.log('prevented'); }}>
+      <div style={{ minHeight: '100vh' }}>
+        <Story />
+      </div>
     </DoobUiProvider>
   ),
 ];
