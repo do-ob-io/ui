@@ -5,6 +5,7 @@ import tailwindColors from 'tailwindcss/colors';
 import { join } from 'node:path';
 import { nextui, NextUIPluginConfig }  from '@nextui-org/react';
 import tailwindReactAria from 'tailwindcss-react-aria-components';
+import tailwindContainerQueries from '@tailwindcss/container-queries';
 import tailwindAnimate from 'tailwindcss-animate';
 import tailwindTypography from '@tailwindcss/typography';
 
@@ -264,6 +265,7 @@ export function doobTailwindPreset({
     plugins: [
       nextui(nextConfig),
       tailwindTypography(typographyConfig),
+      tailwindContainerQueries,
       tailwindReactAria,
       tailwindAnimate,
       doobTailwindPlugin(),

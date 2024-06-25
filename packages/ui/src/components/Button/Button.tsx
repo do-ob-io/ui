@@ -8,7 +8,7 @@ export interface ButtonProps<
   Element extends React.ElementType = typeof AriaButton
 > {
   as?: Element;
-  variant?: 'bordered' | 'filled' | 'light';
+  variant?: 'bordered' | 'filled' | 'faded' | 'light';
   size?: 'sm' | 'md' | 'lg';
   color?: 'primary' | 'secondary' | 'success' | 'warning' | 'danger';
   startContent?: React.ReactNode;
@@ -22,6 +22,7 @@ export interface ButtonProps<
 const variantStyles: Record<NonNullable<ButtonProps['variant']>, string> = {
   bordered: 'border-2 bg-transparent hover:brightness-75 active:brightness-50',
   filled: 'border-2 hover:brightness-75 active:brightness-50',
+  faded: 'border-2 border-transparent hover:brightness-75 active:brightness-50 bg-opacity-10 hover:bg-opacity-30 active:bg-opacity-50',
   light: 'border-2 border-transparent bg-transparent hover:bg-black/10 active::bg-black/20 dark:border-transparent',
 };
 
@@ -62,6 +63,8 @@ export function Button<
       case 'bordered':
       case 'light':
         return emptyStyles[color];
+      case 'faded':
+        return twMerge(fillStyles[color], emptyStyles[color]);
     }
   })();
   

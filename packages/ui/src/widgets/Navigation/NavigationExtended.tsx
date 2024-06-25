@@ -23,7 +23,7 @@ export function NavigationExtended(props: NavigationProps) {
       className={clmg(clsx(props.color && colors, 'relative overflow-hidden', additionalClasses))}
     >
       <NavbarContent justify="start" className="lg:items-start lg:pt-2">
-        <div className="relative z-10">
+        <div className="relative z-10 w-full">
           <NavigationPart_Brand base={props} />
         </div>
       </NavbarContent>

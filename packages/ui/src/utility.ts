@@ -28,12 +28,12 @@ export const fillStyles: Record<TwColors, string> = {
 };
 
 export const emptyStyles: Record<TwColors, string> = {
-  background: 'bg-transparent text-background border-background',
-  primary: 'bg-transparent text-primary border-primary dark:text-primary-dark dark:border-primary-dark',
-  secondary: 'bg-transparent text-secondary border-secondary dark:text-secondary-dark dark:border-secondary-dark',
-  success: 'bg-transparent text-success border-success dark:text-success-dark dark:border-success-dark',
-  warning: 'bg-transparent text-warning border-warning dark:text-warning-dark dark:border-warning-dark',
-  danger: 'bg-transparent text-danger-light-bg border-danger-light-bg dark:text-danger-dark dark:border-danger-dark',
+  background: 'text-background border-background',
+  primary: 'text-primary border-primary dark:text-primary-dark dark:border-primary-dark',
+  secondary: 'text-secondary border-secondary dark:text-secondary-dark dark:border-secondary-dark',
+  success: 'text-success border-success dark:text-success-dark dark:border-success-dark',
+  warning: 'text-warning border-warning dark:text-warning-dark dark:border-warning-dark',
+  danger: 'text-danger-light-bg border-danger-light-bg dark:text-danger-dark dark:border-danger-dark',
 };
 
 /**

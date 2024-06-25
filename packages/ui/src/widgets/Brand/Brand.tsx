@@ -58,7 +58,7 @@ export function Brand({
   };
 
   return (
-    <div className="inline-flex items-center gap-4">
+    <div className="inline-flex w-full items-center gap-4 @container">
       {image && <Image
         src={image}
         alt="Brand"
@@ -68,7 +68,7 @@ export function Brand({
         className={classNames.image}
       />}
       {(name && name?.length) ? (<h1 className={twMerge(
-        'tracking-tight hidden md:inline',
+        'tracking-tight hidden @md:inline',
         textSizes[size],
         'leading-none',
         classNames.name,
@@ -76,7 +76,7 @@ export function Brand({
         {name}
       </h1>) : null}
       {(name && name?.length) ? (<h1 className={twMerge(
-        'tracking-tight leading-tight inline md:hidden',
+        'tracking-tight leading-tight inline @md:hidden',
         textSizes[size],
         classNames.name,
       )}>
