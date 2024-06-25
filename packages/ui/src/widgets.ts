@@ -1,8 +1,8 @@
 export { Form } from './widgets/Form/Form';
-export { Navigation } from './widgets/Navigation/Navigation';
-export { NavigationIsland } from './widgets/Navigation/NavigationIsland';
-export { NavigationStandard } from './widgets/Navigation/NavigationStandard';
-export { NavigationExtended } from './widgets/Navigation/NavigationExtended';
+export { NavigationLegacy } from './widgets/NavigationLegacy/NavigationLegacy';
+export { NavigationIsland } from './widgets/NavigationLegacy/NavigationIsland';
+export { NavigationStandard } from './widgets/NavigationLegacy/NavigationStandard';
+export { NavigationExtended } from './widgets/NavigationLegacy/NavigationExtended';
 export { SearchButton } from './widgets/SearchButton/SearchButton';
 export { SearchForm } from './widgets/SearchForm/SearchForm';
 export { SearchInput } from './widgets/SearchInput/SearchInput';
