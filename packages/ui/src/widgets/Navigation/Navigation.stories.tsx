@@ -14,33 +14,33 @@ type Story = StoryObj<typeof meta>;
 const links: Link[] = [
   {
     title: 'Home',
-    url: '#',
+    url: '/',
   },
   {
     title: 'About',
-    url: '#about',
+    url: '/about',
     links: [
       {
         title: 'Company',
-        url: '#company',
+        url: '/about/company',
       },
       {
         title: 'Team',
-        url: '#team',
+        url: '/team',
       },
     ],
   },
   {
     title: 'Contact',
-    url: '#contact',
+    url: '/contact',
     links: [
       {
         title: 'Location',
-        url: '#location',
+        url: '/contact/location',
         links: [
           {
             title: 'Address',
-            url: '#address',
+            url: '/address',
           },
           {
             title: 'Map',
@@ -48,11 +48,11 @@ const links: Link[] = [
             links: [
               {
                 title: 'Google Map',
-                url: '#google-map',
+                url: '/google-map',
               },
               {
                 title: 'Apple Map',
-                url: '#apple-map',
+                url: '/apple-map',
               },
             ]
           },
@@ -60,11 +60,11 @@ const links: Link[] = [
       },
       {
         title: 'Email',
-        url: '#email',
+        url: '/contact/email',
       },
       {
         title: 'Phone',
-        url: '#phone',
+        url: '/contact/phone',
       },
     ],
   },
@@ -73,5 +73,55 @@ const links: Link[] = [
 export const Default: Story = {
   args: {
     links,
+  }
+};
+
+export const Vertical: Story = {
+  args: {
+    links,
+    orientation: 'vertical',
+  }
+};
+
+export const Overflow: Story = {
+  args: {
+    links: [
+      {
+        title: 'Link#1',
+        url: '/',
+      },
+      {
+        title: 'Link#2',
+        url: '/2',
+      },
+      {
+        title: 'Link#3',
+        url: '/3',
+      },
+      {
+        title: 'Link#4',
+        url: '/4',
+      },
+      {
+        title: 'Link#5',
+        url: '/5',
+      },
+      {
+        title: 'Link#6',
+        url: '/6',
+      },
+      {
+        title: 'Link#7',
+        url: '/7',
+      },
+      {
+        title: 'Link#8',
+        url: '/8',
+      },
+      {
+        title: 'Link#9',
+        url: '/9',
+      },
+    ],
   }
 };

@@ -1,6 +1,7 @@
 'use client';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import React from 'react';
 import { ThemeMode } from '@do-ob/ui/types';
 import { nop } from '@do-ob/core';
 import { createContext } from 'react';
@@ -22,6 +23,11 @@ export interface DoobUiContextProps {
   navigate: (path: string) => void;
 
   /**
+   * Pathname hook.
+   */
+  pathname: string;
+
+  /**
    * The theme to use for the application.
    */
   mode?: ThemeMode;
@@ -38,6 +44,7 @@ export interface DoobUiContextProps {
 export const doobUiContextDefaultProps: DoobUiContextProps = {
   image: undefined,
   navigate: (path) => window.location.href = path,
+  pathname: '',
   mode: 'light',
   modeToggle: nop,
 };

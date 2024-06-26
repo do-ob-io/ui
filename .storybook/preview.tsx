@@ -24,7 +24,7 @@ export const decorators = [
     defaultTheme: 'light',
   }),
   (Story) => (
-    <DoobUiProvider navigate={() => { console.log('prevented'); }}>
+    <DoobUiProvider navigate={(path) => { history.pushState({}, '', path); }}>
       <div style={{ minHeight: '100vh' }}>
         <Story />
       </div>
