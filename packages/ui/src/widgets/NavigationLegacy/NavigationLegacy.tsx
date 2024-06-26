@@ -11,7 +11,7 @@ export interface NavigationVariantProps extends NavigationProps {
   variant?: 'standard' | 'island' | 'extended';
 }
 
-export function Navigation({
+export function NavigationLegacy({
   variant = 'standard',
   ...props
 }: NavigationVariantProps) {

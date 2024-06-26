@@ -1,8 +1,5 @@
 export { Form } from './widgets/Form/Form';
-export { NavigationLegacy } from './widgets/NavigationLegacy/NavigationLegacy';
-export { NavigationIsland } from './widgets/NavigationLegacy/NavigationIsland';
-export { NavigationStandard } from './widgets/NavigationLegacy/NavigationStandard';
-export { NavigationExtended } from './widgets/NavigationLegacy/NavigationExtended';
+export { Navigation, type NavigationProps } from './widgets/Navigation/Navigation';
 export { SearchButton } from './widgets/SearchButton/SearchButton';
 export { SearchForm } from './widgets/SearchForm/SearchForm';
 export { SearchInput } from './widgets/SearchInput/SearchInput';
@@ -14,4 +11,5 @@ export { Hero } from './widgets/Hero/Hero';
 export { HeroArticles } from './widgets/HeroArticles/HeroArticles';
 export { HeroStandard } from './widgets/Hero/HeroStandard';
 export { HeroPrompt } from './widgets/Hero/HeroPrompt';
-export { Brand } from './widgets/Brand/Brand';
+export { Brand, type BrandProps } from './widgets/Brand/Brand';
+

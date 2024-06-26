@@ -1,7 +1,7 @@
 'use client';
 
-import { useContext } from 'react';
-import { Button, ButtonProps } from '@nextui-org/react';
+import { use } from 'react';
+import { Button, ButtonProps } from '@do-ob/ui/components';
 import { MoonIcon, SunIcon } from '@heroicons/react/24/solid';
 
 import { DoobUiContext } from '@do-ob/ui/context';
@@ -25,13 +25,12 @@ export function ThemeButton({
   ...props
 }: ThemeButtonProps) {
 
-  const { mode, modeToggle } = useContext(DoobUiContext);
+  const { mode, modeToggle } = use(DoobUiContext);
 
   return (
     <Button
-      onClick={modeToggle}
+      onPress={modeToggle}
       startContent={mode === 'dark' ? <MoonIcon className="size-2/3" /> : <SunIcon className="size-2/3" />}
-      isIconOnly={!children}
       aria-label="Toggle theme"
       {...props}
     >

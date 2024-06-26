@@ -1,6 +1,6 @@
 'use client';
 
-import { useContext } from 'react';
+import { use } from 'react';
 import { Switch } from '@nextui-org/react';
 import { MoonIcon, SunIcon } from '@heroicons/react/24/solid';
 
@@ -24,7 +24,7 @@ export function ThemeSwitch({
   children,
 }: ThemeSwitchProps) {
 
-  const { mode, modeToggle } = useContext(DoobUiContext);
+  const { mode, modeToggle } = use(DoobUiContext);
 
   return (
     <Switch

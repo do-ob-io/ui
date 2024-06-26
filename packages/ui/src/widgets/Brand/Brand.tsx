@@ -34,6 +34,24 @@ export interface BrandProps {
   }
 }
 
+const imageSizes = {
+  sm: 40,
+  md: 64,
+  lg: 128,
+};
+
+const imageSizeStyles = {
+  sm: 'w-8 h-8',
+  md: 'w-11 h-11',
+  lg: 'w-14 h-14',
+};
+
+const textSizes = {
+  sm: 'text-2xl',
+  md: 'text-3xl',
+  lg: 'text-4xl',
+};
+
 /**
  * Brand
  */
@@ -45,38 +63,29 @@ export function Brand({
   classNames = {},
 }: BrandProps) {
 
-  const imageSizes = {
-    sm: 40,
-    md: 64,
-    lg: 128,
-  };
-
-  const textSizes = {
-    sm: 'text-2xl',
-    md: 'text-3xl',
-    lg: 'text-6xl',
-  };
-
   return (
-    <div className="inline-flex w-full items-center gap-4 @container">
+    <div className="flex size-full items-center gap-4">
       {image && <Image
         src={image}
         alt="Brand"
         width={imageSizes[size]}
         height={imageSizes[size]}
         loading="eager"
-        className={classNames.image}
+        className={twMerge(
+          imageSizeStyles[size],
+          classNames.image
+        )}
       />}
       {(name && name?.length) ? (<h1 className={twMerge(
-        'tracking-tight hidden @md:inline',
+        'tracking-tight hidden lg:inline',
         textSizes[size],
-        'leading-none',
+        'leading-none whitespace-nowrap',
         classNames.name,
       )}>
         {name}
       </h1>) : null}
       {(name && name?.length) ? (<h1 className={twMerge(
-        'tracking-tight leading-tight inline @md:hidden',
+        'tracking-tight leading-tight inline lg:hidden whitespace-nowrap',
         textSizes[size],
         classNames.name,
       )}>
