@@ -62,7 +62,6 @@ export function Navigation({
         selectedKey={selected}
         aria-hidden={overflowing}
         className={twMerge(
-          'block',
           overflowing === true && 'opacity-0',
           className
         )}
