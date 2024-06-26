@@ -61,10 +61,11 @@ export function Brand({
   image = null,
   size = 'md',
   classNames = {},
-}: BrandProps) {
+  ...props
+}: BrandProps & React.HTMLAttributes<HTMLDivElement>) {
 
   return (
-    <div className="flex size-full items-center gap-4">
+    <div className="flex size-full items-center gap-4" {...props}>
       {image && <Image
         src={image}
         alt="Brand"

@@ -17,13 +17,10 @@ export function Header({
   navigation,
 }: HeaderProps) {
   return (
-    <header className="flex flex-row items-end gap-4 border border-red-500 p-4">
-      <div className="flex">
-        <Brand {...brand} />
-      </div>
-      <div className="col-span-2" style={{ flexGrow: 2 }}>
-        <Navigation {...navigation} />
-      </div>
+    <header className="flex w-full flex-row items-center gap-4 border border-red-500 p-4">
+      <Brand {...brand} style={{ flex: 1 }} />
+      <Navigation {...navigation} style={{ flex: 2 }}/>
+      <div className="size-full bg-green-500" style={{ flex: 1 }}>&nbsp;</div>
     </header>
   );
 }

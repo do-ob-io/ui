@@ -37,7 +37,8 @@ export function Navigation({
   links = [],
   orientation = 'horizontal',
   className,
-}: NavigationProps) {
+  ...props
+}: NavigationProps & React.HTMLAttributes<HTMLDivElement>) {
 
   const ref = useRef<HTMLDivElement>(null);
   const overflowing = useOverflow(ref, 'x');
@@ -55,7 +56,7 @@ export function Navigation({
     });
 
   return (
-    <div ref={ref} className="relative block overflow-hidden">
+    <div ref={ref} className="relative w-full overflow-hidden" {...props}>
       <Tabs
         aria-role="navigation"
         orientation={orientation}

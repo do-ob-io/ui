@@ -31,6 +31,20 @@ const links: Link[] = [
     ],
   },
   {
+    title: 'Services',
+    url: '/services',
+    links: [
+      {
+        title: 'Service 1',
+        url: '/services/service-1',
+      },
+      {
+        title: 'Service 2',
+        url: '/services/service-2',
+      },
+    ],
+  },
+  {
     title: 'Contact',
     url: '/contact',
     links: [
