@@ -14,6 +14,7 @@ export interface ButtonProps<
   startContent?: React.ReactNode;
   endContent?: React.ReactNode;
   className?: string;
+  iconify?: boolean;
 }
 
 /**
@@ -21,8 +22,8 @@ export interface ButtonProps<
  */
 const variantStyles: Record<NonNullable<ButtonProps['variant']>, string> = {
   bordered: 'border-2 bg-transparent hover:brightness-75 active:brightness-50',
-  filled: 'border-2 hover:brightness-75 active:brightness-50',
-  faded: 'border-2 border-transparent hover:brightness-75 active:brightness-50 bg-opacity-10 hover:bg-opacity-30 active:bg-opacity-50',
+  filled: 'border-2 hover:brightness-75 active:brightness-50 [&_svg]:fill-background dark:[&_svg]:fill-background-dark',
+  faded: 'border-2 border-transparent dark:border-transparent hover:brightness-75 active:brightness-50 bg-opacity-20 dark:bg-opacity-20 hover:bg-opacity-30 active:bg-opacity-50',
   light: 'border-2 border-transparent bg-transparent hover:bg-black/10 active::bg-black/20 dark:border-transparent',
 };
 
@@ -30,9 +31,18 @@ const variantStyles: Record<NonNullable<ButtonProps['variant']>, string> = {
  * Define tailwind classes for the sizes.
  */
 const sizeStyles: Record<NonNullable<ButtonProps['size']>, string> = {
-  sm: 'px-2 py-1 text-sm',
-  md: 'px-4 py-2 text-base',
-  lg: 'px-6 py-3 text-lg',
+  sm: 'px-2 h-8 text-sm',
+  md: 'px-4 h-11 text-base',
+  lg: 'px-6 h-14 text-xl',
+};
+
+/**
+ * Define tailwind classes for the sizes.
+ */
+const sizeIconStyles: Record<NonNullable<ButtonProps['size']>, string> = {
+  sm: 'size-8 text-sm [&_svg]:size-5',
+  md: 'size-11 text-base [&_svg]:size-7',
+  lg: 'size-14 text-lg [&_svg]:size-10',
 };
 
 /**
@@ -49,13 +59,14 @@ export function Button<
   className,
   startContent = null,
   endContent = null,
+  iconify = false,
   ...props
 }: ButtonProps<Element> & React.ComponentPropsWithoutRef<Element>) {
 
   const Tag = as ?? AriaButton;
 
   const variantClasses = variantStyles[variant];
-  const sizeClasses = sizeStyles[size];
+  const sizeClasses = iconify ? sizeIconStyles[size] : sizeStyles[size];
   const colorClasses = (() => {
     switch (variant) {
       case 'filled':
@@ -77,6 +88,7 @@ export function Button<
         colorClasses,
         sizeClasses,
         variantClasses,
+        iconify && 'rounded-full',
         className
       )}
       {...props}

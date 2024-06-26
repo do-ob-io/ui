@@ -1,6 +1,3 @@
-'use client';
-
-import React from 'react';
 import { twMerge, interactiveStyles } from '@do-ob/ui/utility';
 import { Link as AriaLink } from 'react-aria-components';
 import { ArrowTopRightOnSquareIcon } from '@do-ob/ui/icons-hero-solid';
@@ -27,15 +24,9 @@ export function Link<
   ...props
 }: LinkProps<Element> & React.ComponentPropsWithoutRef<Element>) {
 
-  // const { navigate } = React.useContext(DoobUiContext);
-
   const Tag = as ?? AriaLink;
 
   const isExternal = href && (href.startsWith('http://') || href.startsWith('https://'));
-
-  // const handlePress = () => {
-  //   navigate(href || '');
-  // };
 
   return (
     <Tag

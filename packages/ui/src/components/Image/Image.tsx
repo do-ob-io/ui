@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import { use, useState } from 'react';
 import { twMerge } from '@do-ob/ui/utility';
 import { DoobUiContext } from '@do-ob/ui/context';
 
@@ -31,22 +31,22 @@ export function Image<
   priority = false,
   className,
   style,
-  objectFit = 'cover',
+  objectFit = 'contain',
   objectPosition = 'center',
   ...props
 }: ImageProps<Element> & React.ComponentPropsWithoutRef<Element>) {
 
-  const { image } = React.useContext(DoobUiContext);
-  const [ loaded, loadedSet ] = React.useState(false);
+  const { image } = use(DoobUiContext);
+  const [ loaded, loadedSet ] = useState(false);
 
   const Tag = as ?? image ?? 'img';
 
   return (
-    <picture className="relative flex items-center justify-center" style={{ width: width, height: height }}>
+    <picture className="relative flex items-center justify-center">
       <div className={twMerge('absolute inset-0 size-full animate-pulse bg-background-fg/50 dark:bg-background-dark-fg/50 rounded-md',  loaded && 'hidden')} />
       <Tag
         className={twMerge(
-          'object-cover relative',
+          'relative',
           className
         )}
         src={src}

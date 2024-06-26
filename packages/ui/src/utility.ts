@@ -29,11 +29,11 @@ export const fillStyles: Record<TwColors, string> = {
 
 export const emptyStyles: Record<TwColors, string> = {
   background: 'text-background border-background',
-  primary: 'text-primary border-primary dark:text-primary-dark dark:border-primary-dark',
-  secondary: 'text-secondary border-secondary dark:text-secondary-dark dark:border-secondary-dark',
-  success: 'text-success border-success dark:text-success-dark dark:border-success-dark',
-  warning: 'text-warning border-warning dark:text-warning-dark dark:border-warning-dark',
-  danger: 'text-danger-light-bg border-danger-light-bg dark:text-danger-dark dark:border-danger-dark',
+  primary: 'text-primary border-primary dark:text-primary-dark dark:border-primary-dark [&_svg]:fill-primary dark:[&_svg]:fill-primary-dark',
+  secondary: 'text-secondary border-secondary dark:text-secondary-dark dark:border-secondary-dark [&_svg]:fill-secondary dark:[&_svg]:fill-secondary-dark',
+  success: 'text-success border-success dark:text-success-dark dark:border-success-dark [&_svg]:fill-success dark:[&_svg]:fill-success-dark',
+  warning: 'text-warning border-warning dark:text-warning-dark dark:border-warning-dark [&_svg]:fill-warning dark:[&_svg]:fill-warning-dark',
+  danger: 'text-danger border-danger dark:text-danger-dark dark:border-danger-dark [&_svg]:fill-danger dark:[&_svg]:fill-danger-dark',
 };
 
 /**
