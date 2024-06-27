@@ -1,4 +1,3 @@
-import { Spacer } from '@nextui-org/react';
 import { HeroProps } from './data/HeroProps';
 import { clsx, clmg } from '@do-ob/core';
 import { HeroAction_PromptInput } from './parts/HeroAction_PromptInput';
@@ -31,7 +30,7 @@ export function HeroPrompt(props: HeroProps) {
           {subtitle}
         </h2>
 
-        <Spacer y={6} />
+        <div className="h-6" />
 
         <HeroAction_PromptInput base={props} />
 

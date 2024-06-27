@@ -1,9 +1,8 @@
 'use client';
 
 import { useTypewriter } from '@do-ob/ui/hooks';
-import { Input, InputProps } from '@nextui-org/react';
 
-export interface TypewriterInputProps extends InputProps {
+export interface TypewriterInputProps {
   /**
    * The words to type
    */
@@ -38,7 +37,7 @@ export function TypewriterInput({
   deleteSpeed = 50,
   wordDelay = 1500,
   ...props
-}: TypewriterInputProps) {
+}: TypewriterInputProps & React.InputHTMLAttributes<HTMLInputElement>) {
 
   const words = Array.isArray(wordsProp) ? wordsProp : [ wordsProp ];
 
@@ -51,7 +50,7 @@ export function TypewriterInput({
   });
 
   return (
-    <Input
+    <input
       {...props}
       placeholder={text}
     />

@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import {
   Popover as AriaPopover,
@@ -5,7 +7,7 @@ import {
   DialogTrigger as AriaDialogTrigger,
   // OverlayArrow as AriaOverlayArrow
 } from 'react-aria-components';
-import { fillStyles, twMerge } from '@do-ob/ui/utility';
+import { fillStyles, cn } from '@do-ob/ui/utility';
 // import { ArrowUpIcon } from '@do-ob/ui/icons-hero-solid';
 
 export interface PopoverProps {
@@ -39,13 +41,13 @@ export function Popover({
       <AriaPopover
         placement={placement}
         offset={offset}
-        className="min-w-56 origin-top-left overflow-auto rounded-md bg-background p-1 shadow-lg ring-1 ring-background-fg/30 fill-mode-forwards entering:animate-in entering:fade-in entering:zoom-in-95 exiting:animate-out exiting:fade-out exiting:zoom-out-95 dark:bg-background-dark dark:ring-background-dark-fg/30"
+        className="min-w-56 origin-top-left overflow-auto rounded bg-background p-1 shadow-lg ring-1 ring-background-fg/30 fill-mode-forwards entering:animate-in entering:fade-in entering:zoom-in-95 exiting:animate-out exiting:fade-out exiting:zoom-out-95 dark:bg-background-dark dark:ring-background-dark-fg/30"
       >
         {/* <AriaOverlayArrow>
           <ArrowUpIcon className="block size-4 bg-red-500 fill-black" />
         </AriaOverlayArrow> */}
         <AriaDialog
-          className={twMerge(
+          className={cn(
             'focus-visible:outline-none p-2',
             fillStyles.background,
           )}

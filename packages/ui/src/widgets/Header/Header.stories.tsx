@@ -87,8 +87,7 @@ const links: Link[] = [
 export const Default: Story = {
   args: {
     brand: {
-      name: 'Brand',
-      image: 'https://via.placeholder.com/64',
+      image: 'https://github.com/do-ob-io/shared/blob/main/do-ob-logo-readme.png?raw=true',
     },
     navigation: {
       links,

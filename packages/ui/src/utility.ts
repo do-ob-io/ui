@@ -1,21 +1,19 @@
-'use client';
-
 import { ThemeColor } from '@do-ob/ui/types';
-import { twMerge as twMergeLib } from 'tailwind-merge';
+// import { twMerge } from 'tailwind-merge';
 import { clsx } from '@do-ob/core';
 
 /**
  * Merges tailwind classes.
  */
-export function twMerge(...classes: unknown[]): string {
-  return twMergeLib(clsx(...classes));
+export function cn(...classes: unknown[]): string {
+  return clsx(...classes);
 }
 
 export type TwColors = 'background' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger';
 
 export const interactiveStyles = {
-  focus: 'focus:outline-blue-500 outline-offset-1 focus:outline-2 focus:outline-offset-4 transition-all',
-  mouse: 'brightness-100 dark:hover:brightness-125 dark:active:brightness-150 hover:brightness-75 active:brightness-50 transition-all duration-200 cursor-pointer',
+  focus: 'focus-visible:outline-blue-500 outline-offset-1 focus-visible:outline-4 focus-visible:outline-offset-2 focus-visible:transition-all focus-visible:duration-200 focus:outline-none',
+  mouse: 'brightness-100 dark:hover:brightness-125 dark:active:brightness-150 hover:brightness-75 active:brightness-50 hover:transition-all hover:duration-200 cursor-pointer',
 };
 
 export const fillStyles: Record<TwColors, string> = {

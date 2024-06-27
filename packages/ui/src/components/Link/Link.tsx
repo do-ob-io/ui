@@ -1,4 +1,6 @@
-import { twMerge, interactiveStyles } from '@do-ob/ui/utility';
+'use client';
+
+import { cn, interactiveStyles } from '@do-ob/ui/utility';
 import { Link as AriaLink } from 'react-aria-components';
 import { ArrowTopRightOnSquareIcon } from '@do-ob/ui/icons-hero-solid';
 // import { DoobUiContext } from '@do-ob/ui/context';
@@ -30,7 +32,7 @@ export function Link<
 
   return (
     <Tag
-      className={twMerge(
+      className={cn(
         'underline text-sky-800 dark:text-sky-300 hover:decoration-wavy inline-flex items-center',
         interactiveStyles.focus,
         interactiveStyles.mouse,

@@ -19,6 +19,11 @@
       "import": "./dist/*.js",
       "types": "./dist/*.d.ts"
     },
+    "./utility": {
+      "require": "./dist/utility.js",
+      "import": "./dist/utility.js",
+      "types": "./dist/utility.d.ts"
+    },
     "./index": null,
     "./package.json": "./package.json"
   },

@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Button as AriaButton } from 'react-aria-components';
-import { fillStyles, emptyStyles, twMerge, interactiveStyles } from '@do-ob/ui/utility';
+import { fillStyles, emptyStyles, cn, interactiveStyles } from '@do-ob/ui/utility';
 
 export interface ButtonProps<
   Element extends React.ElementType = typeof AriaButton
@@ -75,13 +75,13 @@ export function Button<
       case 'light':
         return emptyStyles[color];
       case 'faded':
-        return twMerge(fillStyles[color], emptyStyles[color]);
+        return cn(fillStyles[color], emptyStyles[color]);
     }
   })();
   
   return (
     <Tag
-      className={twMerge(
+      className={cn(
         'rounded inline-flex justify-center items-center no-underline',
         interactiveStyles.focus,
         interactiveStyles.mouse,

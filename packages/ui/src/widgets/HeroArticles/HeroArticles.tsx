@@ -44,19 +44,19 @@ export function HeroArticles({
   let roundedClass = '';
   switch (radius) {
     case 'sm':
-      roundedClass = 'rounded-small';
+      roundedClass = 'rounded-s,';
       break;
     case 'md':
-      roundedClass = 'rounded-medium';
+      roundedClass = 'rounded-md';
       break;
     case 'lg':
-      roundedClass = 'rounded-large';
+      roundedClass = 'rounded-lg';
       break;
     case 'none':
       roundedClass = 'rounded-none';
       break;
     default:
-      roundedClass = 'rounded-medium';
+      roundedClass = 'rounded-md';
       break;
   }
 
@@ -109,6 +109,7 @@ export function HeroArticles({
                 width={2048}
                 height={1365}
                 className="aspect-[3/2] h-auto w-full object-cover"
+                layout="fill"
                 radius={radius}
                 src={article.image}
               />

@@ -3,10 +3,9 @@
 import { use, useRef } from 'react';
 import { Link } from '@do-ob/ui/types';
 import { DoobUiContext } from '@do-ob/ui/context';
-import { interactiveStyles, twMerge } from '@do-ob/ui/utility';
+import { interactiveStyles, cn } from '@do-ob/ui/utility';
 import { Tabs, TabList, Tab } from 'react-aria-components';
 import { Button } from '@do-ob/ui/components';
-import { clsx } from '@do-ob/core';
 import { useOverflow } from '@do-ob/ui/hooks';
 import { Bars3Icon } from '@do-ob/ui/icons';
 
@@ -42,7 +41,6 @@ export function Navigation({
 
   const ref = useRef<HTMLDivElement>(null);
   const overflowing = useOverflow(ref, 'x');
-  console.log({ overflowing });
 
   const { pathname } = use(DoobUiContext);
   let selected = '';
@@ -56,15 +54,18 @@ export function Navigation({
     });
 
   return (
-    <div ref={ref} className="relative w-full overflow-hidden" {...props}>
+    <div ref={ref} className={cn(
+      'relative overflow-hidden p-2',
+      className
+    )} {...props}>
       <Tabs
         aria-role="navigation"
         orientation={orientation}
         selectedKey={selected}
         aria-hidden={overflowing}
-        className={twMerge(
+        className={cn(
+          'w-full',
           overflowing === true && 'opacity-0',
-          className
         )}
         keyboardActivation="manual"
       >
@@ -72,21 +73,20 @@ export function Navigation({
           {links.length === 0 ? (
             <div>&nbsp;</div>
           ) : null}
-          {links.map((link, index) => (
+          {links.map((link) => (
             <Tab
-              className={twMerge(
+              className={cn(
                 interactiveStyles.focus,
-                interactiveStyles.mouse,
-                'relative px-4 h-11 hover:text-primary active:text-primary [&>*:first-child]:selected:bg-primary group rounded selected:font-bold flex items-center',
+                'relative px-3 h-11 hover:text-primary dark:hover:text-primary-dark dark:active:text-primary-dark active:text-primary [&>*:first-child]:selected:bg-primary group rounded selected:font-bold flex items-center',
                 orientation === 'horizontal' ? '[&>*:first-child]:selected:h-[6px] justify-center' : '[&>*:first-child]:selected:w-[6px] justify-start',
               )}
-              key={index}
+              key={link.title}
               id={link.url}
               href={link.url}
             >
               <div
-                className={clsx(
-                  'absolute rounded-[2px] transition-all group-hover:bg-primary/60 group-focus:bg-primary/60',
+                className={cn(
+                  'absolute rounded-[2px] transition-all group-hover:bg-primary/60 group-focus:bg-primary/60 dark:group-hover:bg-primary-dark/60 dark:group-focus:bg-primary-dark/60',
                   orientation === 'horizontal' ? 'bottom-0 left-0 h-[4px] w-full' : 'left-0 top-0 h-full w-[4px]',
                 )}
                 aria-hidden="true"
@@ -97,16 +97,18 @@ export function Navigation({
         </TabList>
       </Tabs>
 
-      <Button
-        variant="light"
-        iconify
-        className={twMerge(
-          'absolute top-0 left-0 size-11',
-          overflowing ? '' : 'hidden',
-        )}
-      >
-        <Bars3Icon />
-      </Button>
+      <div className="absolute left-0 top-0 flex h-full items-center p-2">
+        <Button
+          aria-label="Show navigation items"
+          variant="faded"
+          iconify
+          className={cn(
+            overflowing ? '' : 'hidden',
+          )}
+        >
+          <Bars3Icon />
+        </Button>
+      </div>
 
     </div>
   );

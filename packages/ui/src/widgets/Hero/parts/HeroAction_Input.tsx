@@ -1,5 +1,4 @@
 import { HeroProps } from '../data/HeroProps';
-import { Input } from '@nextui-org/react';
 
 export function HeroAction_Buttons({ base: {
   actionText
@@ -7,7 +6,7 @@ export function HeroAction_Buttons({ base: {
   return (
     <div className="flex gap-4">
       {actionText ? (
-        <Input
+        <input
           placeholder={actionText}
         />
       ) : null}

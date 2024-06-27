@@ -1,5 +1,5 @@
 import { Image } from '@do-ob/ui/components';
-import { twMerge } from '@do-ob/ui/utility';
+import { cn } from '@do-ob/ui/utility';
 
 /**
  * Brand properties.
@@ -60,24 +60,29 @@ export function Brand({
   nameShort,
   image = null,
   size = 'md',
+  className,
   classNames = {},
   ...props
 }: BrandProps & React.HTMLAttributes<HTMLDivElement>) {
 
   return (
-    <div className="flex size-full items-center gap-4" {...props}>
+    <div className={cn(
+      'flex flex-row flex-nowrap items-center gap-4 whitespace-nowrap',
+      className
+    )} {...props}>
       {image && <Image
         src={image}
         alt="Brand"
         width={imageSizes[size]}
         height={imageSizes[size]}
-        loading="eager"
-        className={twMerge(
+        objectFit="contain"
+        priority
+        className={cn(
           imageSizeStyles[size],
           classNames.image
         )}
       />}
-      {(name && name?.length) ? (<h1 className={twMerge(
+      {(name && name?.length) ? (<h1 className={cn(
         'tracking-tight hidden lg:inline',
         textSizes[size],
         'leading-none whitespace-nowrap',
@@ -85,7 +90,7 @@ export function Brand({
       )}>
         {name}
       </h1>) : null}
-      {(name && name?.length) ? (<h1 className={twMerge(
+      {(name && name?.length) ? (<h1 className={cn(
         'tracking-tight leading-tight inline lg:hidden whitespace-nowrap',
         textSizes[size],
         classNames.name,

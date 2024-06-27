@@ -3,7 +3,6 @@ import type { Config } from 'tailwindcss';
 import tailwindPlugin from 'tailwindcss/plugin';
 import tailwindColors from 'tailwindcss/colors';
 import { join } from 'node:path';
-import { nextui, NextUIPluginConfig }  from '@nextui-org/react';
 import tailwindReactAria from 'tailwindcss-react-aria-components';
 import tailwindContainerQueries from '@tailwindcss/container-queries';
 import tailwindAnimate from 'tailwindcss-animate';
@@ -246,13 +245,13 @@ export function applyForegroundColors(initialColors: Record<string, { DEFAULT: s
 
 export interface DoobTailwindPreset {
   root?: string;
-  nextConfig?: NextUIPluginConfig;
+  colors?: Record<string, Record<string, string>>;
   typographyConfig?: Parameters<typeof tailwindTypography>[0];
 }
 
 export function doobTailwindPreset({
   root = process.cwd(),
-  nextConfig = {},
+  colors = {},
   typographyConfig = {},
 }: DoobTailwindPreset): Config & { content: string[] } {
 
@@ -263,7 +262,6 @@ export function doobTailwindPreset({
       join(root, 'node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}'),
     ],
     plugins: [
-      nextui(nextConfig),
       tailwindTypography(typographyConfig),
       tailwindContainerQueries,
       tailwindReactAria,
@@ -275,7 +273,7 @@ export function doobTailwindPreset({
         aspectRatio: {
           'photo': '3 / 2',
         },
-        colors: applyForegroundColors(extendedColors),
+        colors: applyForegroundColors({ ...extendedColors, ...colors }),
       }
     }
   };
