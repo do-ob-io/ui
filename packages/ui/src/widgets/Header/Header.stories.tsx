@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 // import { Suspense } from 'react';
 import { Header } from './Header';
-import { Link } from '@do-ob/ui/types';
+import { Link, SocialLinks } from '@do-ob/ui/types';
 
 const meta = {
   component: Header,
@@ -92,11 +92,35 @@ const links: Link[] = [
   },
 ];
 
+const socials: SocialLinks = [
+  {
+    type: 'facebook',
+    url: 'https://facebook.com',
+  },
+  {
+    type: 'instagram',
+    url: 'https://instagram.com',
+  },
+  {
+    type: 'linkedin',
+    url: 'https://linkedin.com',
+  },
+  {
+    type: 'x',
+    url: 'https://x.com',
+  },
+  {
+    type: 'youtube',
+    url: 'https://youtube.com',
+  },
+];
+
 export const Standard: Story = {
   args: {
     variant: 'standard',
+    socials,
     brand: {
-      image: 'https://github.com/do-ob-io/shared/blob/main/do-ob-logo-readme.png?raw=true',
+      logo: 'https://github.com/do-ob-io/shared/blob/main/do-ob-logo-readme.png?raw=true',
     },
     navigation: {
       links,
@@ -107,8 +131,9 @@ export const Standard: Story = {
 export const Extended: Story = {
   args: {
     variant: 'extended',
+    socials,
     brand: {
-      image: 'https://github.com/do-ob-io/shared/blob/main/do-ob-logo-readme.png?raw=true',
+      logo: 'https://github.com/do-ob-io/shared/blob/main/do-ob-logo-readme.png?raw=true',
     },
     navigation: {
       links,

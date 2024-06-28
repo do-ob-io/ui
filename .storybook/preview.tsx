@@ -1,7 +1,6 @@
-import React from 'react';
 import type { Preview } from '@storybook/react';
-import { withThemeByClassName } from '@storybook/addon-themes';
-import { DoobUiProvider } from '../packages/ui/src/provider';
+// import { withThemeByClassName } from '@storybook/addon-themes';
+import { withDoob } from './provider';
 import '../global.css';
 
 const preview: Preview = {
@@ -12,24 +11,20 @@ const preview: Preview = {
         date: /Date$/i,
       },
     },
-  }
+  },
+
+  // tags: [ 'autodocs' ]
 };
 
 export const decorators = [
-  withThemeByClassName({
-    themes: {
-      light: 'light',
-      dark: 'dark',
-    },
-    defaultTheme: 'light',
-  }),
-  (Story) => (
-    <DoobUiProvider navigate={(path) => { history.pushState({}, '', path); }}>
-      <div style={{ minHeight: '100vh' }}>
-        <Story />
-      </div>
-    </DoobUiProvider>
-  ),
+  // withThemeByClassName({
+  //   themes: {
+  //     light: 'light',
+  //     dark: 'dark',
+  //   },
+  //   defaultTheme: 'light',
+  // }),
+  withDoob,
 ];
 
 export default preview;

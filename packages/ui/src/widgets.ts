@@ -7,4 +7,5 @@ export { HeroArticles } from './widgets/HeroArticles/HeroArticles';
 export { HeroStandard } from './widgets/Hero/HeroStandard';
 // export { HeroPrompt } from './widgets/Hero/HeroPrompt';
 export { Brand, type BrandProps } from './widgets/Brand/Brand';
-export { Header, type HeaderProps } from './widgets/Header/Header';
+export { Header } from './widgets/Header/Header';
+export type { HeaderProps } from './widgets/Header/Header.types';

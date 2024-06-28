@@ -16,9 +16,14 @@ export interface BrandProps {
   nameShort?: string;
 
   /**
-   * The brand image.
+   * The brand logo.
    */
-  image?: string | null;
+  logo?: string | null;
+
+  /**
+   * The dimensions of the logo.
+   */
+  logoSize?: [number, number];
 
   /**
    * Size of the branding
@@ -63,7 +68,8 @@ const textSizes = {
 export function Brand({
   name,
   nameShort,
-  image = null,
+  logo = null,
+  logoSize,
   size = 'md',
   href,
   className,
@@ -80,11 +86,11 @@ export function Brand({
       'flex flex-row flex-nowrap items-center gap-4 whitespace-nowrap p-0',
       className
     )} variant={href ? 'light' : undefined} {...props}>
-      {image && <Image
-        src={image}
+      {logo && <Image
+        src={logo}
         alt="Brand"
-        width={imageSizes[size]}
-        height={imageSizes[size]}
+        width={logoSize?.[0] ?? imageSizes[size]}
+        height={logoSize?.[1] ?? imageSizes[size]}
         objectFit="contain"
         priority
         className={cn(

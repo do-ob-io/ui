@@ -29,9 +29,17 @@ export function HeaderExtended({
         'grid w-full grid-cols-2 grid-rows-2 items-center justify-center [grid-template-areas:"brand_tools""nav_nav"]',
         maxWidthScreenStyles[maxWidth]
       )}>
-        <Brand href={brand?.href ?? '/'} className="[grid-area:brand]" {...brand}/>
-        <Navigation {...navigation} className="[grid-area:nav]" style={{ flex: 2 }}/>
-        <div className="size-full bg-green-500 [grid-area:tools]" style={{ flex: 1 }}>&nbsp;</div>
+        <div className="[grid-area:brand]">
+          <Brand href={brand?.href ?? '/'} {...brand}/>
+        </div>
+        <div className="px-6 [grid-area:nav]">
+          <Navigation {...navigation} style={{ flex: 2 }}/>
+        </div>
+        <div className="[grid-area:tools]">
+          <div className="flex size-full items-center justify-end">
+            <button className="bg-blue-500">Test</button>
+          </div>
+        </div>
       </div>
     </header>
   );

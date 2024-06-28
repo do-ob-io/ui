@@ -1,3 +1,4 @@
+import { SocialLinks } from '@do-ob/ui/types';
 import type { BrandProps, NavigationProps } from '@do-ob/ui/widgets';
 
 export interface HeaderProps {
@@ -15,6 +16,11 @@ export interface HeaderProps {
    * Navigation properties.
    */
   navigation?: NavigationProps;
+
+  /**
+   * Social links.
+   */
+  socials?: SocialLinks;
 
   /**
    * Maximum width of the header.
