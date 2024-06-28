@@ -36,7 +36,7 @@ export function Header({
   return (
     <header
       className={cn(
-        'w-full flex items-center justify-center',
+        'flex w-full items-center justify-center',
         className
       )}
       {...props}

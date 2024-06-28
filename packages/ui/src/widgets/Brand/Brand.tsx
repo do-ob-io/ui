@@ -83,15 +83,15 @@ export function Brand({
         )}
       />}
       {(name && name?.length) ? (<h1 className={cn(
-        'tracking-tight hidden lg:inline',
+        'hidden tracking-tight lg:inline',
         textSizes[size],
-        'leading-none whitespace-nowrap',
+        'whitespace-nowrap leading-none',
         classNames.name,
       )}>
         {name}
       </h1>) : null}
       {(name && name?.length) ? (<h1 className={cn(
-        'tracking-tight leading-tight inline lg:hidden whitespace-nowrap',
+        'inline whitespace-nowrap leading-tight tracking-tight lg:hidden',
         textSizes[size],
         classNames.name,
       )}>

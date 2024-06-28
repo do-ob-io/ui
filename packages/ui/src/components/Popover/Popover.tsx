@@ -48,7 +48,7 @@ export function Popover({
         </AriaOverlayArrow> */}
         <AriaDialog
           className={cn(
-            'focus-visible:outline-none p-2',
+            'p-2 focus-visible:outline-none',
             fillStyles.background,
           )}
         >

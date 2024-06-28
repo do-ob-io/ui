@@ -6,6 +6,15 @@ import { fixupPluginRules } from '@eslint/compat';
 
 export default [
   ...doob.configs.recommended,
+
+  {
+    settings: {
+      tailwindcss: {
+        callees: [ 'classnames', 'clsx', 'ctl', 'cn' ],
+      }
+    }
+  },
+
   {
     files: [ '**/*.{jsx,tsx}' ],
     plugins: {

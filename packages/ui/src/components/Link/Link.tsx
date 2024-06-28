@@ -33,7 +33,7 @@ export function Link<
   return (
     <Tag
       className={cn(
-        'underline text-sky-800 dark:text-sky-300 hover:decoration-wavy inline-flex items-center',
+        'inline-flex items-center text-sky-800 underline hover:decoration-wavy dark:text-sky-300',
         interactiveStyles.focus,
         interactiveStyles.mouse,
         className

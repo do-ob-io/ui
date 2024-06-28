@@ -26,7 +26,7 @@ export function HeroStandard(props: HeroProps) {
         )}>
           {title}
         </h1>
-        <h2 className={clsx('text-3xl font-light text-default-600 dark:text-default-500', classNames?.subtitle)}>
+        <h2 className={clsx('text-3xl font-light text-background-fg dark:text-background-dark-fg', classNames?.subtitle)}>
           {subtitle}
         </h2>
 

@@ -77,8 +77,8 @@ export function Navigation({
             <Tab
               className={cn(
                 interactiveStyles.focus,
-                'relative px-3 h-11 hover:text-primary dark:hover:text-primary-dark dark:active:text-primary-dark active:text-primary [&>*:first-child]:selected:bg-primary group rounded selected:font-bold flex items-center',
-                orientation === 'horizontal' ? '[&>*:first-child]:selected:h-[6px] justify-center' : '[&>*:first-child]:selected:w-[6px] justify-start',
+                'group relative flex h-11 items-center rounded px-3 active:text-primary hover:text-primary selected:font-bold dark:active:text-primary-dark dark:hover:text-primary-dark [&>*:first-child]:selected:bg-primary',
+                orientation === 'horizontal' ? 'justify-center [&>*:first-child]:selected:h-[6px]' : 'justify-start [&>*:first-child]:selected:w-[6px]',
               )}
               key={link.title}
               id={link.url}

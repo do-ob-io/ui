@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Button as AriaButton } from 'react-aria-components';
+import { Button as AriaButton, Link as AriaLink } from 'react-aria-components';
 import { fillStyles, emptyStyles, cn, interactiveStyles } from '@do-ob/ui/utility';
 
 export interface ButtonProps<
@@ -15,6 +15,7 @@ export interface ButtonProps<
   endContent?: React.ReactNode;
   className?: string;
   iconify?: boolean;
+  href?: string;
 }
 
 /**
@@ -60,10 +61,11 @@ export function Button<
   startContent = null,
   endContent = null,
   iconify = false,
+  href,
   ...props
 }: ButtonProps<Element> & React.ComponentPropsWithoutRef<Element>) {
 
-  const Tag = as ?? AriaButton;
+  const Tag = as ?? (href ? AriaLink : AriaButton);
 
   const variantClasses = variantStyles[variant];
   const sizeClasses = iconify ? sizeIconStyles[size] : sizeStyles[size];
@@ -82,7 +84,7 @@ export function Button<
   return (
     <Tag
       className={cn(
-        'rounded inline-flex justify-center items-center no-underline',
+        'inline-flex items-center justify-center rounded no-underline',
         interactiveStyles.focus,
         interactiveStyles.mouse,
         colorClasses,
