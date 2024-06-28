@@ -17,7 +17,7 @@ const socialIcons: Record<Socials, () => Promise<React.ComponentType<React.HTMLA
 
 export async function SocialButtons({
   socials = [],
-  variant = 'faded',
+  variant = 'light',
   size = 'md',
   className,
   ...props
@@ -37,7 +37,7 @@ export async function SocialButtons({
   return (
     <Group
       className={cn(
-        'flex gap-2',
+        'flex gap-1',
         className,
       )}
       aria-label="Social links"

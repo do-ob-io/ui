@@ -1,6 +1,8 @@
 import { cn } from '@do-ob/ui/utility';
+import { Toolbar } from 'react-aria-components';
 import { Brand, Navigation } from '@do-ob/ui/widgets';
 import type { HeaderProps } from './Header.types';
+import { SocialButtons } from '../SocialButtons/SocialButtons';
 
 const maxWidthScreenStyles = {
   sm: 'max-w-screen-sm',
@@ -13,6 +15,7 @@ const maxWidthScreenStyles = {
 export function HeaderExtended({
   brand,
   navigation,
+  socials,
   maxWidth = '2xl',
   className,
   ...props
@@ -35,10 +38,10 @@ export function HeaderExtended({
         <div className="px-6 [grid-area:nav]">
           <Navigation {...navigation} style={{ flex: 2 }}/>
         </div>
-        <div className="[grid-area:tools]">
-          <div className="flex size-full items-center justify-end">
-            <button className="bg-blue-500">Test</button>
-          </div>
+        <div className="flex justify-end [grid-area:tools]">
+          <Toolbar>
+            <SocialButtons socials={socials} />
+          </Toolbar>
         </div>
       </div>
     </header>

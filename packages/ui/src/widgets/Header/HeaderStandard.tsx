@@ -1,6 +1,8 @@
 import { cn } from '@do-ob/ui/utility';
 import { Brand, Navigation } from '@do-ob/ui/widgets';
 import type { HeaderProps } from './Header.types';
+import { Toolbar } from 'react-aria-components';
+import { SocialButtons } from '../SocialButtons/SocialButtons';
 
 const maxWidthScreenStyles = {
   sm: 'max-w-screen-sm',
@@ -13,6 +15,7 @@ const maxWidthScreenStyles = {
 export function HeaderStandard({
   brand,
   navigation,
+  socials,
   maxWidth = '2xl',
   className,
   ...props
@@ -31,7 +34,9 @@ export function HeaderStandard({
       )}>
         <Brand href={brand?.href ?? '/'} {...brand}/>
         <Navigation {...navigation} style={{ flex: 2 }}/>
-        <div className="size-full bg-green-500" style={{ flex: 1 }}>&nbsp;</div>
+        <Toolbar>
+          <SocialButtons socials={socials} />
+        </Toolbar>
       </div>
     </header>
   );

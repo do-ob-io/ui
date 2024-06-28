@@ -64,6 +64,14 @@ export function Button<
 
   const Tag = as ?? (href ? AriaLink : AriaButton);
 
+  const isExternal = href && (href.startsWith('http://') || href.startsWith('https://'));
+
+  const linkProps = {
+    href,
+    target: isExternal ? '_blank' : undefined,
+    rel: isExternal ? 'noopener noreferrer' : undefined,
+  };
+
   const variantClasses = variantStyles[variant];
   const sizeClasses = iconify ?
     sizeIconStyles[size] :
@@ -92,6 +100,7 @@ export function Button<
         iconify && 'rounded-full',
         className
       )}
+      {...linkProps}
       {...props}
     >
       {startContent && <span className="mr-2">{startContent}</span>}
