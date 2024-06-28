@@ -4,7 +4,6 @@ import { Socials } from '@do-ob/ui/types';
 import { SocialButtonsProps } from './SocialButtons.types';
 import { cn } from '@do-ob/ui/utility';
 
-
 /**
  * Map of social keys to async imports of social icon components.
  */
@@ -18,6 +17,8 @@ const socialIcons: Record<Socials, () => Promise<React.ComponentType<React.HTMLA
 
 export async function SocialButtons({
   socials = [],
+  variant = 'faded',
+  size = 'md',
   className,
   ...props
 }: SocialButtonsProps & React.ComponentProps<typeof Group>) {
@@ -39,6 +40,7 @@ export async function SocialButtons({
         'flex gap-2',
         className,
       )}
+      aria-label="Social links"
       {...props}
     >
       {icons.map((icon) => (
@@ -46,8 +48,8 @@ export async function SocialButtons({
           key={icon.type}
           href={icon.url}
           iconify
-          variant="filled"
-          size="sm"
+          variant={variant}
+          size={size}
         >
           <icon.Icon />
         </Button>

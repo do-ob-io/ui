@@ -3,25 +3,13 @@
 import React from 'react';
 import { Button as AriaButton, Link as AriaLink } from 'react-aria-components';
 import { fillStyles, emptyStyles, cn, interactiveStyles } from '@do-ob/ui/utility';
-
-export interface ButtonProps<
-  Element extends React.ElementType = typeof AriaButton
-> {
-  as?: Element;
-  variant?: 'bordered' | 'filled' | 'faded' | 'light';
-  size?: 'sm' | 'md' | 'lg';
-  color?: 'primary' | 'secondary' | 'success' | 'warning' | 'danger';
-  startContent?: React.ReactNode;
-  endContent?: React.ReactNode;
-  className?: string;
-  iconify?: boolean;
-  href?: string;
-}
+import { ButtonProps, ButtonVariant, ButtonSize } from './Button.types';
+import { Polymorphic } from '@do-ob/ui/types';
 
 /**
  * Define tailwind classes for the variants.
  */
-const variantStyles: Record<NonNullable<ButtonProps['variant']>, string> = {
+const variantStyles: Record<ButtonVariant, string> = {
   bordered: 'border-2 bg-transparent hover:brightness-75 active:brightness-50',
   filled: 'border-2 hover:brightness-75 active:brightness-50 [&_svg]:fill-background dark:[&_svg]:fill-background-dark',
   faded: 'border-2 border-transparent dark:border-transparent hover:brightness-75 active:brightness-50 bg-opacity-20 dark:bg-opacity-20 hover:bg-opacity-30 active:bg-opacity-50',
@@ -31,7 +19,7 @@ const variantStyles: Record<NonNullable<ButtonProps['variant']>, string> = {
 /**
  * Define tailwind classes for the sizes.
  */
-const sizeStyles: Record<NonNullable<ButtonProps['size']>, string> = {
+const sizeStyles: Record<ButtonSize, string> = {
   sm: 'px-2 h-8 text-sm',
   md: 'px-4 h-11 text-base',
   lg: 'px-6 h-14 text-xl',
@@ -40,7 +28,7 @@ const sizeStyles: Record<NonNullable<ButtonProps['size']>, string> = {
 /**
  * Define tailwind classes for the sizes in non-text context.
  */
-const sizeComponetStyles: Record<NonNullable<ButtonProps['size']>, string> = {
+const sizeComponetStyles: Record<ButtonSize, string> = {
   sm: 'px-2 min-h-8 text-sm',
   md: 'px-4 min-h-11 text-base',
   lg: 'px-6 min-h-14 text-xl',
@@ -49,7 +37,7 @@ const sizeComponetStyles: Record<NonNullable<ButtonProps['size']>, string> = {
 /**
  * Define tailwind classes for the sizes.
  */
-const sizeIconStyles: Record<NonNullable<ButtonProps['size']>, string> = {
+const sizeIconStyles: Record<ButtonSize, string> = {
   sm: 'size-8 text-sm [&_svg]:size-5',
   md: 'size-11 text-base [&_svg]:size-7',
   lg: 'size-14 text-lg [&_svg]:size-10',
@@ -59,7 +47,7 @@ const sizeIconStyles: Record<NonNullable<ButtonProps['size']>, string> = {
  * Button
  */
 export function Button<
-  Element extends React.ElementType
+  Element extends React.ElementType = typeof AriaButton
 >({
   as,
   children,
@@ -72,7 +60,7 @@ export function Button<
   iconify = false,
   href,
   ...props
-}: ButtonProps<Element> & React.ComponentPropsWithoutRef<Element>) {
+}: ButtonProps & Polymorphic<Element>) {
 
   const Tag = as ?? (href ? AriaLink : AriaButton);
 

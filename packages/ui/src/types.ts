@@ -3,6 +3,15 @@ export * from './types/actions';
 export * from './types/locale';
 
 /**
+ * Polymorphic component.
+ */
+export type Polymorphic<
+  Element extends React.ElementType
+> = {
+  as?: Element;
+} & React.ComponentPropsWithoutRef<Element>;
+
+/**
  * A call to some action
  */
 export interface Call {
