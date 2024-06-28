@@ -17,3 +17,12 @@ export const Default: Story = {
     nameShort: 'My Short Name',
   }
 };
+
+export const WithHREF: Story = {
+  args: {
+    image: 'https://github.com/do-ob-io/shared/blob/main/do-ob-logo-readme.png?raw=true',
+    name: 'My Really Long Band Name',
+    nameShort: 'My Short Name',
+    href: '/'
+  }
+};

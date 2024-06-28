@@ -38,6 +38,15 @@ const sizeStyles: Record<NonNullable<ButtonProps['size']>, string> = {
 };
 
 /**
+ * Define tailwind classes for the sizes in non-text context.
+ */
+const sizeComponetStyles: Record<NonNullable<ButtonProps['size']>, string> = {
+  sm: 'px-2 min-h-8 text-sm',
+  md: 'px-4 min-h-11 text-base',
+  lg: 'px-6 min-h-14 text-xl',
+};
+
+/**
  * Define tailwind classes for the sizes.
  */
 const sizeIconStyles: Record<NonNullable<ButtonProps['size']>, string> = {
@@ -68,7 +77,9 @@ export function Button<
   const Tag = as ?? (href ? AriaLink : AriaButton);
 
   const variantClasses = variantStyles[variant];
-  const sizeClasses = iconify ? sizeIconStyles[size] : sizeStyles[size];
+  const sizeClasses = iconify ?
+    sizeIconStyles[size] :
+    (typeof children === 'string' ? sizeStyles[size] : sizeComponetStyles[size]);
   const colorClasses = (() => {
     switch (variant) {
       case 'filled':

@@ -1,4 +1,4 @@
-import { Image } from '@do-ob/ui/components';
+import { Button, Image } from '@do-ob/ui/components';
 import { cn } from '@do-ob/ui/utility';
 
 /**
@@ -24,6 +24,11 @@ export interface BrandProps {
    * Size of the branding
    */
   size?: 'sm' | 'md' | 'lg';
+
+  /**
+   * Hyperlink for the branding.
+   */
+  href?: string;
 
   /**
    * Class names for the slots.
@@ -60,16 +65,21 @@ export function Brand({
   nameShort,
   image = null,
   size = 'md',
+  href,
   className,
   classNames = {},
   ...props
 }: BrandProps & React.HTMLAttributes<HTMLDivElement>) {
+  console.log('test');
+
+  const Tag = href?.length ? Button : 'div' as React.ElementType;
+  console.log('Tag', Tag);
 
   return (
-    <div className={cn(
-      'flex flex-row flex-nowrap items-center gap-4 whitespace-nowrap',
+    <Tag className={cn(
+      'flex flex-row flex-nowrap items-center gap-4 whitespace-nowrap p-0',
       className
-    )} {...props}>
+    )} variant={href ? 'light' : undefined} {...props}>
       {image && <Image
         src={image}
         alt="Brand"
@@ -83,7 +93,7 @@ export function Brand({
         )}
       />}
       {(name && name?.length) ? (<h1 className={cn(
-        'hidden tracking-tight lg:inline',
+        'hidden tracking-tight text-background-fg dark:text-background-dark-fg lg:inline',
         textSizes[size],
         'whitespace-nowrap leading-none',
         classNames.name,
@@ -91,13 +101,13 @@ export function Brand({
         {name}
       </h1>) : null}
       {(name && name?.length) ? (<h1 className={cn(
-        'inline whitespace-nowrap leading-tight tracking-tight lg:hidden',
+        'inline whitespace-nowrap leading-tight tracking-tight text-background-fg dark:text-background-dark-fg lg:hidden',
         textSizes[size],
         classNames.name,
       )}>
         {nameShort ?? name}
       </h1>) : null}
-    </div>
+    </Tag>
   );
 }
 

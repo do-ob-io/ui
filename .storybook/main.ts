@@ -1,6 +1,6 @@
 import type { StorybookConfig } from '@storybook/react-vite';
-import { resolve } from 'node:path';
-import { mergeConfig } from 'vite';
+// import { resolve } from 'node:path';
+// import { mergeConfig } from 'vite';
 
 const config: StorybookConfig = {
   stories: [
@@ -14,20 +14,12 @@ const config: StorybookConfig = {
     '@storybook/addon-themes',
   ],
   framework: {
-    name: '@storybook/react-vite',
-    options: {},
+    name: '@storybook/nextjs',
+    options: {
+    },
   },
-  viteFinal: (config) => {
-    return mergeConfig(config, {
-      resolve: {
-        alias: [
-          {
-            find: /^@do-ob\/ui(\/?.*)/,
-            replacement: resolve('packages/ui/src$1'),
-          },
-        ],
-      },
-    });
-  },
+  features: {
+    experimentalRSC: true,
+  }
 };
 export default config;

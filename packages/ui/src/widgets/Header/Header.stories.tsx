@@ -1,10 +1,18 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
+// import { Suspense } from 'react';
 import { Header } from './Header';
 import { Link } from '@do-ob/ui/types';
 
 const meta = {
   component: Header,
+  // decorators: [
+  //   Story => (
+  //     <Suspense>
+  //       <Story />
+  //     </Suspense>
+  //   ),
+  // ],
 } satisfies Meta<typeof Header>;
 
 export default meta;
@@ -84,8 +92,21 @@ const links: Link[] = [
   },
 ];
 
-export const Default: Story = {
+export const Standard: Story = {
   args: {
+    variant: 'standard',
+    brand: {
+      image: 'https://github.com/do-ob-io/shared/blob/main/do-ob-logo-readme.png?raw=true',
+    },
+    navigation: {
+      links,
+    }
+  }
+};
+
+export const Extended: Story = {
+  args: {
+    variant: 'extended',
     brand: {
       image: 'https://github.com/do-ob-io/shared/blob/main/do-ob-logo-readme.png?raw=true',
     },

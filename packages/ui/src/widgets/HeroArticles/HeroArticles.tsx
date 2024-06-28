@@ -108,7 +108,6 @@ export function HeroArticles({
                 alt={article.title}
                 width={2048}
                 height={1365}
-                className="aspect-[3/2] h-auto w-full object-cover"
                 layout="fill"
                 radius={radius}
                 src={article.image}
