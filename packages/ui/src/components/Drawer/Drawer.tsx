@@ -6,12 +6,26 @@ import type { DrawerProps } from './Drawer.types';
 import { nop } from '@do-ob/core';
 import { dialogActions } from '@do-ob/ui/reducer';
 import { useDebounce } from '@do-ob/ui/hooks';
-import { use, useEffect } from 'react';
+import { use, useCallback, useEffect } from 'react';
 import { DialogContext, DialogDispatchContext } from '@do-ob/ui/context';
+import { cn } from '@do-ob/ui/utility';
+
+/**
+ * Map of direction tailwind classes.
+ */
+const directionStyles = {
+  top: 'top-0 left-0 right-0 entering:translate-y-[-100%] exiting:translate-y-[-100%]',
+  right: 'top-0 right-0 bottom-0 entering:translate-x-full exiting:translate-x-full',
+  bottom: 'left-0 right-0 bottom-0 entering:translate-y-full exiting:translate-y-full',
+  left: 'top-0 left-0 bottom-0 entering:translate-x-[-100%] exiting:translate-x-[-100%]',
+};
 
 export function Drawer({
-  name,
+  id,
+  title,
   dismissable = true,
+  length = '33%',
+  direction = 'right',
   onClose = nop,
   onOpen = nop,
   onOpenChange = nop,
@@ -20,12 +34,11 @@ export function Drawer({
   // ...props
 }: DrawerProps & React.HTMLAttributes<HTMLElement>) {
 
-  const id = name;
   const drawer = use(DialogContext).items[id] ?? { id, open: false };
   const dispatch = use(DialogDispatchContext);
   const isOpen = useDebounce(!!drawer.open, 300);
 
-  const handleOpenChange = (next: boolean) => {
+  const handleOpenChange = useCallback((next: boolean) => {
     onOpenChange(next);
     if (!next) {
       if (dismissable && drawer.open) {
@@ -35,7 +48,11 @@ export function Drawer({
     } else {
       onOpen();
     }
-  };
+  }, [ onOpenChange, onClose, onOpen, dismissable, drawer.open, dispatch, id ]);
+
+  useEffect(() => {
+    console.log('rerender drawer', id);
+  });
 
   useEffect(() => {
     dispatch(dialogActions.register(id));
@@ -54,15 +71,17 @@ export function Drawer({
       onOpenChange={handleOpenChange}
     >
       <Modal
-        className="fixed w-1/3 min-w-80 bg-white shadow-md transition-all duration-500 entering:translate-x-full exiting:translate-x-full"
+        className={cn(
+          'fixed min-w-80 transform-gpu bg-white shadow-md transition-all duration-500',
+          directionStyles[direction],
+        )}
         style={{
-          top: 0,
-          right: 0,
-          bottom: 0,
+          width: direction === 'top' || direction === 'bottom' ? '100%' : length,
+          height: direction === 'top' || direction === 'bottom' ? length : '100%',
         }}
       >
-        <Dialog>
-          <Heading slot="title">{name}</Heading>
+        <Dialog className="p-4 focus-visible:outline-none">
+          <Heading slot="title" className="text-lg">{title}</Heading>
           {children}
         </Dialog>
       </Modal>

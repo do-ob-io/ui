@@ -16,11 +16,17 @@ export const Controlled: Story = {
 
     return (<>
       <Button dialog="example">Click me</Button>
-      <Drawer {...args} />
+      <Drawer {...args}>
+        <p>Drawer content</p>
+        <Button dialog="example">Click me to close</Button>
+      </Drawer>
     </>);
   },
   args: {
-    name: 'example'
+    id: 'example',
+    title: 'Example Drawer',
+    dismissable: true,
+    direction: 'right',
   }
 };
 
