@@ -3,9 +3,15 @@
  
 import React from 'react';
 import { RouterProvider } from 'react-aria-components';
-import { DoobUiContext, DoobUiContextProps, doobUiContextDefaultProps } from '@do-ob/ui/context';
+import {
+  DoobUiContext,
+  DoobUiContextProps,
+  doobUiContextDefaultProps,
+  DialogContext,
+  DialogDispatchContext,
+} from '@do-ob/ui/context';
 import { useMode, usePathname } from '@do-ob/ui/hooks';
-import { reducer, initialState } from '@do-ob/ui/reducer';
+import { dialogReducer } from '@do-ob/ui/reducer';
 
 export interface DoobUiProviderProps {
   /**
@@ -43,7 +49,7 @@ export function DoobUiProvider({
   ...props
 }: React.PropsWithChildren<DoobUiProviderProps>) {
 
-  const [ state, dispatch ] = React.useReducer(reducer, initialState);
+  const [ dialogState, dialogDispatch ] = React.useReducer(dialogReducer, dialogReducer());
 
   const pathname = usePathname(pathnameProp);
   const { mode, modeToggle } = useMode(props.mode);
@@ -53,13 +59,15 @@ export function DoobUiProvider({
       <DoobUiContext.Provider value={{
         ...doobUiContextDefaultProps,
         ...props,
-        state,
-        dispatch,
         pathname,
         mode,
         modeToggle
       }}>
-        {children}
+        <DialogContext.Provider value={dialogState}>
+          <DialogDispatchContext.Provider value={dialogDispatch}>
+            {children}
+          </DialogDispatchContext.Provider>
+        </DialogContext.Provider>
       </DoobUiContext.Provider>
     </RouterProvider>
   );

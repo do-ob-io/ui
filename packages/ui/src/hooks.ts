@@ -4,6 +4,4 @@ export * from './hooks/useTypewriter';
 export * from './hooks/useOverflow';
 export * from './hooks/useDebounce';
 export * from './hooks/usePathname';
-export * from './hooks/useSelector';
-export * from './hooks/useDispatch';
-export * from './hooks/useDrawerControl';
+export * from './hooks/useDialogControl';

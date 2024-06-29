@@ -9,6 +9,11 @@ export type DialogAction = {
     id: string;
   }
 } | {
+  type: 'dialog/toggle',
+  payload: {
+    id: string;
+  }
+} | {
   type: 'dialog/open',
   payload: {
     id: string;
@@ -38,6 +43,18 @@ export function register(id: string): DialogAction {
 export function unregister(id: string): DialogAction {
   return {
     type: 'dialog/unregister',
+    payload: {
+      id,
+    }
+  };
+}
+
+/**
+ * Toggles a dialog between open and closed.
+ */
+export function toggle(id: string): DialogAction {
+  return {
+    type: 'dialog/toggle',
     payload: {
       id,
     }

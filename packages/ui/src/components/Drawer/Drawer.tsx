@@ -1,12 +1,13 @@
 'use client';
 
-import { ModalOverlay, Modal, Dialog } from 'react-aria-components';
+import { ModalOverlay, Modal, Dialog, Heading } from 'react-aria-components';
 // import { cn } from '@do-ob/ui/utility';
 import type { DrawerProps } from './Drawer.types';
 import { nop } from '@do-ob/core';
 import { dialogActions } from '@do-ob/ui/reducer';
-import { useDebounce, useDispatch, useSelector } from '@do-ob/ui/hooks';
-import { useEffect } from 'react';
+import { useDebounce } from '@do-ob/ui/hooks';
+import { use, useEffect } from 'react';
+import { DialogContext, DialogDispatchContext } from '@do-ob/ui/context';
 
 export function Drawer({
   name,
@@ -19,9 +20,9 @@ export function Drawer({
   // ...props
 }: DrawerProps & React.HTMLAttributes<HTMLElement>) {
 
-  const id = `drawer/${name}`;
-  const drawer = useSelector((state) => state.dialog.items[id]) ?? { id, open: false };
-  const dispatch = useDispatch();
+  const id = name;
+  const drawer = use(DialogContext).items[id] ?? { id, open: false };
+  const dispatch = use(DialogDispatchContext);
   const isOpen = useDebounce(!!drawer.open, 300);
 
   const handleOpenChange = (next: boolean) => {
@@ -37,13 +38,10 @@ export function Drawer({
   };
 
   useEffect(() => {
-
     dispatch(dialogActions.register(id));
-
     return () => {
       dispatch(dialogActions.unregister(id));
     };
-
   }, [ dispatch, id ]);
 
   return (
@@ -64,6 +62,7 @@ export function Drawer({
         }}
       >
         <Dialog>
+          <Heading slot="title">{name}</Heading>
           {children}
         </Dialog>
       </Modal>

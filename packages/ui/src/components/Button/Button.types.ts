@@ -13,4 +13,5 @@ export interface ButtonProps {
   className?: string;
   iconify?: boolean;
   href?: string;
+  dialog?: string;
 }

@@ -35,6 +35,9 @@ export function reducer(
         }
       };
     case 'dialog/unregister':
+      if(!state.items[payload.id]) {
+        return state;
+      }
       return {
         ...state,
         items: Object.values(state.items).reduce((acc, dialog) => {
@@ -44,7 +47,24 @@ export function reducer(
           return acc;
         }, {} as DialogState['items'])
       };
+    case 'dialog/toggle':
+      if(!state.items[payload.id]) {
+        return state;
+      }
+      return {
+        ...state,
+        items: {
+          ...state.items,
+          [payload.id]: {
+            ...state.items[payload.id],
+            open: !state.items[payload.id].open,
+          }
+        }
+      };
     case 'dialog/open':
+      if(!state.items[payload.id]) {
+        return state;
+      }
       return {
         ...state,
         items: {
@@ -56,6 +76,9 @@ export function reducer(
         }
       };
     case 'dialog/close':
+      if(!state.items[payload.id]) {
+        return state;
+      }
       return {
         ...state,
         items: {
