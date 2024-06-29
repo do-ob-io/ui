@@ -19,6 +19,7 @@ export async function SocialButtons({
   socials = [],
   variant = 'light',
   size = 'md',
+  color = 'background',
   className,
   ...props
 }: SocialButtonsProps & React.ComponentProps<typeof Group>) {
@@ -49,6 +50,7 @@ export async function SocialButtons({
           href={icon.url}
           iconify
           variant={variant}
+          color={color}
           size={size}
         >
           <icon.Icon />

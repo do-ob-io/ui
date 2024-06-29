@@ -38,7 +38,6 @@ export function HeroArticles({
     announcement,
     latest,
     radius,
-    imageNode,
   } = props;
 
   let roundedClass = '';
@@ -104,7 +103,6 @@ export function HeroArticles({
           >
             <div className={clsx('relative m-2 overflow-hidden backdrop-blur-md', roundedClass)}>
               <Image
-                as={imageNode}
                 alt={article.title}
                 width={2048}
                 height={1365}

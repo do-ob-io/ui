@@ -2,7 +2,7 @@ export type ButtonVariant = 'bordered' | 'filled' | 'faded' | 'light';
 
 export type ButtonSize = 'sm' | 'md' | 'lg';
 
-export type ButtonColor = 'primary' | 'secondary' | 'success' | 'warning' | 'danger';
+export type ButtonColor = 'background' | 'primary' | 'secondary' | 'success' | 'warning' | 'danger';
 
 export interface ButtonProps {
   variant?: ButtonVariant;
