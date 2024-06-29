@@ -1,10 +1,11 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+ 
 'use client';
  
 import React from 'react';
 import { RouterProvider } from 'react-aria-components';
 import { DoobUiContext, DoobUiContextProps, doobUiContextDefaultProps } from '@do-ob/ui/context';
-import { useMode } from '@do-ob/ui/hooks';
+import { useMode, usePathname } from '@do-ob/ui/hooks';
+import { reducer, initialState } from '@do-ob/ui/reducer';
 
 export interface DoobUiProviderProps {
   /**
@@ -33,51 +34,6 @@ export interface DoobUiProviderProps {
 }
 
 /**
- * A simple hook to get the current pathname
- */
-const usePathname = (override: string): string => {
-  const [ pathname, setPathname ] = React.useState<string>(override ?? window.location.pathname);
-
-  React.useEffect(() => {
-    if(override) {
-      setPathname(override);
-      return;
-    }
-
-    const handleLocationChange = () => {
-      setPathname(window.location.pathname);
-    };
-
-    // Function to wrap history methods to dispatch events
-    const wrapHistoryMethod = (method: 'pushState' | 'replaceState') => {
-      const originalMethod = history[method];
-
-      return function (this: History, ...args: any[]) {
-        const result = originalMethod.apply(this, args as any);
-        window.dispatchEvent(new Event('locationchange'));
-        return result;
-      };
-    };
-
-    // Wrap the pushState and replaceState methods
-    history.pushState = wrapHistoryMethod('pushState');
-    history.replaceState = wrapHistoryMethod('replaceState');
-
-    // Listen for popstate and custom locationchange events
-    window.addEventListener('popstate', handleLocationChange);
-    window.addEventListener('locationchange', handleLocationChange);
-
-    // Clean up the event listeners on component unmount
-    return () => {
-      window.removeEventListener('popstate', handleLocationChange);
-      window.removeEventListener('locationchange', handleLocationChange);
-    };
-  }, [ override ]);
-
-  return pathname;
-};
-
-/**
  * The provider for the doob context
  */
 export function DoobUiProvider({
@@ -87,6 +43,8 @@ export function DoobUiProvider({
   ...props
 }: React.PropsWithChildren<DoobUiProviderProps>) {
 
+  const [ state, dispatch ] = React.useReducer(reducer, initialState);
+
   const pathname = usePathname(pathnameProp);
   const { mode, modeToggle } = useMode(props.mode);
 
@@ -95,6 +53,8 @@ export function DoobUiProvider({
       <DoobUiContext.Provider value={{
         ...doobUiContextDefaultProps,
         ...props,
+        state,
+        dispatch,
         pathname,
         mode,
         modeToggle

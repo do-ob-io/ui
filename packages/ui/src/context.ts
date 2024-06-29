@@ -5,6 +5,8 @@ import React from 'react';
 import { ThemeMode } from '@do-ob/ui/types';
 import { nop } from '@do-ob/core';
 import { createContext } from 'react';
+import type { Action, State } from './reducer';
+import { initialState } from './reducer';
 
 /**
  * Context properties for the do-ob ui provider
@@ -36,6 +38,16 @@ export interface DoobUiContextProps {
    * Toggle the theme mode.
    */
   modeToggle?: () => void;
+
+  /**
+   * The user interface (ui) state.
+   */
+  state: State;
+
+  /**
+   * The user interface (ui) dispatch.
+   */
+  dispatch: React.Dispatch<Action>;
 }
 
 /**
@@ -47,6 +59,8 @@ export const doobUiContextDefaultProps: DoobUiContextProps = {
   pathname: '',
   mode: 'light',
   modeToggle: nop,
+  state: initialState,
+  dispatch: nop
 };
 
 /**
