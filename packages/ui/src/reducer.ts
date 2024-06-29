@@ -1,19 +1,24 @@
-import { reducer as drawerReducer } from './reducers/drawer.reducer';
-import type { DrawerState } from './reducers/drawer.reducer';
-import type { DrawerAction } from './reducers/drawer.actions';
+import { reducer as dialogReducer } from './reducers/dialog.reducer';
+export * as dialogActions from './reducers/dialog.actions';
+import type { DialogState } from './reducers/dialog.reducer';
+import type { DialogAction } from './reducers/dialog.actions';
 
 export interface State {
-  drawer: DrawerState;
+  dialog: DialogState;
 }
 
-export type Action = DrawerAction;
+export type Action = DialogAction;
 
 export const initialState: State = {
-  drawer: drawerReducer()
+  dialog: dialogReducer()
 };
 
 export function reducer(state: State = initialState, action: unknown = {}) {
+
+  console.log({ action });
+  
   return {
-    drawer: drawerReducer(state.drawer, action as DrawerAction),
+    ...state,
+    dialog: dialogReducer(state.dialog, action as DialogAction),
   };
 }

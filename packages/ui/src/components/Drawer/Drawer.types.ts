@@ -1,8 +1,8 @@
 export interface DrawerProps {
   /**
-   * Controls the open state of the drawer.
+   * Required name of the dialog used for controls.
    */
-  open?: boolean;
+  name: string;
 
   /**
    * If the drawer can be dismissed by clicking outside of it.
@@ -12,4 +12,6 @@ export interface DrawerProps {
   onClose?: () => void;
 
   onOpen?: () => void;
+
+  onOpenChange?: (open: boolean) => void;
 }

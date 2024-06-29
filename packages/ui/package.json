@@ -8,9 +8,6 @@
   "files": [
     "dist"
   ],
-  "imports": {
-    "#*": ["./*", "./*.ts", "./*.tsx"]
-  },
   "exports": {
     ".": {
       "require": "./dist/index.js",

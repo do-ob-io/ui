@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { Drawer } from './Drawer';
-import { useState } from 'react';
+import { Button } from '@do-ob/ui/components';
+import { useDrawerControl } from '@do-ob/ui/hooks';
 
 const meta = {
   component: Drawer,
@@ -11,26 +12,18 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
-  render: (args) => (<>
-    <h1>Use the story controls to open and close the drawer.</h1>
-    <Drawer {...args} />
-  </>),
-  args: {
-    open: true,
-  }
-};
-
 export const Controlled: Story = {
-  render: (args) => {
+  render: function Render(args) {
 
-    const [ open, openSet ] = useState(false);
+    const controllerProps = useDrawerControl('example');
 
     return (<>
-      <button onClick={() => openSet(true)}>Click me</button>
-      <Drawer {...args} open={open} onClose={() => openSet(false)} />
+      <Button {...controllerProps}>Click me</Button>
+      <Drawer {...args} />
     </>);
   },
-  args: {}
+  args: {
+    name: 'example'
+  }
 };
 

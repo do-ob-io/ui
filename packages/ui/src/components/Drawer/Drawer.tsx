@@ -4,10 +4,12 @@ import { ModalOverlay, Modal, Dialog } from 'react-aria-components';
 // import { cn } from '@do-ob/ui/utility';
 import type { DrawerProps } from './Drawer.types';
 import { nop } from '@do-ob/core';
-import { useDebounce } from '@do-ob/ui/hooks';
+import { dialogActions } from '@do-ob/ui/reducer';
+import { useDebounce, useDispatch, useSelector } from '@do-ob/ui/hooks';
+import { useEffect } from 'react';
 
 export function Drawer({
-  open = false,
+  name,
   dismissable = true,
   onClose = nop,
   onOpen = nop,
@@ -17,24 +19,40 @@ export function Drawer({
   // ...props
 }: DrawerProps & React.HTMLAttributes<HTMLElement>) {
 
-  const isOpen = useDebounce(open, 300);
+  const id = `drawer/${name}`;
+  const drawer = useSelector((state) => state.dialog.items[id]) ?? { id, open: false };
+  const dispatch = useDispatch();
+  const isOpen = useDebounce(!!drawer.open, 300);
 
   const handleOpenChange = (next: boolean) => {
     onOpenChange(next);
     if (!next) {
+      if (dismissable && drawer.open) {
+        dispatch(dialogActions.close(id));
+      }
       onClose();
     } else {
       onOpen();
     }
   };
 
+  useEffect(() => {
+
+    dispatch(dialogActions.register(id));
+
+    return () => {
+      dispatch(dialogActions.unregister(id));
+    };
+
+  }, [ dispatch, id ]);
+
   return (
     <ModalOverlay
       className="fixed inset-0 bg-black/40 backdrop-blur-[2px] transition-all duration-300 entering:bg-transparent entering:backdrop-blur-0 exiting:bg-transparent exiting:backdrop-blur-0"
-      isOpen={open}
+      isOpen={drawer.open}
       isDismissable={dismissable}
-      isEntering={!open}
-      isExiting={!open && isOpen}
+      isEntering={!drawer.open}
+      isExiting={!drawer.open && isOpen}
       onOpenChange={handleOpenChange}
     >
       <Modal
