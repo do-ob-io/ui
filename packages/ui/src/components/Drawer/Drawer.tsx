@@ -25,7 +25,7 @@ export function Drawer({
       onOpenChange={onClose}
     >
       <Modal
-        className="fixed w-1/3 bg-white shadow-md transition-all duration-500 entering:translate-x-full exiting:translate-x-full"
+        className="fixed w-1/3 min-w-80 bg-white shadow-md transition-all duration-500 entering:translate-x-full exiting:translate-x-full"
         style={{
           top: 0,
           right: 0,
