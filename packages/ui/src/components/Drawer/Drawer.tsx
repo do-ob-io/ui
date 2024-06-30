@@ -1,14 +1,11 @@
 'use client';
 
 import { ModalOverlay, Modal, Dialog, Heading } from 'react-aria-components';
-// import { cn } from '@do-ob/ui/utility';
 import type { DrawerProps } from './Drawer.types';
 import { nop } from '@do-ob/core';
-import { dialogActions } from '@do-ob/ui/reducer';
-import { useDebounce, useDialogControl } from '@do-ob/ui/hooks';
+import { useDebounce, useDialogControl, useDialogRegister, useDialogState } from '@do-ob/ui/hooks';
 import { Button, Divider } from '@do-ob/ui/components';
-import { use, useCallback, useEffect } from 'react';
-import { DialogContext, DialogDispatchContext } from '@do-ob/ui/context';
+import { useCallback } from 'react';
 import { cn } from '@do-ob/ui/utility';
 import { XMarkIcon } from '@do-ob/ui/icons';
 
@@ -37,8 +34,7 @@ export function Drawer({
   // ...props
 }: DrawerProps & React.HTMLAttributes<HTMLElement>) {
 
-  const drawer = use(DialogContext).items[id] ?? { id, open: false };
-  const dispatch = use(DialogDispatchContext);
+  const drawer = useDialogState(id);
   const isOpen = useDebounce(!!drawer.open, 300);
 
   const controls = useDialogControl(id);
@@ -55,12 +51,7 @@ export function Drawer({
     }
   }, [ onOpenChange, onClose, onOpen, dismissable, drawer.open, controls ]);
 
-  useEffect(() => {
-    dispatch(dialogActions.register(id));
-    return () => {
-      dispatch(dialogActions.unregister(id));
-    };
-  }, [ dispatch, id ]);
+  useDialogRegister(id);
 
   return (
     <ModalOverlay

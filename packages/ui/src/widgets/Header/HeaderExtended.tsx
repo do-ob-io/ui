@@ -2,6 +2,7 @@ import { cn } from '@do-ob/ui/utility';
 import { Toolbar } from 'react-aria-components';
 import { Brand, Navigation, SocialButtons } from '@do-ob/ui/widgets';
 import type { HeaderProps } from './Header.types';
+import { Divider } from '@do-ob/ui/components';
 
 const maxWidthScreenStyles = {
   sm: 'max-w-screen-sm',
@@ -38,8 +39,10 @@ export function HeaderExtended({
           <Navigation {...navigation}/>
         </div>
         <div className="flex justify-end [grid-area:tools]">
-          <Toolbar>
-            <SocialButtons socials={socials} />
+          <Toolbar className="flex flex-row">
+            <SocialButtons socials={socials} size="sm" />
+            <Divider orientation="vertical" className="mx-2"/>
+            <SocialButtons socials={socials?.slice(0,2)} size="sm" />
           </Toolbar>
         </div>
       </div>

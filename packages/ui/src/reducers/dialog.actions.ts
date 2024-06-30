@@ -12,16 +12,19 @@ export type DialogAction = {
   type: 'dialog/toggle',
   payload: {
     id: string;
+    triggerRef?: React.RefObject<HTMLElement | null>;
   }
 } | {
   type: 'dialog/open',
   payload: {
     id: string;
+    triggerRef?: React.RefObject<HTMLElement | null>;
   }
 } | {
   type: 'dialog/close',
   payload: {
     id: string;
+    triggerRef?: React.RefObject<HTMLElement | null>;
   }
 };
 
@@ -52,11 +55,12 @@ export function unregister(id: string): DialogAction {
 /**
  * Toggles a dialog between open and closed.
  */
-export function toggle(id: string): DialogAction {
+export function toggle(id: string, triggerRef?: React.RefObject<HTMLElement | null>): DialogAction {
   return {
     type: 'dialog/toggle',
     payload: {
       id,
+      triggerRef,
     }
   };
 }
@@ -64,11 +68,12 @@ export function toggle(id: string): DialogAction {
 /**
  * Opens a dialog.
  */
-export function open(id: string): DialogAction {
+export function open(id: string, triggerRef?: React.RefObject<HTMLElement | null>): DialogAction {
   return {
     type: 'dialog/open',
     payload: {
       id,
+      triggerRef,
     }
   };
 }
@@ -76,11 +81,12 @@ export function open(id: string): DialogAction {
 /**
  * Closes a dialog.
  */
-export function close(id: string): DialogAction {
+export function close(id: string, triggerRef?: React.RefObject<HTMLElement | null>): DialogAction {
   return {
     type: 'dialog/close',
     payload: {
       id,
+      triggerRef,
     }
   };
 }

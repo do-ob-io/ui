@@ -4,5 +4,8 @@ export * from './hooks/useTypewriter';
 export * from './hooks/useOverflow';
 export * from './hooks/useDebounce';
 export * from './hooks/usePathname';
+export * from './hooks/useDialogState';
 export * from './hooks/useDialogControlButtonProps';
 export * from './hooks/useDialogControl';
+export * from './hooks/useDialogRegister';
+export * from './hooks/useOutsidePress';

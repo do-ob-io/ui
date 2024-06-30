@@ -2,6 +2,7 @@
 import React from 'react';
 import { DividerProps } from './Divider.types';
 import { cn } from '@do-ob/ui/utility';
+import { Separator } from 'react-aria-components';
 
 export function Divider({
   orientation = 'horizontal',
@@ -9,14 +10,15 @@ export function Divider({
   ...props
 }: DividerProps & React.HTMLAttributes<HTMLDivElement>) {
   return (
-    <div
+    <Separator
+      orientation={orientation}
       className={cn(
         'border-background-fg/50',
-        orientation === 'horizontal' ? 'w-full border-t' : 'h-full border-l',
+        orientation === 'horizontal' ? 'h-px w-full border-t' : 'h-full w-px border-l',
         className
       )}
       {...props}
-    ></div>
+    ></Separator>
   );
 };
 

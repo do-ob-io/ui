@@ -43,6 +43,7 @@ export function NavigationTabs({
       )}
       keyboardActivation="manual"
       onSelectionChange={(key) => {
+        console.log('key', key);
         if(key === selected) {
           onSelectionChange(key);
         }

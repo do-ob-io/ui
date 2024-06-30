@@ -76,10 +76,8 @@ export function Brand({
   classNames = {},
   ...props
 }: BrandProps & React.HTMLAttributes<HTMLDivElement>) {
-  console.log('test');
 
   const Tag = href?.length ? Button : 'div' as React.ElementType;
-  console.log('Tag', Tag);
 
   return (
     <Tag className={cn(

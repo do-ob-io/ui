@@ -5,6 +5,7 @@ export interface DialogState {
   items: Record<string, {
     id: string;
     open: boolean;
+    triggerRef?: React.RefObject<HTMLElement | null>;
   }>
 }
 
@@ -58,6 +59,7 @@ export function reducer(
           [payload.id]: {
             ...state.items[payload.id],
             open: !state.items[payload.id].open,
+            triggerRef: payload.triggerRef ?? state.items[payload.id].triggerRef,
           }
         }
       };
@@ -72,6 +74,7 @@ export function reducer(
           [payload.id]: {
             ...state.items[payload.id],
             open: true,
+            triggerRef: payload.triggerRef ?? state.items[payload.id].triggerRef,
           }
         }
       };
@@ -86,6 +89,7 @@ export function reducer(
           [payload.id]: {
             ...state.items[payload.id],
             open: false,
+            triggerRef: payload.triggerRef ?? state.items[payload.id].triggerRef,
           }
         }
       };
