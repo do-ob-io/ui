@@ -17,7 +17,7 @@ export const interactiveStyles = {
 };
 
 export const fillStyles: Record<TwColors, string> = {
-  background: 'bg-background text-background-fg border-background dark:bg-background-dark dark:text-background-dark-fg dark:border-background-dark',
+  background: 'bg-background text-background-fg border-background dark:bg-background-dark dark:text-background-dark-fg dark:border-background-dark [&_svg]:fill-background-fg dark:[&_svg]:fill-background-dark-fg',
   primary: 'bg-primary text-primary-fg border-primary dark:bg-primary-dark dark:text-primary-dark-fg dark:border-primary-dark',
   secondary: 'bg-secondary text-secondary-fg border-secondary dark:bg-secondary-dark dark:text-secondary-dark-fg dark:border-secondary-dark',
   success: 'bg-success text-success-fg border-success dark:bg-success-dark dark:text-success-dark-fg dark:border-success-dark',
@@ -26,7 +26,7 @@ export const fillStyles: Record<TwColors, string> = {
 };
 
 export const emptyStyles: Record<TwColors, string> = {
-  background: 'text-background border-background',
+  background: 'text-background border-background dark:text-background-dark dark:border-background-dark [&_svg]:fill-background-fg dark:[&_svg]:fill-background-dark-fg',
   primary: 'text-primary border-primary dark:text-primary-dark dark:border-primary-dark [&_svg]:fill-primary dark:[&_svg]:fill-primary-dark',
   secondary: 'text-secondary border-secondary dark:text-secondary-dark dark:border-secondary-dark [&_svg]:fill-secondary dark:[&_svg]:fill-secondary-dark',
   success: 'text-success border-success dark:text-success-dark dark:border-success-dark [&_svg]:fill-success dark:[&_svg]:fill-success-dark',

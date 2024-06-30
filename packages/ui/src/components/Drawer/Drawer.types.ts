@@ -26,6 +26,11 @@ export interface DrawerProps {
    */
   direction?: 'top' | 'right' | 'bottom' | 'left';
 
+  /**
+   * Hides the drawer title.
+   */
+  hideTitle?: boolean;
+
   onClose?: () => void;
 
   onOpen?: () => void;

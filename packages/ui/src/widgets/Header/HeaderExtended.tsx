@@ -1,8 +1,7 @@
 import { cn } from '@do-ob/ui/utility';
 import { Toolbar } from 'react-aria-components';
-import { Brand, Navigation } from '@do-ob/ui/widgets';
+import { Brand, Navigation, SocialButtons } from '@do-ob/ui/widgets';
 import type { HeaderProps } from './Header.types';
-import { SocialButtons } from '../SocialButtons/SocialButtons';
 
 const maxWidthScreenStyles = {
   sm: 'max-w-screen-sm',
@@ -23,20 +22,20 @@ export function HeaderExtended({
   return (
     <header
       className={cn(
-        'flex w-full items-center justify-center gap-4 px-6 py-4',
+        'flex w-full items-center justify-center gap-4 md:px-6 md:py-4',
         className
       )}
       {...props}
     >
       <div className={cn(
-        'grid w-full grid-cols-2 grid-rows-2 items-center justify-center [grid-template-areas:"brand_tools""nav_nav"]',
+        'grid w-full grid-cols-2 grid-rows-2 items-center justify-center [grid-template-areas:"brand_brand""nav_tools"] md:[grid-template-areas:"brand_tools""nav_nav"]',
         maxWidthScreenStyles[maxWidth]
       )}>
-        <div className="[grid-area:brand]">
+        <div className="flex justify-center [grid-area:brand] md:justify-start">
           <Brand href={brand?.href ?? '/'} {...brand}/>
         </div>
-        <div className="px-6 [grid-area:nav]">
-          <Navigation {...navigation} style={{ flex: 2 }}/>
+        <div className="flex justify-start [grid-area:nav] md:px-6">
+          <Navigation {...navigation}/>
         </div>
         <div className="flex justify-end [grid-area:tools]">
           <Toolbar>

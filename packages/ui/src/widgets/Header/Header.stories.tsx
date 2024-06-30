@@ -134,6 +134,7 @@ export const Extended: Story = {
     socials,
     brand: {
       name: 'User Interface Library',
+      nameShort: 'UI Library',
       logo: 'https://github.com/do-ob-io/shared/blob/main/do-ob-logo-readme.png?raw=true',
     },
     navigation: {

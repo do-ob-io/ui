@@ -5,10 +5,12 @@ import { ModalOverlay, Modal, Dialog, Heading } from 'react-aria-components';
 import type { DrawerProps } from './Drawer.types';
 import { nop } from '@do-ob/core';
 import { dialogActions } from '@do-ob/ui/reducer';
-import { useDebounce } from '@do-ob/ui/hooks';
+import { useDebounce, useDialogControl } from '@do-ob/ui/hooks';
+import { Button, Divider } from '@do-ob/ui/components';
 import { use, useCallback, useEffect } from 'react';
 import { DialogContext, DialogDispatchContext } from '@do-ob/ui/context';
 import { cn } from '@do-ob/ui/utility';
+import { XMarkIcon } from '@do-ob/ui/icons';
 
 /**
  * Map of direction tailwind classes.
@@ -23,6 +25,7 @@ const directionStyles = {
 export function Drawer({
   id,
   title,
+  hideTitle = false,
   dismissable = true,
   length = '33%',
   direction = 'right',
@@ -38,21 +41,19 @@ export function Drawer({
   const dispatch = use(DialogDispatchContext);
   const isOpen = useDebounce(!!drawer.open, 300);
 
+  const controls = useDialogControl(id);
+
   const handleOpenChange = useCallback((next: boolean) => {
     onOpenChange(next);
     if (!next) {
       if (dismissable && drawer.open) {
-        dispatch(dialogActions.close(id));
+        controls.close();
       }
       onClose();
     } else {
       onOpen();
     }
-  }, [ onOpenChange, onClose, onOpen, dismissable, drawer.open, dispatch, id ]);
-
-  useEffect(() => {
-    console.log('rerender drawer', id);
-  });
+  }, [ onOpenChange, onClose, onOpen, dismissable, drawer.open, controls ]);
 
   useEffect(() => {
     dispatch(dialogActions.register(id));
@@ -71,6 +72,7 @@ export function Drawer({
       onOpenChange={handleOpenChange}
     >
       <Modal
+        
         className={cn(
           'fixed min-w-80 transform-gpu bg-white shadow-md transition-all duration-500',
           directionStyles[direction],
@@ -80,8 +82,21 @@ export function Drawer({
           height: direction === 'top' || direction === 'bottom' ? length : '100%',
         }}
       >
-        <Dialog className="p-4 focus-visible:outline-none">
-          <Heading slot="title" className="text-lg">{title}</Heading>
+        <Dialog className="p-4 focus-visible:outline-none" aria-label={hideTitle ? title : undefined}>
+          {!hideTitle ? (
+            <Heading slot="title" className="mb-2 flex flex-row items-center text-xl">
+              <div style={{ flex: 1 }}>{title}</div>
+              <Button
+                color="background"
+                iconify
+                aria-label="Close"
+                onPress={() => controls.close()}
+              >
+                <XMarkIcon />
+              </Button>
+            </Heading>
+          ): null}
+          <Divider className="mb-2" />
           {children}
         </Dialog>
       </Modal>

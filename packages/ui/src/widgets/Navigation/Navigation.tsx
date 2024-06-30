@@ -1,106 +1,47 @@
 'use client';
 
-import { use, useRef } from 'react';
-import { Link } from '@do-ob/ui/types';
-import { DoobUiContext } from '@do-ob/ui/context';
-import { interactiveStyles, cn } from '@do-ob/ui/utility';
-import { Tabs, TabList, Tab } from 'react-aria-components';
-import { Button } from '@do-ob/ui/components';
+import { useId, useRef } from 'react';
+import { cn } from '@do-ob/ui/utility';
+import { Button, Drawer } from '@do-ob/ui/components';
 import { useOverflow } from '@do-ob/ui/hooks';
 import { Bars3Icon } from '@do-ob/ui/icons';
+import { NavigationProps } from './Navigation.types';
+import { NavigationTabs } from './NavigationTabs';
+import { useDialogControl } from '@do-ob/ui/hooks';
 
-export interface NavigationProps {
-  /**
-   * Label to use for accessibility.
-   */
-  label?: string;
+export function Navigation(props: NavigationProps & React.HTMLAttributes<HTMLDivElement>) {
 
-  /**
-   * The links of the navigation
-   */
-  links?: Link[];
+  const {
+    label = 'Site Navigation',
+    orientation = 'horizontal',
+    links: _,
+    className,
+    ...divProps
+  } = props;
 
-  /**
-   * The orientation of the navigation
-   */
-  orientation?: 'horizontal' | 'vertical';
-
-  /**
-   * Class names to merge with the root componet.
-   */
-  className?: string;
-}
-
-export function Navigation({
-  label = 'Site Navigation',
-  links = [],
-  orientation = 'horizontal',
-  className,
-  ...props
-}: NavigationProps & React.HTMLAttributes<HTMLDivElement>) {
-
+  const drawerId = useId();
   const ref = useRef<HTMLDivElement>(null);
   const overflowing = useOverflow(ref, 'x');
 
-  const { pathname } = use(DoobUiContext);
-  let selected = '';
-  links
-    .map((link) => link.url)
-    .sort((a, b) => a.length - b.length)
-    .forEach((linkPath) => {
-      if (!!pathname.length && pathname.startsWith(linkPath)) {
-        selected = linkPath;
-      }
-    });
+  const drawerControl = useDialogControl(drawerId);
+
+  const handleSelectionChange = () => {
+    drawerControl.close();
+  };
 
   return (
     <div ref={ref} className={cn(
       'relative overflow-hidden p-2',
       className
-    )} {...props}>
-      <Tabs
-        aria-role="navigation"
-        orientation={orientation}
-        selectedKey={selected}
-        aria-hidden={overflowing}
-        className={cn(
-          'w-full',
-          overflowing === true && 'opacity-0',
-        )}
-        keyboardActivation="manual"
-      >
-        <TabList ref={ref} className="flex gap-1 orientation-horizontal:flex-row orientation-vertical:flex-col" aria-label={label}>
-          {links.length === 0 ? (
-            <div>&nbsp;</div>
-          ) : null}
-          {links.map((link) => (
-            <Tab
-              className={cn(
-                interactiveStyles.focus,
-                'group relative flex h-11 items-center rounded px-3 active:text-primary hover:text-primary selected:font-bold dark:active:text-primary-dark dark:hover:text-primary-dark [&>*:first-child]:selected:bg-primary',
-                orientation === 'horizontal' ? 'justify-center [&>*:first-child]:selected:h-[6px]' : 'justify-start [&>*:first-child]:selected:w-[6px]',
-              )}
-              key={link.title}
-              id={link.url}
-              href={link.url}
-            >
-              <div
-                className={cn(
-                  'absolute rounded-[2px] transition-all group-hover:bg-primary/60 group-focus:bg-primary/60 dark:group-hover:bg-primary-dark/60 dark:group-focus:bg-primary-dark/60',
-                  orientation === 'horizontal' ? 'bottom-0 left-0 h-[4px] w-full' : 'left-0 top-0 h-full w-[4px]',
-                )}
-                aria-hidden="true"
-              ></div>
-              {link.title}
-            </Tab>
-          ))}
-        </TabList>
-      </Tabs>
+    )} {...divProps}>
+      <NavigationTabs overflowing={overflowing} base={props} />
 
       <div className="absolute left-0 top-0 flex h-full items-center p-2">
         <Button
           aria-label="Show navigation items"
           variant="faded"
+          color="background"
+          dialog={drawerId}
           iconify
           className={cn(
             overflowing ? '' : 'hidden',
@@ -109,6 +50,19 @@ export function Navigation({
           <Bars3Icon />
         </Button>
       </div>
+
+      {orientation === 'horizontal' ? (
+        <Drawer id={drawerId} title={label} direction="left">
+          <NavigationTabs
+            base={{
+              ...props,
+              orientation: 'vertical'
+            }}
+            overflowing={false}
+            onSelectionChange={handleSelectionChange}
+          />
+        </Drawer>
+      ) :null}
 
     </div>
   );

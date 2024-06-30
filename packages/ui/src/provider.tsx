@@ -1,17 +1,15 @@
  
 'use client';
  
-import React from 'react';
+import React, { useMemo } from 'react';
 import { RouterProvider } from 'react-aria-components';
 import {
   DoobUiContext,
   DoobUiContextProps,
   doobUiContextDefaultProps,
-  DialogContext,
-  DialogDispatchContext,
 } from '@do-ob/ui/context';
 import { useMode, usePathname } from '@do-ob/ui/hooks';
-import { dialogReducer } from '@do-ob/ui/reducer';
+import { DialogProvider } from './provider/DialogProvider';
 
 export interface DoobUiProviderProps {
   /**
@@ -49,25 +47,23 @@ export function DoobUiProvider({
   ...props
 }: React.PropsWithChildren<DoobUiProviderProps>) {
 
-  const [ dialogState, dialogDispatch ] = React.useReducer(dialogReducer, dialogReducer());
-
   const pathname = usePathname(pathnameProp);
   const { mode, modeToggle } = useMode(props.mode);
 
+  const contextValue = useMemo(() => ({
+    ...doobUiContextDefaultProps,
+    ...props,
+    pathname,
+    mode,
+    modeToggle,
+  }), [ props, pathname, mode, modeToggle ]);
+
   return (
     <RouterProvider navigate={navigate}>
-      <DoobUiContext.Provider value={{
-        ...doobUiContextDefaultProps,
-        ...props,
-        pathname,
-        mode,
-        modeToggle
-      }}>
-        <DialogContext.Provider value={dialogState}>
-          <DialogDispatchContext.Provider value={dialogDispatch}>
-            {children}
-          </DialogDispatchContext.Provider>
-        </DialogContext.Provider>
+      <DoobUiContext.Provider value={contextValue}>
+        <DialogProvider>
+          {children}
+        </DialogProvider>
       </DoobUiContext.Provider>
     </RouterProvider>
   );

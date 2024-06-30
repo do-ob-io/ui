@@ -5,7 +5,7 @@ import { Button as AriaButton, Link as AriaLink } from 'react-aria-components';
 import { fillStyles, emptyStyles, cn, interactiveStyles } from '@do-ob/ui/utility';
 import { ButtonProps, ButtonVariant, ButtonSize } from './Button.types';
 import { Polymorphic } from '@do-ob/ui/types';
-import { useDialogControl } from '@do-ob/ui/hooks';
+import { useDialogControlButtonProps } from '@do-ob/ui/hooks';
 
 /**
  * Define tailwind classes for the variants.
@@ -64,7 +64,7 @@ export function Button<
   ...props
 }: ButtonProps & Polymorphic<Element>) {
 
-  const dialogControlProps = useDialogControl(dialog);
+  const dialogControlProps = useDialogControlButtonProps(dialog);
 
   const Tag = as ?? (href ? AriaLink : AriaButton);
 

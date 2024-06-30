@@ -29,7 +29,7 @@ export function HeaderStandard({
       {...props}
     >
       <div className={cn(
-        'flex w-full items-center justify-center gap-4 px-6 py-4',
+        'flex w-full flex-wrap items-center justify-center gap-4 px-6 py-4',
         maxWidthScreenStyles[maxWidth]
       )}>
         <Brand href={brand?.href ?? '/'} {...brand}/>
