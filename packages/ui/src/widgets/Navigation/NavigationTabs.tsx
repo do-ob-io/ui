@@ -4,6 +4,7 @@ import { DoobUiContext } from '@do-ob/ui/context';
 import { Tab, TabList, Tabs } from 'react-aria-components';
 import { cn, interactiveStyles } from '@do-ob/ui/utility';
 import { nop } from '@do-ob/core';
+import { ChevronDownIcon } from '@do-ob/ui/icons';
 
 export function NavigationTabs({
   base: {
@@ -57,12 +58,13 @@ export function NavigationTabs({
           <Tab
             className={cn(
               interactiveStyles.focus,
-              'group relative flex h-11 items-center rounded px-3 active:text-primary hover:text-primary selected:font-bold dark:active:text-primary-dark dark:hover:text-primary-dark [&>*:first-child]:selected:bg-primary',
+              'cursor-pointer',
+              'group relative inline-flex h-11 flex-row items-center gap-1 rounded px-3 active:text-primary hover:text-primary selected:font-bold dark:active:text-primary-dark dark:hover:text-primary-dark [&>*:first-child]:selected:bg-primary',
               orientation === 'horizontal' ? 'justify-center [&>*:first-child]:selected:h-[6px]' : 'justify-start [&>*:first-child]:selected:w-[6px]',
             )}
             key={link.title}
             id={link.url}
-            href={link.url}
+            href={link.links?.length ? undefined : link.url}
           >
             <div
               className={cn(
@@ -72,6 +74,9 @@ export function NavigationTabs({
               aria-hidden="true"
             ></div>
             {link.title}
+            {link.links?.length ? (
+              <ChevronDownIcon className="size-4" />
+            ) : null}
           </Tab>
         ))}
       </TabList>
