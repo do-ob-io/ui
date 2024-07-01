@@ -52,6 +52,7 @@
     "react-aria": "nightly",
     "react-aria-components": "nightly",
     "react-dom": "19.0.0-rc-8971381549-20240625",
+    "react-stately": "nightly",
     "storybook": "^8.2.0-alpha.10",
     "tailwind-merge": "^2.3.0",
     "tailwindcss": "^3.4.3",

@@ -51,7 +51,7 @@ export function Drawer({
     }
   }, [ onOpenChange, onClose, onOpen, dismissable, drawer.open, controls ]);
 
-  useDialogRegister(id);
+  useDialogRegister(id, 'drawer');
 
   return (
     <ModalOverlay

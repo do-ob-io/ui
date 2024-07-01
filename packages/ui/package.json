@@ -43,6 +43,7 @@
     "@tailwindcss/typography": "^0.5.13",
     "react-aria": "nightly",
     "react-aria-components": "nightly",
+    "react-stately": "nightly",
     "tailwindcss-animate": "^1.0.7",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-react-aria-components": "^1.1.3"

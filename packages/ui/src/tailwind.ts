@@ -2,7 +2,7 @@
 import type { Config } from 'tailwindcss';
 import tailwindPlugin from 'tailwindcss/plugin';
 import tailwindColors from 'tailwindcss/colors';
-import { join } from 'node:path';
+import { join } from 'path';
 import tailwindReactAria from 'tailwindcss-react-aria-components';
 import tailwindContainerQueries from '@tailwindcss/container-queries';
 import tailwindAnimate from 'tailwindcss-animate';

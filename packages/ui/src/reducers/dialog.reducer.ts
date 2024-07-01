@@ -1,10 +1,10 @@
- 
 import type { DialogAction } from './dialog.actions';
 
 export interface DialogState {
   items: Record<string, {
     id: string;
     open: boolean;
+    type?: 'modal' | 'popover' | 'drawer';
     triggerRef?: React.RefObject<HTMLElement | null>;
   }>
 }
@@ -23,6 +23,8 @@ export function reducer(
 
   const { type, payload } = action;
 
+  console.log({ type, payload });
+
   switch (type) {
     case 'dialog/register':
       return {
@@ -32,6 +34,7 @@ export function reducer(
           [payload.id]: {
             id: payload.id,
             open: false,
+            type: payload.type,
           }
         }
       };
@@ -52,6 +55,20 @@ export function reducer(
       if(!state.items[payload.id]) {
         return state;
       }
+
+      // Ensure all other popovers are closed when a popover is opened.
+      if (state.items[payload.id].open === true && state.items[payload.id].type === 'popover') {
+        state.items = Object.values(state.items).reduce((acc, dialog) => {
+          if (dialog.type === 'popover') {
+            acc[dialog.id] = {
+              ...dialog,
+              open: false,
+            };
+          }
+          return acc;
+        }, {} as DialogState['items']);
+      }
+
       return {
         ...state,
         items: {

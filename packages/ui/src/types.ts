@@ -1,4 +1,3 @@
- 
 export * from './types/actions';
 export * from './types/locale';
 
@@ -56,10 +55,14 @@ export interface Link {
   title: string;
 
   /**
-   * Nested links.
+   * Subitems
    */
-  links?: Link[];
+  items?: Link[];
 }
+
+/**
+ * A Link Tree
+ */
 
 export type Socials = 'facebook' | 'x' | 'instagram' | 'linkedin' | 'youtube';
 

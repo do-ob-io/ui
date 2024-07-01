@@ -8,6 +8,7 @@ import { Bars3Icon } from '@do-ob/ui/icons';
 import { NavigationProps } from './Navigation.types';
 import { NavigationTabs } from './NavigationTabs';
 import { useDialogControl } from '@do-ob/ui/hooks';
+import { NavigationPopovers } from './NavigationPopovers';
 
 export function Navigation(props: NavigationProps & React.HTMLAttributes<HTMLDivElement>) {
 
@@ -19,7 +20,8 @@ export function Navigation(props: NavigationProps & React.HTMLAttributes<HTMLDiv
     ...divProps
   } = props;
 
-  const drawerId = useId();
+  const id = useId();
+  const drawerId = `${id}-drawer`;
   const ref = useRef<HTMLDivElement>(null);
   const overflowing = useOverflow(ref, 'x');
 
@@ -34,7 +36,7 @@ export function Navigation(props: NavigationProps & React.HTMLAttributes<HTMLDiv
       'relative overflow-hidden p-2',
       className
     )} {...divProps}>
-      <NavigationTabs overflowing={overflowing} base={props} />
+      <NavigationTabs id={id} overflowing={overflowing} base={props} />
 
       <div className="absolute left-0 top-0 flex h-full items-center p-2">
         <Button
@@ -51,18 +53,20 @@ export function Navigation(props: NavigationProps & React.HTMLAttributes<HTMLDiv
         </Button>
       </div>
 
-      {orientation === 'horizontal' ? (
+      {orientation === 'horizontal' ? (<>
         <Drawer id={drawerId} title={label} direction="left">
           <NavigationTabs
             base={{
               ...props,
               orientation: 'vertical'
             }}
+            id={id}
             overflowing={false}
             onSelectionChange={handleSelectionChange}
           />
         </Drawer>
-      ) :null}
+        <NavigationPopovers base={props} id={id} />
+      </>) :null}
 
     </div>
   );

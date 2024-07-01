@@ -36,7 +36,7 @@ export function Popover({
   useOutsidePress(popoverRef, handleOutsidePress);
 
   // Register the popover dialog.
-  useDialogRegister(id);
+  useDialogRegister(id, 'popover');
 
   const handleOpenChange = useCallback((next: boolean) => {
     if (!next) {

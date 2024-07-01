@@ -2,6 +2,7 @@ export type DialogAction = {
   type: 'dialog/register',
   payload: {
     id: string;
+    type?: 'modal' | 'popover' | 'drawer';
   }
 } | {
   type: 'dialog/unregister',
@@ -31,11 +32,12 @@ export type DialogAction = {
 /**
  * Registers a dialog.
  */
-export function register(id: string): DialogAction {
+export function register(id: string, type?: 'modal' | 'popover' | 'drawer'): DialogAction {
   return {
     type: 'dialog/register',
     payload: {
       id,
+      type,
     }
   };
 }
