@@ -1,6 +1,6 @@
 {
   "name": "@do-ob/ui",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "A TailwindCSS and React Aria (Open Source) components library for React projects.",
   "type": "module",
   "main": "dist/index.js",
