@@ -18,7 +18,7 @@
   "license": "MIT",
   "devDependencies": {
     "@do-ob/core": "^1.1.0",
-    "@do-ob/eslint-config": "^2.3.0",
+    "@do-ob/eslint-config": "^2.5.0",
     "@do-ob/ts-config": "^2.0.0",
     "@do-ob/vite-lib-config": "^3.0.1",
     "@eslint/compat": "^1.1.0",
@@ -41,9 +41,6 @@
     "autoprefixer": "^10.4.19",
     "cssnano": "^7.0.2",
     "eslint": "^9.2.0",
-    "eslint-plugin-react": "^7.34.2",
-    "eslint-plugin-react-compiler": "0.0.0-experimental-51a85ea-20240601",
-    "eslint-plugin-react-hooks": "^4.6.2",
     "framer-motion": "^11.2.10",
     "glob": "^10.4.2",
     "next": "15.0.0-rc.0",

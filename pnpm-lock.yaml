@@ -12,8 +12,8 @@ importers:
         specifier: ^1.1.0
         version: 1.1.0
       '@do-ob/eslint-config':
-        specifier: ^2.3.0
-        version: 2.3.0(eslint@9.4.0)(tailwindcss@3.4.4)(typescript@5.4.5)
+        specifier: ^2.5.0
+        version: 2.5.0(eslint@9.4.0)(tailwindcss@3.4.4)(typescript@5.4.5)
       '@do-ob/ts-config':
         specifier: ^2.0.0
         version: 2.0.0(typescript@5.4.5)
@@ -80,15 +80,6 @@ importers:
       eslint:
         specifier: ^9.2.0
         version: 9.4.0
-      eslint-plugin-react:
-        specifier: ^7.34.2
-        version: 7.34.2(eslint@9.4.0)
-      eslint-plugin-react-compiler:
-        specifier: 0.0.0-experimental-51a85ea-20240601
-        version: 0.0.0-experimental-51a85ea-20240601(eslint@9.4.0)
-      eslint-plugin-react-hooks:
-        specifier: ^4.6.2
-        version: 4.6.2(eslint@9.4.0)
       framer-motion:
         specifier: ^11.2.10
         version: 11.2.10(react-dom@19.0.0-rc-8971381549-20240625(react@19.0.0-rc-8971381549-20240625))(react@19.0.0-rc-8971381549-20240625)
@@ -904,8 +895,8 @@ packages:
   '@do-ob/core@1.1.0':
     resolution: {integrity: sha512-Ew/f6Twj6Z4TzFW1ii4CDFtzpSGfuSn/FMo43By6QbcZ9MdA7U9jxPFBkDcgHlU3dVIZIfPol6aWN7V59SQPyQ==}
 
-  '@do-ob/eslint-config@2.3.0':
-    resolution: {integrity: sha512-jezw0GnatrViICC8tauRJDAh1qVmwMHL6VTgwJ12HGuYRlwKCRTW0EJuU73IFekR8z7bro0FAaGY9n9MinbJcQ==}
+  '@do-ob/eslint-config@2.5.0':
+    resolution: {integrity: sha512-C4EDG/V/99P4rzP/2BJcOnVSXls7/eDp4YWROGJnGHDSSMdPNEybRxvXqaO8spdOH5Z1/jQ/qzFBZOwO/1SyIQ==}
     engines: {node: '>=20'}
     peerDependencies:
       eslint: ^9
@@ -4032,8 +4023,8 @@ packages:
     peerDependencies:
       eslint: ^3.0.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0-0
 
-  eslint-plugin-react@7.34.2:
-    resolution: {integrity: sha512-2HCmrU+/JNigDN6tg55cRDKCQWicYAPB38JGSFDQt95jDm8rrvSUo7YPkOIm5l6ts1j1zCvysNcasvfTMQzUOw==}
+  eslint-plugin-react@7.34.3:
+    resolution: {integrity: sha512-aoW4MV891jkUulwDApQbPYTVZmeuSyFrudpbTAQuj5Fv8VL+o6df2xIGpw8B0hPjAaih1/Fb0om9grCdyFYemA==}
     engines: {node: '>=4'}
     peerDependencies:
       eslint: ^3 || ^4 || ^5 || ^6 || ^7 || ^8
@@ -7909,11 +7900,15 @@ snapshots:
 
   '@do-ob/core@1.1.0': {}
 
-  '@do-ob/eslint-config@2.3.0(eslint@9.4.0)(tailwindcss@3.4.4)(typescript@5.4.5)':
+  '@do-ob/eslint-config@2.5.0(eslint@9.4.0)(tailwindcss@3.4.4)(typescript@5.4.5)':
     dependencies:
+      '@eslint/compat': 1.1.0
       '@eslint/js': 9.4.0
       '@stylistic/eslint-plugin': 2.1.0(eslint@9.4.0)(typescript@5.4.5)
       eslint: 9.4.0
+      eslint-plugin-react: 7.34.3(eslint@9.4.0)
+      eslint-plugin-react-compiler: 0.0.0-experimental-51a85ea-20240601(eslint@9.4.0)
+      eslint-plugin-react-hooks: 4.6.2(eslint@9.4.0)
       eslint-plugin-tailwindcss: 3.17.3(tailwindcss@3.4.4)
       globals: 15.4.0
       typescript-eslint: 8.0.0-alpha.13(eslint@9.4.0)(typescript@5.4.5)
@@ -13737,7 +13732,7 @@ snapshots:
     dependencies:
       eslint: 9.4.0
 
-  eslint-plugin-react@7.34.2(eslint@9.4.0):
+  eslint-plugin-react@7.34.3(eslint@9.4.0):
     dependencies:
       array-includes: 3.1.8
       array.prototype.findlast: 1.2.5
