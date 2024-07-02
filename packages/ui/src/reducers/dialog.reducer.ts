@@ -23,8 +23,6 @@ export function reducer(
 
   const { type, payload } = action;
 
-  console.log({ type, payload });
-
   switch (type) {
     case 'dialog/register':
       return {

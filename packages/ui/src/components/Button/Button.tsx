@@ -59,6 +59,7 @@ export function Button<
   startContent = null,
   endContent = null,
   iconify = false,
+  unstyled = false,
   href,
   dialog,
   ...props
@@ -94,7 +95,7 @@ export function Button<
   
   return (
     <Tag
-      className={cn(
+      className={unstyled ? className : cn(
         'inline-flex items-center justify-center rounded no-underline',
         interactiveStyles.focus,
         interactiveStyles.mouse,

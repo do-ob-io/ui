@@ -1,6 +1,6 @@
 'use client';
 
-import { createRef, use, useRef } from 'react';
+import { createRef, use, useMemo } from 'react';
 import { NavigationProps } from './Navigation.types';
 import { DialogDispatchContext, DoobUiContext } from '@do-ob/ui/context';
 import { Tab, TabList, Tabs } from 'react-aria-components';
@@ -8,6 +8,7 @@ import { cn, interactiveStyles } from '@do-ob/ui/utility';
 import { nop } from '@do-ob/core';
 import { ChevronDownIcon } from '@do-ob/ui/icons';
 import { dialogActions } from '@do-ob/ui/reducer';
+import { useTreeData } from 'react-stately';
 
 export function NavigationTabs({
   base: {
@@ -25,7 +26,16 @@ export function NavigationTabs({
   onSelectionChange?: (key: string) => void;
 }) {
 
-  const tabRefs = useRef<Record<string, HTMLElement | null>>({});
+  const linkTree = useTreeData({
+    initialItems: links,
+    getKey: (item) => item.url,
+    getChildren: (item) => item.links ?? [],
+  });
+
+  const tabRefs = useMemo(() => (links.reduce((acc, { url }) => {
+    acc[url] = createRef<HTMLDivElement>();
+    return acc;
+  }, {} as Record<string, React.RefObject<HTMLDivElement | null>>)), [ links ]);
 
   const { pathname } = use(DoobUiContext);
   const dispatch = use(DialogDispatchContext);
@@ -60,27 +70,32 @@ export function NavigationTabs({
 
         // Only for horizontal navigation.
         if(orientation === 'horizontal') {
-          const selectedLink = links.find((link) => link.url === key);
+          const selectedLink = linkTree.getItem(key);
+
+          console.log({
+            selectedLink,
+            tabRefs,
+            ref: tabRefs[selectedLink.value.url].current
+          });
+
+          console.log(selectedLink.value.url);
 
           // If the selected link has sub-items, open a dialog.
-          if(selectedLink?.items?.length) {
-            const element = tabRefs.current[key] ?? null;
-
-            const ref = createRef<HTMLElement | null>();
-            ref.current = element;
+          if(selectedLink.children.length > 0) {
             dispatch(dialogActions.open(
-              `${id}-${selectedLink.url}`,
-              ref
+              `${id}-${selectedLink.value.url}`,
+              tabRefs[selectedLink.value.url],
             ));
           }
         }
       }}
     >
-      <TabList className="flex gap-1 orientation-horizontal:flex-row orientation-vertical:flex-col" aria-label={label}>
-        {links.length === 0 ? (
-          <div>&nbsp;</div>
-        ) : null}
-        {links.map((link) => (
+      <TabList
+        className="flex gap-1 orientation-horizontal:flex-row orientation-vertical:flex-col"
+        items={linkTree.items}
+        aria-label={label}
+      >
+        {({ value, children }) => (
           <Tab
             className={cn(
               interactiveStyles.focus,
@@ -88,9 +103,9 @@ export function NavigationTabs({
               'group relative inline-flex h-11 flex-row items-center gap-1 rounded px-3 active:text-primary hover:text-primary selected:font-bold dark:active:text-primary-dark dark:hover:text-primary-dark [&>*:first-child]:selected:bg-primary',
               orientation === 'horizontal' ? 'justify-center [&>*:first-child]:selected:h-[6px]' : 'justify-start [&>*:first-child]:selected:w-[6px]',
             )}
-            key={link.url}
-            id={link.url}
-            href={link.items?.length ? undefined : link.url}
+            key={value.url}
+            id={value.url}
+            href={children.length ? undefined : value.url}
           >
             <div
               className={cn(
@@ -100,21 +115,19 @@ export function NavigationTabs({
               aria-hidden="true"
             ></div>
             <div
-              ref={(el) => {
-                tabRefs.current[link.url] = el;
-              }}
+              ref={tabRefs[value.url]}
               className={cn(
                 'flex size-full flex-row gap-1',
                 orientation === 'horizontal' ? 'items-center justify-center' : 'items-center justify-start'
               )}
             >
-              {link.title}
-              {orientation === 'horizontal' && link.items?.length ? (
+              {value.title}
+              {orientation === 'horizontal' && children.length > 0 ? (
                 <ChevronDownIcon className="size-4" />
               ) : null}
             </div>
           </Tab>
-        ))}
+        )}
       </TabList>
     </Tabs>
   );

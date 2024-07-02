@@ -6,6 +6,7 @@ export type ButtonColor = 'background' | 'primary' | 'secondary' | 'success' | '
 
 export interface ButtonProps {
   variant?: ButtonVariant;
+  unstyled?: boolean;
   size?: ButtonSize;
   color?: ButtonColor;
   startContent?: React.ReactNode;

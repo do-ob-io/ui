@@ -57,7 +57,7 @@ export interface Link {
   /**
    * Subitems
    */
-  items?: Link[];
+  links?: Link[];
 }
 
 /**
