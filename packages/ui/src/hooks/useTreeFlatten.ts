@@ -7,7 +7,6 @@ function flattenTree<T extends object>(
   getChildren: (node: T) => T[] | undefined,
   level: number = 0
 ): Flattened<T>[] {
-  console.log('CALLED');
   return tree.reduce((acc: Flattened<T>[], node: T) => {
     const children = getChildren(node);
     acc.push({ ...node, level });

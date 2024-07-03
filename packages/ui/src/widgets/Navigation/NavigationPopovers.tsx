@@ -25,7 +25,10 @@ export function NavigationPopovers({
           <NavigationMenu
             base={{
               ...base,
-              links: [ link, ...link.links ?? [] ],
+              links: [ {
+                title: link.title,
+                url: link.url,
+              }, ...link.links ?? [] ],
             }}
           />
         </Popover>

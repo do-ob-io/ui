@@ -21,11 +21,6 @@ export function NavigationMenu({
     getKey: (item) => item.url,
   });
 
-  console.log({
-    linksFlat,
-    linkList: linkList.items
-  });
-
   return (
     <Tabs
       orientation="vertical"
