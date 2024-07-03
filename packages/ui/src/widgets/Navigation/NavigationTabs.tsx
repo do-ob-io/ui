@@ -72,14 +72,6 @@ export function NavigationTabs({
         if(orientation === 'horizontal') {
           const selectedLink = linkTree.getItem(key);
 
-          console.log({
-            selectedLink,
-            tabRefs,
-            ref: tabRefs[selectedLink.value.url].current
-          });
-
-          console.log(selectedLink.value.url);
-
           // If the selected link has sub-items, open a dialog.
           if(selectedLink.children.length > 0) {
             dispatch(dialogActions.open(

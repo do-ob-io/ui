@@ -9,3 +9,4 @@ export * from './hooks/useDialogControlButtonProps';
 export * from './hooks/useDialogControl';
 export * from './hooks/useDialogRegister';
 export * from './hooks/useOutsidePress';
+export * from './hooks/useTreeFlatten';

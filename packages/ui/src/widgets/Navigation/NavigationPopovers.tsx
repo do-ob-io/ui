@@ -1,5 +1,6 @@
 import { Popover } from '@do-ob/ui/components';
 import { NavigationProps } from './Navigation.types';
+import { NavigationMenu } from './NavigationMenu';
 
 export function NavigationPopovers({
   base,
@@ -10,16 +11,23 @@ export function NavigationPopovers({
     links = [],
   } = base;
 
+  const filteredLinks = links.filter((link) => link.links && link.links.length > 0);
+
   return (
     <>
-      {links.map((link) => (
+      {filteredLinks.map((link) => (
         <Popover
           key={link.url}
           id={`${id}-${link.url}`}
           placement="bottom"
           nonmodal
         >
-          <h2>{link.title}</h2>
+          <NavigationMenu
+            base={{
+              ...base,
+              links: [ link, ...link.links ?? [] ],
+            }}
+          />
         </Popover>
       ))}
     </>
