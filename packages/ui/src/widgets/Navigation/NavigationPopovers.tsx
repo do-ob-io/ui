@@ -1,6 +1,7 @@
 import { Popover } from '@do-ob/ui/components';
 import { NavigationProps } from './Navigation.types';
-import { NavigationMenu } from './NavigationMenu';
+// import { NavigationMenu } from './NavigationMenu';
+import { NavigationTabs } from './NavigationTabs';
 
 export function NavigationPopovers({
   base,
@@ -22,14 +23,14 @@ export function NavigationPopovers({
           placement="bottom"
           nonmodal
         >
-          <NavigationMenu
+          <NavigationTabs
             base={{
               ...base,
-              links: [ {
-                title: link.title,
-                url: link.url,
-              }, ...link.links ?? [] ],
+              orientation: 'vertical',
+              links: [ link ],
             }}
+            id={id}
+            overflowing={false}
           />
         </Popover>
       ))}

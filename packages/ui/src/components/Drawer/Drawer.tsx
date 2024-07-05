@@ -65,7 +65,7 @@ export function Drawer({
       <Modal
         
         className={cn(
-          'fixed min-w-80 transform-gpu bg-white shadow-md transition-all duration-500',
+          'fixed min-w-80 transform-gpu overflow-y-auto bg-white shadow-md transition-all duration-500',
           directionStyles[direction],
         )}
         style={{
@@ -74,7 +74,7 @@ export function Drawer({
         }}
       >
         <Dialog className="p-4 focus-visible:outline-none" aria-label={hideTitle ? title : undefined}>
-          {!hideTitle ? (
+          {!hideTitle ? (<>
             <Heading slot="title" className="mb-2 flex flex-row items-center text-xl">
               <div style={{ flex: 1 }}>{title}</div>
               <Button
@@ -86,8 +86,8 @@ export function Drawer({
                 <XMarkIcon />
               </Button>
             </Heading>
-          ): null}
-          <Divider className="mb-2" />
+            <Divider className="mb-2" />
+          </>): null}
           {children}
         </Dialog>
       </Modal>

@@ -8,7 +8,8 @@ import { cn, interactiveStyles } from '@do-ob/ui/utility';
 import { nop } from '@do-ob/core';
 import { ChevronDownIcon } from '@do-ob/ui/icons';
 import { dialogActions } from '@do-ob/ui/reducer';
-import { useTreeData } from 'react-stately';
+import { useListData } from 'react-stately';
+import { useTreeFlatten } from '@do-ob/ui/hooks';
 
 export function NavigationTabs({
   base: {
@@ -26,10 +27,11 @@ export function NavigationTabs({
   onSelectionChange?: (key: string) => void;
 }) {
 
-  const linkTree = useTreeData({
-    initialItems: links,
+  const linksFlattened = useTreeFlatten(links, (link) => link.links);
+
+  const linkList = useListData({
+    initialItems: linksFlattened,
     getKey: (item) => item.url,
-    getChildren: (item) => item.links ?? [],
   });
 
   const tabRefs = useMemo(() => (links.reduce((acc, { url }) => {
@@ -70,13 +72,13 @@ export function NavigationTabs({
 
         // Only for horizontal navigation.
         if(orientation === 'horizontal') {
-          const selectedLink = linkTree.getItem(key);
+          const selectedLink = linkList.getItem(key);
 
           // If the selected link has sub-items, open a dialog.
-          if(selectedLink.children.length > 0) {
+          if(selectedLink.children > 0) {
             dispatch(dialogActions.open(
-              `${id}-${selectedLink.value.url}`,
-              tabRefs[selectedLink.value.url],
+              `${id}-${selectedLink.url}`,
+              tabRefs[selectedLink.url],
             ));
           }
         }
@@ -84,20 +86,21 @@ export function NavigationTabs({
     >
       <TabList
         className="flex gap-1 orientation-horizontal:flex-row orientation-vertical:flex-col"
-        items={linkTree.items}
+        items={orientation === 'horizontal' ? linkList.items.filter((item) => item.level === 0) : linkList.items}
         aria-label={label}
       >
-        {({ value, children }) => (
+        {({ children, ...value }) => (
           <Tab
             className={cn(
               interactiveStyles.focus,
               'cursor-pointer',
-              'group relative inline-flex h-11 flex-row items-center gap-1 rounded px-3 active:text-primary hover:text-primary selected:font-bold dark:active:text-primary-dark dark:hover:text-primary-dark [&>*:first-child]:selected:bg-primary',
+              'group relative inline-flex flex-row items-center gap-1 rounded px-3 active:text-primary hover:text-primary selected:font-bold dark:active:text-primary-dark dark:hover:text-primary-dark [&>*:first-child]:selected:bg-primary',
+              value.level === 0 ? 'h-11' : 'h-8',
               orientation === 'horizontal' ? 'justify-center [&>*:first-child]:selected:h-[6px]' : 'justify-start [&>*:first-child]:selected:w-[6px]',
             )}
             key={value.url}
             id={value.url}
-            href={children.length ? undefined : value.url}
+            href={children ? undefined : value.url}
           >
             <div
               className={cn(
@@ -110,11 +113,15 @@ export function NavigationTabs({
               ref={tabRefs[value.url]}
               className={cn(
                 'flex size-full flex-row gap-1',
+                value.level > 0 && 'text-sm',
                 orientation === 'horizontal' ? 'items-center justify-center' : 'items-center justify-start'
               )}
+              style={{
+                paddingLeft: `${value.level * .5}rem`,
+              }}
             >
               {value.title}
-              {orientation === 'horizontal' && children.length > 0 ? (
+              {orientation === 'horizontal' && children > 0 ? (
                 <ChevronDownIcon className="size-4" />
               ) : null}
             </div>

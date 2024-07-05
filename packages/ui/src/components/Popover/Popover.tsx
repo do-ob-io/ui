@@ -56,7 +56,7 @@ export function Popover({
       shouldCloseOnInteractOutside={(element) => {
         return !!popover.triggerRef && !element.contains(popover.triggerRef?.current);
       }}
-      className="min-w-56 origin-top-left rounded bg-background p-1 shadow-lg ring-1 ring-background-fg/30 fill-mode-forwards entering:animate-in entering:fade-in entering:zoom-in-95 exiting:animate-out exiting:fade-out exiting:zoom-out-95 dark:bg-background-dark dark:ring-background-dark-fg/30"
+      className="min-w-56 origin-top-left overflow-y-auto rounded bg-background p-1 shadow-lg ring-1 ring-background-fg/30 fill-mode-forwards entering:animate-in entering:fade-in entering:zoom-in-95 exiting:animate-out exiting:fade-out exiting:zoom-out-95 dark:bg-background-dark dark:ring-background-dark-fg/30"
     >
       <AriaOverlayArrow
         className={({ placement }) => cn(

@@ -1,6 +1,16 @@
 import { useMemo } from 'react';
 
-type Flattened<T extends object> = T & { level: number };
+type Flattened<T extends object> = T & {
+  /**
+   * Determines the depth the node was in the tree.
+   */
+  level: number;
+
+  /**
+   * The number of children the node has.
+   */
+  children: number;
+};
 
 function flattenTree<T extends object>(
   tree: T[],
@@ -9,7 +19,7 @@ function flattenTree<T extends object>(
 ): Flattened<T>[] {
   return tree.reduce((acc: Flattened<T>[], node: T) => {
     const children = getChildren(node);
-    acc.push({ ...node, level });
+    acc.push({ ...node, level, children: children?.length || 0 });
 
     if (children && children.length > 0) {
       acc.push(...flattenTree(children, getChildren, level + 1));
