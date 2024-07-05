@@ -65,7 +65,7 @@ export function Drawer({
       <Modal
         
         className={cn(
-          'fixed min-w-80 transform-gpu overflow-y-auto bg-white shadow-md transition-all duration-500',
+          'fixed min-w-80 transform-gpu overflow-y-auto bg-background shadow-md transition-all duration-500 dark:bg-background-dark',
           directionStyles[direction],
         )}
         style={{

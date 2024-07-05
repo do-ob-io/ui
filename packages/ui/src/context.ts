@@ -6,7 +6,7 @@ import { ThemeMode } from '@do-ob/ui/types';
 import { nop } from '@do-ob/core';
 import { createContext } from 'react';
 
-export * from './context/DialogsContext';
+export { DialogContext, DialogDispatchContext } from './context/DialogsContext';
 
 /**
  * Context properties for the do-ob ui provider

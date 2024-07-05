@@ -1,3 +1,5 @@
+'use client';
+
 import { cn } from '@do-ob/ui/utility';
 import { Brand, Navigation } from '@do-ob/ui/widgets';
 import type { HeaderProps } from './Header.types';

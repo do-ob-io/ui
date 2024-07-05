@@ -1,4 +1,5 @@
-// Divider.tsx
+'use client';
+
 import React from 'react';
 import { DividerProps } from './Divider.types';
 import { cn } from '@do-ob/ui/utility';
@@ -13,7 +14,7 @@ export function Divider({
     <Separator
       orientation={orientation}
       className={cn(
-        'border-background-fg/50',
+        'border-background-fg/50 dark:border-background-dark-fg/50',
         orientation === 'horizontal' ? 'h-px w-full border-t' : 'h-full w-px border-l',
         className
       )}

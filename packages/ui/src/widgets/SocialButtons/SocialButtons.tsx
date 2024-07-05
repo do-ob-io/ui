@@ -1,3 +1,5 @@
+'use client';
+
 import { Group } from 'react-aria-components';
 import { Button } from '@do-ob/ui/components';
 import { Socials } from '@do-ob/ui/types';

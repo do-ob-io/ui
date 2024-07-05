@@ -1,3 +1,5 @@
+'use client';
+
 import { cn } from '@do-ob/ui/utility';
 import { Toolbar } from 'react-aria-components';
 import { Brand, Navigation, SocialButtons } from '@do-ob/ui/widgets';
