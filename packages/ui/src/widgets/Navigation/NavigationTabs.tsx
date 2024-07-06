@@ -94,7 +94,7 @@ export function NavigationTabs({
             className={cn(
               interactiveStyles.focus,
               'cursor-pointer',
-              'group relative inline-flex flex-row items-center gap-1 rounded px-3 active:text-primary hover:text-primary selected:font-bold dark:active:text-primary-dark dark:hover:text-primary-dark [&>*:first-child]:selected:bg-primary',
+              'focus-visible::text-primary dark:focus-visible::text-primary-dark group relative inline-flex flex-row items-center gap-1 rounded px-3 hover:text-primary selected:font-bold dark:hover:text-primary-dark [&>*:first-child]:selected:bg-primary',
               value.level === 0 ? 'h-11' : 'h-8',
               orientation === 'horizontal' ? 'justify-center [&>*:first-child]:selected:h-[6px]' : 'justify-start [&>*:first-child]:selected:w-[6px]',
             )}
@@ -104,7 +104,7 @@ export function NavigationTabs({
           >
             <div
               className={cn(
-                'absolute rounded-[2px] transition-all group-hover:bg-primary/60 group-focus:bg-primary/60 dark:group-hover:bg-primary-dark/60 dark:group-focus:bg-primary-dark/60',
+                'absolute rounded-[2px] transition-all group-hover:bg-primary/60 group-focus-visible:bg-primary/60 dark:group-hover:bg-primary-dark/60 dark:group-focus-visible:bg-primary-dark/60',
                 orientation === 'horizontal' ? 'bottom-0 left-0 h-[4px] w-full' : 'left-0 top-0 h-full w-[4px]',
               )}
               aria-hidden="true"
