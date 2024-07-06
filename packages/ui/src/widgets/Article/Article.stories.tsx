@@ -39,7 +39,7 @@ export const Default: Story = {
       <blockquote>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</blockquote>
 
       <blockquote>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
       </blockquote>
 
       <p><code>&lt;Lorem ipsum&gt;</code></p>
