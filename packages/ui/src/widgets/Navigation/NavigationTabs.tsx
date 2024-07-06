@@ -60,7 +60,7 @@ export function NavigationTabs({
       aria-hidden={overflowing}
       className={cn(
         'w-full',
-        overflowing === true && 'opacity-0',
+        overflowing !== false && 'opacity-0',
       )}
       keyboardActivation="manual"
       onSelectionChange={(key) => {
