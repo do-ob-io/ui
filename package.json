@@ -2,7 +2,17 @@
   "name": "@do-ob/ui",
   "version": "1.0.0",
   "description": "React user interface components for do-ob applications.",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./base": {
+      "import": "./dist/base/index.js",
+      "types": "./dist/base/index.d.ts"
+    }
+  },
   "scripts": {
     "build": "tsc -p ./tsconfig.json",
     "test": "echo \"Error: no test specified\" && exit 1"
