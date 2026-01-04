@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { ArrowUpIcon } from 'lucide-react';
 
-import { Button } from './button';
+import { Button } from './button.js';
 
 const meta = {
   component: Button,
