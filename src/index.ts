@@ -1,1 +1,1 @@
-export * from './base/index.js';
+export * from './utils.js';
