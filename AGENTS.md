@@ -10,10 +10,7 @@ This is a **design-system–adjacent** project:
 - Visual behavior is validated through **Storybook**
 - Logic reuse must flow through `@do-ob/core`
 
-## Technology Stack (Fixed)
-
-AI agents must assume and respect the following:
-
+## Technology Stack
 - **React 19**
 - **TypeScript (strict)**
 - **TailwindCSS (strict)**
