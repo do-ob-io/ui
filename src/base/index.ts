@@ -2,4 +2,4 @@
  * @module base
  */
 
-export * from './button.js';
+export * from './button/index.js';
