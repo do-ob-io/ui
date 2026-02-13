@@ -1,5 +1,5 @@
 import { cn } from '@do-ob/core/web';
-import { cva, type VariantProps } from 'class-variance-authority';
+import { cva, type VariantProps } from '@do-ob/core/web';
 
 
 function Empty({ className, ...props }: React.ComponentProps<'div'>) {

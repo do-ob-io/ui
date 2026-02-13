@@ -10,7 +10,7 @@ import {
   type Locale,
 } from 'react-day-picker';
 
-import { Button, buttonVariants } from '@/base/button';
+import { Button, buttonVariants } from '@/base/button.js';
 
 function Calendar({
   className,

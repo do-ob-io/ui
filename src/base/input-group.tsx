@@ -1,10 +1,10 @@
 import { cn } from '@do-ob/core/web';
-import { cva, type VariantProps } from 'class-variance-authority';
+import { cva, type VariantProps } from '@do-ob/core/web';
 import type * as React from 'react';
 
-import { Button } from '@/base/button';
-import { Input } from '@/base/input';
-import { Textarea } from '@/base/textarea';
+import { Button } from '@/base/button.js';
+import { Input } from '@/base/input.js';
+import { Textarea } from '@/base/textarea.js';
 
 function InputGroup({ className, ...props }: React.ComponentProps<'div'>) {
   return (

@@ -5,7 +5,7 @@ import { cn } from '@do-ob/core/web';
 import { XIcon } from 'lucide-react';
 import type * as React from 'react';
 
-import { Button } from '@/base/button';
+import { Button } from '@/base/button.js';
 
 function Dialog({ ...props }: DialogPrimitive.Root.Props) {
   return <DialogPrimitive.Root data-slot="dialog" {...props} />;

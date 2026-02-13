@@ -1,27 +1,27 @@
 import { mergeProps } from '@base-ui/react/merge-props';
 import { useRender } from '@base-ui/react/use-render';
 import { cn } from '@do-ob/core/web';
-import { cva, type VariantProps } from 'class-variance-authority';
+import { cva, type VariantProps } from '@do-ob/core/web';
+import { useIsMobile } from '@do-ob/hook/browser';
 import { PanelLeftIcon } from 'lucide-react';
 import * as React from 'react';
 
-import { Button } from '@/base/button';
-import { Input } from '@/base/input';
-import { Separator } from '@/base/separator';
+import { Button } from '@/base/button.js';
+import { Input } from '@/base/input.js';
+import { Separator } from '@/base/separator.js';
 import {
   Sheet,
   SheetContent,
   SheetDescription,
   SheetHeader,
   SheetTitle,
-} from '@/base/sheet';
-import { Skeleton } from '@/base/skeleton';
+} from '@/base/sheet.js';
+import { Skeleton } from '@/base/skeleton.js';
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from '@/base/tooltip';
-import { useIsMobile } from '@/hooks/use-mobile';
+} from '@/base/tooltip.js';
 
 const SIDEBAR_COOKIE_NAME = 'sidebar_state';
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
@@ -29,6 +29,17 @@ const SIDEBAR_WIDTH = '16rem';
 const SIDEBAR_WIDTH_MOBILE = '18rem';
 const SIDEBAR_WIDTH_ICON = '3rem';
 const SIDEBAR_KEYBOARD_SHORTCUT = 'b';
+
+interface SidebarCookieStore {
+  set: (
+    options: {
+      name: string;
+      value: string;
+      path?: string;
+      maxAge?: number;
+    },
+  ) => Promise<void>;
+}
 
 interface SidebarContextProps {
   state: 'expanded' | 'collapsed';
@@ -81,7 +92,13 @@ function SidebarProvider({
       }
 
       // This sets the cookie to keep the sidebar state.
-      document.cookie = `${SIDEBAR_COOKIE_NAME}=${openState}; path=/; max-age=${SIDEBAR_COOKIE_MAX_AGE}`;
+      const cookieStore = (globalThis as { cookieStore?: SidebarCookieStore }).cookieStore;
+      void cookieStore?.set({
+        name: SIDEBAR_COOKIE_NAME,
+        value: String(openState),
+        path: '/',
+        maxAge: SIDEBAR_COOKIE_MAX_AGE,
+      });
     },
     [ setOpenProp, open ],
   );
@@ -287,7 +304,7 @@ function SidebarRail({ className, ...props }: React.ComponentProps<'button'>) {
       onClick={toggleSidebar}
       title="Toggle Sidebar"
       className={cn(
-        'hover:after:bg-sidebar-border absolute inset-y-0 z-20 hidden w-4 transition-all ease-linear group-data-[side=left]:-right-4 group-data-[side=right]:left-0 after:absolute after:inset-y-0 after:start-1/2 after:w-[2px] sm:flex ltr:-translate-x-1/2 rtl:-translate-x-1/2',
+        'hover:after:bg-sidebar-border absolute inset-y-0 z-20 hidden w-4 transition-all ease-linear group-data-[side=left]:-right-4 group-data-[side=right]:left-0 after:absolute after:inset-y-0 after:start-1/2 after:w-0.5 sm:flex ltr:-translate-x-1/2 rtl:-translate-x-1/2',
         'in-data-[side=left]:cursor-w-resize in-data-[side=right]:cursor-e-resize',
         '[[data-side=left][data-state=collapsed]_&]:cursor-e-resize [[data-side=right][data-state=collapsed]_&]:cursor-w-resize',
         'hover:group-data-[collapsible=offcanvas]:bg-sidebar group-data-[collapsible=offcanvas]:translate-x-0 group-data-[collapsible=offcanvas]:after:left-full',
@@ -531,11 +548,9 @@ function SidebarMenuButton({
     return comp;
   }
 
-  if (typeof tooltip === 'string') {
-    tooltip = {
-      children: tooltip,
-    };
-  }
+  const tooltipContentProps = typeof tooltip === 'string'
+    ? { children: tooltip }
+    : tooltip;
 
   return (
     <Tooltip>
@@ -544,7 +559,7 @@ function SidebarMenuButton({
         side="right"
         align="center"
         hidden={state !== 'collapsed' || isMobile}
-        {...tooltip}
+        {...tooltipContentProps}
       />
     </Tooltip>
   );

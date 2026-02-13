@@ -1,10 +1,10 @@
 import { mergeProps } from '@base-ui/react/merge-props';
 import { useRender } from '@base-ui/react/use-render';
 import { cn } from '@do-ob/core/web';
-import { cva, type VariantProps } from 'class-variance-authority';
+import { cva, type VariantProps } from '@do-ob/core/web';
 import type * as React from 'react';
 
-import { Separator } from '@/base/separator';
+import { Separator } from '@/base/separator.js';
 
 function ItemGroup({ className, ...props }: React.ComponentProps<'div'>) {
   return (

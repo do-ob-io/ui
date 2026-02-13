@@ -1,11 +1,11 @@
 'use client';
 
 import { cn } from '@do-ob/core/web';
-import { cva, type VariantProps } from 'class-variance-authority';
+import { cva, type VariantProps } from '@do-ob/core/web';
 import { useMemo } from 'react';
 
-import { Label } from '@/base/label';
-import { Separator } from '@/base/separator';
+import { Label } from '@/base/label.js';
+import { Separator } from '@/base/separator.js';
 
 function FieldSet({ className, ...props }: React.ComponentProps<'fieldset'>) {
   return (

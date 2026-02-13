@@ -15,7 +15,7 @@
     }
   },
   "scripts": {
-    "build": "tsc -p ./tsconfig.lib.json"
+    "build": "tsc -p ./tsconfig.lib.json && tsc-alias -p ./tsconfig.lib.json"
   },
   "author": "",
   "license": "MIT",
@@ -26,10 +26,12 @@
   "devDependencies": {
     "@do-ob/core": "workspace:^1.0.0",
     "@do-ob/hook": "workspace:^1.0.0",
+    "@types/lodash": "^4.17.23",
     "@types/react": "^19.1.12",
     "@types/react-dom": "^19.1.9",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
+    "tsc-alias": "^1.8.16",
     "typescript": "^5.9.2",
     "vite": "^7.1.4"
   },
