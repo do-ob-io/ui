@@ -2,9 +2,9 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import type { ComponentType } from 'react';
 import { expect } from 'storybook/test';
 
-import { Button } from './button.js';
+import { Tooltip } from './tooltip.js';
 
-const Component = Button as unknown as ComponentType<Record<string, unknown>>;
+const Component = Tooltip as unknown as ComponentType<Record<string, unknown>>;
 
 const meta = {
   component: Component,

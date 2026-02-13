@@ -2,9 +2,9 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import type { ComponentType } from 'react';
 import { expect } from 'storybook/test';
 
-import { Button } from './button.js';
+import { Skeleton } from './skeleton.js';
 
-const Component = Button as unknown as ComponentType<Record<string, unknown>>;
+const Component = Skeleton as unknown as ComponentType<Record<string, unknown>>;
 
 const meta = {
   component: Component,
