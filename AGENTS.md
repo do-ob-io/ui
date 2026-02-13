@@ -1,4 +1,4 @@
-# @do-ob/ui Library
+# UI Library
 
 Reusable React 19 UI components for do-ob applications, built on Base UI with TailwindCSS styling.
 
