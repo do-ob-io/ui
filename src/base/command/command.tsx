@@ -9,11 +9,11 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-} from '@/base/dialog.js';
+} from '@/base/dialog/index.js';
 import {
   InputGroup,
   InputGroupAddon,
-} from '@/base/input-group.js';
+} from '@/base/input-group/index.js';
 
 function Command({
   className,

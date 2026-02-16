@@ -6,22 +6,22 @@ import { useIsMobile } from '@do-ob/hook/browser';
 import { PanelLeftIcon } from 'lucide-react';
 import * as React from 'react';
 
-import { Button } from '@/base/button.js';
-import { Input } from '@/base/input.js';
-import { Separator } from '@/base/separator.js';
+import { Button } from '@/base/button/index.js';
+import { Input } from '@/base/input/index.js';
+import { Separator } from '@/base/separator/index.js';
 import {
   Sheet,
   SheetContent,
   SheetDescription,
   SheetHeader,
   SheetTitle,
-} from '@/base/sheet.js';
-import { Skeleton } from '@/base/skeleton.js';
+} from '@/base/sheet/index.js';
+import { Skeleton } from '@/base/skeleton/index.js';
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from '@/base/tooltip.js';
+} from '@/base/tooltip/index.js';
 
 const SIDEBAR_COOKIE_NAME = 'sidebar_state';
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7;

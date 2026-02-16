@@ -4,7 +4,7 @@ import { cn } from '@do-ob/core/web';
 import { cva, type VariantProps } from '@do-ob/core/web';
 import type * as React from 'react';
 
-import { Separator } from '@/base/separator.js';
+import { Separator } from '@/base/separator/index.js';
 
 function ItemGroup({ className, ...props }: React.ComponentProps<'div'>) {
   return (

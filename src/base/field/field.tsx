@@ -4,8 +4,8 @@ import { cn } from '@do-ob/core/web';
 import { cva, type VariantProps } from '@do-ob/core/web';
 import { useMemo } from 'react';
 
-import { Label } from '@/base/label.js';
-import { Separator } from '@/base/separator.js';
+import { Label } from '@/base/label/index.js';
+import { Separator } from '@/base/separator/index.js';
 
 function FieldSet({ className, ...props }: React.ComponentProps<'fieldset'>) {
   return (

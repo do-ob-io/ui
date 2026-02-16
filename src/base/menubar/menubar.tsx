@@ -18,7 +18,7 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
-} from '@/base/dropdown-menu.js';
+} from '@/base/dropdown-menu/index.js';
 
 function Menubar({ className, ...props }: MenubarPrimitive.Props) {
   return (

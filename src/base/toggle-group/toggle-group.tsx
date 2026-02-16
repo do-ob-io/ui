@@ -6,7 +6,7 @@ import { cn } from '@do-ob/core/web';
 import { type VariantProps } from '@do-ob/core/web';
 import * as React from 'react';
 
-import { toggleVariants } from '@/base/toggle.js';
+import { toggleVariants } from '@/base/toggle/index.js';
 
 const ToggleGroupContext = React.createContext<
   VariantProps<typeof toggleVariants> & {

@@ -2,9 +2,9 @@ import { cn } from '@do-ob/core/web';
 import { cva, type VariantProps } from '@do-ob/core/web';
 import type * as React from 'react';
 
-import { Button } from '@/base/button.js';
-import { Input } from '@/base/input.js';
-import { Textarea } from '@/base/textarea.js';
+import { Button } from '@/base/button/index.js';
+import { Input } from '@/base/input/index.js';
+import { Textarea } from '@/base/textarea/index.js';
 
 function InputGroup({ className, ...props }: React.ComponentProps<'div'>) {
   return (

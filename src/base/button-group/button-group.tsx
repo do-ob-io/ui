@@ -3,7 +3,7 @@ import { useRender } from '@base-ui/react/use-render';
 import { cn } from '@do-ob/core/web';
 import { cva, type VariantProps } from '@do-ob/core/web';
 
-import { Separator } from '@/base/separator.js';
+import { Separator } from '@/base/separator/index.js';
 
 const buttonGroupVariants = cva(
   'has-[>[data-slot=button-group]]:gap-2 has-[select[aria-hidden=true]:last-child]:[&>[data-slot=select-trigger]:last-of-type]:rounded-r-md flex w-fit items-stretch *:focus-visible:z-10 *:focus-visible:relative [&>[data-slot=select-trigger]:not([class*=\'w-\'])]:w-fit [&>input]:flex-1',

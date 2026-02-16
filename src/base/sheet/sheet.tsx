@@ -3,7 +3,7 @@ import { cn } from '@do-ob/core/web';
 import { XIcon } from 'lucide-react';
 import type * as React from 'react';
 
-import { Button } from '@/base/button.js';
+import { Button } from '@/base/button/index.js';
 
 function Sheet({ ...props }: SheetPrimitive.Root.Props) {
   return <SheetPrimitive.Root data-slot="sheet" {...props} />;
