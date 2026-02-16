@@ -10,7 +10,7 @@ import {
   TooltipTrigger,
 } from './tooltip.js';
 
-const meta = {
+const meta: Meta<typeof Tooltip> = {
   component: Tooltip,
   parameters: {
     layout: 'centered',
@@ -23,7 +23,7 @@ const meta = {
       </TooltipProvider>
     ),
   ],
-} satisfies Meta<typeof Tooltip>;
+};
 
 export default meta;
 type Story = StoryObj<typeof meta>;
