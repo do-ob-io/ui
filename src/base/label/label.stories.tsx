@@ -1,38 +1,44 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import type { ComponentType } from 'react';
 import { expect } from 'storybook/test';
 
 import { Label } from './label.js';
 
-const Component = Label as unknown as ComponentType<Record<string, unknown>>;
-
 const meta = {
-  component: Component,
-  tags: [ 'autodocs' ],
+  component: Label,
   parameters: {
-    layout: 'padded',
+    layout: 'centered',
   },
-} satisfies Meta<typeof Component>;
+  tags: [ 'autodocs' ],
+} satisfies Meta<typeof Label>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+/**
+ * Default label element.
+ */
 export const Default: Story = {
-  render: () => (
-    <div data-testid="default-story">
-      <Component>Demo</Component>
-    </div>
-  ),
+  args: {
+    children: 'Email address',
+    htmlFor: 'email',
+  },
+  play: async ({ canvas }) => {
+    await expect(canvas.getByText('Email address')).toBeVisible();
+  },
 };
 
-export const DemoState: Story = {
-  render: () => (
-    <div data-testid="demo-state-story">
-      <Component>Demo</Component>
-      <span>Secondary state</span>
+/**
+ * Label associated with an input.
+ */
+export const WithInput: Story = {
+  render: (args) => (
+    <div className="grid gap-2 w-[300px]">
+      <Label htmlFor="name" {...args}>Full Name</Label>
+      <input id="name" className="border rounded-md px-2 py-1 text-sm" placeholder="Enter name" />
     </div>
   ),
   play: async ({ canvas }) => {
-    expect(canvas.getByTestId('demo-state-story')).toBeInTheDocument();
+    await expect(canvas.getByText('Full Name')).toBeVisible();
+    await expect(canvas.getByPlaceholderText('Enter name')).toBeInTheDocument();
   },
 };

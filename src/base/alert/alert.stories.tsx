@@ -1,38 +1,79 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import type { ComponentType } from 'react';
+import { TriangleAlertIcon, InfoIcon } from 'lucide-react';
 import { expect } from 'storybook/test';
 
-import { Alert } from './alert.js';
+import { Button } from '../button/button.js';
 
-const Component = Alert as unknown as ComponentType<Record<string, unknown>>;
+import { Alert, AlertTitle, AlertDescription, AlertAction } from './alert.js';
 
 const meta = {
-  component: Component,
-  tags: [ 'autodocs' ],
+  component: Alert,
   parameters: {
     layout: 'padded',
   },
-} satisfies Meta<typeof Component>;
+  tags: [ 'autodocs' ],
+  argTypes: {
+    variant: {
+      control: 'select',
+      options: [ 'default', 'destructive' ],
+    },
+  },
+} satisfies Meta<typeof Alert>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+/**
+ * Default alert with title and description.
+ */
 export const Default: Story = {
-  render: () => (
-    <div data-testid="default-story">
-      <Component>Demo</Component>
-    </div>
-  ),
-};
-
-export const DemoState: Story = {
-  render: () => (
-    <div data-testid="demo-state-story">
-      <Component>Demo</Component>
-      <span>Secondary state</span>
-    </div>
+  render: (args) => (
+    <Alert {...args}>
+      <InfoIcon />
+      <AlertTitle>Information</AlertTitle>
+      <AlertDescription>This is an informational alert message.</AlertDescription>
+    </Alert>
   ),
   play: async ({ canvas }) => {
-    expect(canvas.getByTestId('demo-state-story')).toBeInTheDocument();
+    await expect(canvas.getByRole('alert')).toBeInTheDocument();
+    await expect(canvas.getByText('Information')).toBeVisible();
+    await expect(canvas.getByText('This is an informational alert message.')).toBeVisible();
+  },
+};
+
+/**
+ * Destructive variant for error or warning messages.
+ */
+export const Destructive: Story = {
+  render: (args) => (
+    <Alert variant="destructive" {...args}>
+      <TriangleAlertIcon />
+      <AlertTitle>Error</AlertTitle>
+      <AlertDescription>Something went wrong. Please try again.</AlertDescription>
+    </Alert>
+  ),
+  play: async ({ canvas }) => {
+    await expect(canvas.getByRole('alert')).toBeInTheDocument();
+    await expect(canvas.getByText('Error')).toBeVisible();
+  },
+};
+
+/**
+ * Alert with an action button.
+ */
+export const WithAction: Story = {
+  render: (args) => (
+    <Alert {...args}>
+      <InfoIcon />
+      <AlertTitle>Update available</AlertTitle>
+      <AlertDescription>A new version is available for download.</AlertDescription>
+      <AlertAction>
+        <Button variant="outline" size="sm">Update</Button>
+      </AlertAction>
+    </Alert>
+  ),
+  play: async ({ canvas }) => {
+    await expect(canvas.getByRole('alert')).toBeInTheDocument();
+    await expect(canvas.getByText('Update')).toBeVisible();
   },
 };

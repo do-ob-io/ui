@@ -1,38 +1,64 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import type { ComponentType } from 'react';
-import { expect } from 'storybook/test';
+import { expect, screen, userEvent } from 'storybook/test';
 
-import { Popover } from './popover.js';
+import { Button } from '../button/button.js';
 
-const Component = Popover as unknown as ComponentType<Record<string, unknown>>;
+import { Popover, PopoverTrigger, PopoverContent, PopoverHeader, PopoverTitle, PopoverDescription } from './popover.js';
 
 const meta = {
-  component: Component,
-  tags: [ 'autodocs' ],
+  component: Popover,
   parameters: {
-    layout: 'padded',
+    layout: 'centered',
   },
-} satisfies Meta<typeof Component>;
+  tags: [ 'autodocs' ],
+} satisfies Meta<typeof Popover>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+/**
+ * Default popover with trigger button.
+ */
 export const Default: Story = {
-  render: () => (
-    <div data-testid="default-story">
-      <Component>Demo</Component>
-    </div>
-  ),
-};
-
-export const DemoState: Story = {
-  render: () => (
-    <div data-testid="demo-state-story">
-      <Component>Demo</Component>
-      <span>Secondary state</span>
-    </div>
+  render: (args) => (
+    <Popover {...args}>
+      <PopoverTrigger render={<Button variant="outline" />}>
+        Open Popover
+      </PopoverTrigger>
+      <PopoverContent>
+        <PopoverHeader>
+          <PopoverTitle>Popover Title</PopoverTitle>
+          <PopoverDescription>This is some popover content.</PopoverDescription>
+        </PopoverHeader>
+        <p className="text-sm">Additional content goes here.</p>
+      </PopoverContent>
+    </Popover>
   ),
   play: async ({ canvas }) => {
-    expect(canvas.getByTestId('demo-state-story')).toBeInTheDocument();
+    await expect(canvas.getByRole('button', { name: 'Open Popover' })).toBeInTheDocument();
+  },
+};
+
+/**
+ * Tests opening the popover.
+ */
+export const OpenPopover: Story = {
+  render: (args) => (
+    <Popover {...args}>
+      <PopoverTrigger render={<Button />}>
+        Click me
+      </PopoverTrigger>
+      <PopoverContent>
+        <PopoverHeader>
+          <PopoverTitle>Info</PopoverTitle>
+          <PopoverDescription>Popover is now open.</PopoverDescription>
+        </PopoverHeader>
+      </PopoverContent>
+    </Popover>
+  ),
+  play: async ({ canvas }) => {
+    await userEvent.click(canvas.getByRole('button', { name: 'Click me' }));
+    await expect(screen.getByText('Info')).toBeVisible();
+    await expect(screen.getByText('Popover is now open.')).toBeVisible();
   },
 };

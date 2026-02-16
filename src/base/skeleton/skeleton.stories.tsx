@@ -1,38 +1,53 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import type { ComponentType } from 'react';
 import { expect } from 'storybook/test';
 
 import { Skeleton } from './skeleton.js';
 
-const Component = Skeleton as unknown as ComponentType<Record<string, unknown>>;
-
 const meta = {
-  component: Component,
-  tags: [ 'autodocs' ],
+  component: Skeleton,
   parameters: {
-    layout: 'padded',
+    layout: 'centered',
   },
-} satisfies Meta<typeof Component>;
+  tags: [ 'autodocs' ],
+} satisfies Meta<typeof Skeleton>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+/**
+ * Default skeleton placeholder.
+ */
 export const Default: Story = {
-  render: () => (
-    <div data-testid="default-story">
-      <Component>Demo</Component>
-    </div>
-  ),
-};
-
-export const DemoState: Story = {
-  render: () => (
-    <div data-testid="demo-state-story">
-      <Component>Demo</Component>
-      <span>Secondary state</span>
+  render: (args) => (
+    <div className="flex items-center gap-4">
+      <Skeleton className="size-12 rounded-full" {...args} />
+      <div className="space-y-2">
+        <Skeleton className="h-4 w-62.5" {...args} />
+        <Skeleton className="h-4 w-50" {...args} />
+      </div>
     </div>
   ),
   play: async ({ canvas }) => {
-    expect(canvas.getByTestId('demo-state-story')).toBeInTheDocument();
+    const container = canvas.getByText('', { selector: '[data-slot="skeleton"]' });
+    await expect(container).toBeInTheDocument();
+  },
+};
+
+/**
+ * Card skeleton placeholder.
+ */
+export const CardSkeleton: Story = {
+  render: (args) => (
+    <div className="flex flex-col gap-3 w-75">
+      <Skeleton className="h-31.25 w-full rounded-xl" {...args} />
+      <div className="space-y-2">
+        <Skeleton className="h-4 w-full" {...args} />
+        <Skeleton className="h-4 w-3/4" {...args} />
+      </div>
+    </div>
+  ),
+  play: async ({ canvas }) => {
+    const skeletons = canvas.getAllByRole('generic');
+    await expect(skeletons.length).toBeGreaterThan(0);
   },
 };

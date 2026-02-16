@@ -1,38 +1,83 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import type { ComponentType } from 'react';
 import { expect } from 'storybook/test';
 
-import { Breadcrumb } from './breadcrumb.js';
-
-const Component = Breadcrumb as unknown as ComponentType<Record<string, unknown>>;
+import {
+  Breadcrumb,
+  BreadcrumbList,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+  BreadcrumbEllipsis,
+} from './breadcrumb.js';
 
 const meta = {
-  component: Component,
-  tags: [ 'autodocs' ],
+  component: Breadcrumb,
   parameters: {
-    layout: 'padded',
+    layout: 'centered',
   },
-} satisfies Meta<typeof Component>;
+  tags: [ 'autodocs' ],
+} satisfies Meta<typeof Breadcrumb>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+/**
+ * Default breadcrumb navigation with links and current page.
+ */
 export const Default: Story = {
-  render: () => (
-    <div data-testid="default-story">
-      <Component>Demo</Component>
-    </div>
-  ),
-};
-
-export const DemoState: Story = {
-  render: () => (
-    <div data-testid="demo-state-story">
-      <Component>Demo</Component>
-      <span>Secondary state</span>
-    </div>
+  render: (args) => (
+    <Breadcrumb {...args}>
+      <BreadcrumbList>
+        <BreadcrumbItem>
+          <BreadcrumbLink href="#">Home</BreadcrumbLink>
+        </BreadcrumbItem>
+        <BreadcrumbSeparator />
+        <BreadcrumbItem>
+          <BreadcrumbLink href="#">Products</BreadcrumbLink>
+        </BreadcrumbItem>
+        <BreadcrumbSeparator />
+        <BreadcrumbItem>
+          <BreadcrumbPage>Current Page</BreadcrumbPage>
+        </BreadcrumbItem>
+      </BreadcrumbList>
+    </Breadcrumb>
   ),
   play: async ({ canvas }) => {
-    expect(canvas.getByTestId('demo-state-story')).toBeInTheDocument();
+    await expect(canvas.getByText('Home')).toBeVisible();
+    await expect(canvas.getByText('Products')).toBeVisible();
+    await expect(canvas.getByText('Current Page')).toBeVisible();
+  },
+};
+
+/**
+ * Breadcrumb with ellipsis for collapsed items.
+ */
+export const WithEllipsis: Story = {
+  render: (args) => (
+    <Breadcrumb {...args}>
+      <BreadcrumbList>
+        <BreadcrumbItem>
+          <BreadcrumbLink href="#">Home</BreadcrumbLink>
+        </BreadcrumbItem>
+        <BreadcrumbSeparator />
+        <BreadcrumbItem>
+          <BreadcrumbEllipsis />
+        </BreadcrumbItem>
+        <BreadcrumbSeparator />
+        <BreadcrumbItem>
+          <BreadcrumbLink href="#">Category</BreadcrumbLink>
+        </BreadcrumbItem>
+        <BreadcrumbSeparator />
+        <BreadcrumbItem>
+          <BreadcrumbPage>Current</BreadcrumbPage>
+        </BreadcrumbItem>
+      </BreadcrumbList>
+    </Breadcrumb>
+  ),
+  play: async ({ canvas }) => {
+    await expect(canvas.getByText('Home')).toBeVisible();
+    await expect(canvas.getByText('Category')).toBeVisible();
+    await expect(canvas.getByText('Current')).toBeVisible();
   },
 };

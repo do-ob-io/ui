@@ -1,38 +1,98 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import type { ComponentType } from 'react';
 import { expect } from 'storybook/test';
 
 import { Badge } from './badge.js';
 
-const Component = Badge as unknown as ComponentType<Record<string, unknown>>;
-
 const meta = {
-  component: Component,
-  tags: [ 'autodocs' ],
+  component: Badge,
   parameters: {
-    layout: 'padded',
+    layout: 'centered',
   },
-} satisfies Meta<typeof Component>;
+  tags: [ 'autodocs' ],
+  argTypes: {
+    variant: {
+      control: 'select',
+      options: [ 'default', 'secondary', 'destructive', 'outline', 'ghost', 'link' ],
+    },
+  },
+} satisfies Meta<typeof Badge>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+/**
+ * Default badge with primary styling.
+ */
 export const Default: Story = {
-  render: () => (
-    <div data-testid="default-story">
-      <Component>Demo</Component>
-    </div>
-  ),
+  args: {
+    children: 'Badge',
+  },
+  play: async ({ canvas }) => {
+    await expect(canvas.getByText('Badge')).toBeVisible();
+  },
 };
 
-export const DemoState: Story = {
-  render: () => (
-    <div data-testid="demo-state-story">
-      <Component>Demo</Component>
-      <span>Secondary state</span>
-    </div>
-  ),
+/**
+ * Secondary variant badge.
+ */
+export const Secondary: Story = {
+  args: {
+    variant: 'secondary',
+    children: 'Secondary',
+  },
   play: async ({ canvas }) => {
-    expect(canvas.getByTestId('demo-state-story')).toBeInTheDocument();
+    await expect(canvas.getByText('Secondary')).toBeVisible();
+  },
+};
+
+/**
+ * Destructive variant badge for errors or warnings.
+ */
+export const Destructive: Story = {
+  args: {
+    variant: 'destructive',
+    children: 'Error',
+  },
+  play: async ({ canvas }) => {
+    await expect(canvas.getByText('Error')).toBeVisible();
+  },
+};
+
+/**
+ * Outline variant badge.
+ */
+export const Outline: Story = {
+  args: {
+    variant: 'outline',
+    children: 'Outline',
+  },
+  play: async ({ canvas }) => {
+    await expect(canvas.getByText('Outline')).toBeVisible();
+  },
+};
+
+/**
+ * Ghost variant badge.
+ */
+export const Ghost: Story = {
+  args: {
+    variant: 'ghost',
+    children: 'Ghost',
+  },
+  play: async ({ canvas }) => {
+    await expect(canvas.getByText('Ghost')).toBeVisible();
+  },
+};
+
+/**
+ * Link variant badge.
+ */
+export const Link: Story = {
+  args: {
+    variant: 'link',
+    children: 'Link',
+  },
+  play: async ({ canvas }) => {
+    await expect(canvas.getByText('Link')).toBeVisible();
   },
 };

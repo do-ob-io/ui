@@ -1,38 +1,104 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import type { ComponentType } from 'react';
-import { expect } from 'storybook/test';
+import { toast } from 'sonner';
+import { expect, userEvent, screen } from 'storybook/test';
+
+import { Button } from '../button/button.js';
 
 import { Toaster } from './sonner.js';
 
-const Component = Toaster as unknown as ComponentType<Record<string, unknown>>;
-
 const meta = {
-  component: Component,
-  tags: [ 'autodocs' ],
+  component: Toaster,
   parameters: {
-    layout: 'padded',
+    layout: 'centered',
   },
-} satisfies Meta<typeof Component>;
+  tags: [ 'autodocs' ],
+  decorators: [
+    (Story) => (
+      // Wrap since Toaster relies on next-themes; provide fallback
+      <div>
+        <Story />
+        <Toaster />
+      </div>
+    ),
+  ],
+} satisfies Meta<typeof Toaster>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+/**
+ * Default toast notification.
+ */
 export const Default: Story = {
   render: () => (
-    <div data-testid="default-story">
-      <Component>Demo</Component>
-    </div>
-  ),
-};
-
-export const DemoState: Story = {
-  render: () => (
-    <div data-testid="demo-state-story">
-      <Component>Demo</Component>
-      <span>Secondary state</span>
-    </div>
+    <Button
+      variant="outline"
+      onClick={() => toast('Event has been created.')}
+    >
+      Show Toast
+    </Button>
   ),
   play: async ({ canvas }) => {
-    expect(canvas.getByTestId('demo-state-story')).toBeInTheDocument();
+    await userEvent.click(canvas.getByRole('button', { name: 'Show Toast' }));
+    await expect(screen.getByText('Event has been created.')).toBeVisible();
+  },
+};
+
+/**
+ * Success toast notification.
+ */
+export const Success: Story = {
+  render: () => (
+    <Button
+      variant="outline"
+      onClick={() => toast.success('Successfully saved!')}
+    >
+      Show Success
+    </Button>
+  ),
+  play: async ({ canvas }) => {
+    await userEvent.click(canvas.getByRole('button', { name: 'Show Success' }));
+    await expect(screen.getByText('Successfully saved!')).toBeVisible();
+  },
+};
+
+/**
+ * Error toast notification.
+ */
+export const Error: Story = {
+  render: () => (
+    <Button
+      variant="outline"
+      onClick={() => toast.error('Something went wrong.')}
+    >
+      Show Error
+    </Button>
+  ),
+  play: async ({ canvas }) => {
+    await userEvent.click(canvas.getByRole('button', { name: 'Show Error' }));
+    await expect(screen.getByText('Something went wrong.')).toBeVisible();
+  },
+};
+
+/**
+ * Toast with description and action.
+ */
+export const WithDescription: Story = {
+  render: () => (
+    <Button
+      variant="outline"
+      onClick={() =>
+        toast('Scheduled', {
+          description: 'Meeting at 3:00 PM today.',
+        })
+      }
+    >
+      Show Detailed Toast
+    </Button>
+  ),
+  play: async ({ canvas }) => {
+    await userEvent.click(canvas.getByRole('button', { name: 'Show Detailed Toast' }));
+    await expect(screen.getByText('Scheduled')).toBeVisible();
+    await expect(screen.getByText('Meeting at 3:00 PM today.')).toBeVisible();
   },
 };

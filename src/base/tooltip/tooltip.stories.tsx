@@ -1,38 +1,87 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import type { ComponentType } from 'react';
-import { expect } from 'storybook/test';
+import { expect, screen, userEvent } from 'storybook/test';
 
-import { Tooltip } from './tooltip.js';
+import { Button } from '../button/button.js';
 
-const Component = Tooltip as unknown as ComponentType<Record<string, unknown>>;
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from './tooltip.js';
 
 const meta = {
-  component: Component,
-  tags: [ 'autodocs' ],
+  component: Tooltip,
   parameters: {
-    layout: 'padded',
+    layout: 'centered',
   },
-} satisfies Meta<typeof Component>;
+  tags: [ 'autodocs' ],
+  decorators: [
+    (Story) => (
+      <TooltipProvider>
+        <Story />
+      </TooltipProvider>
+    ),
+  ],
+} satisfies Meta<typeof Tooltip>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+/**
+ * Default tooltip on hover.
+ */
 export const Default: Story = {
-  render: () => (
-    <div data-testid="default-story">
-      <Component>Demo</Component>
-    </div>
-  ),
-};
-
-export const DemoState: Story = {
-  render: () => (
-    <div data-testid="demo-state-story">
-      <Component>Demo</Component>
-      <span>Secondary state</span>
-    </div>
+  render: (args) => (
+    <Tooltip {...args}>
+      <TooltipTrigger render={<Button variant="outline" />}>
+        Hover me
+      </TooltipTrigger>
+      <TooltipContent>
+        <p>Tooltip content</p>
+      </TooltipContent>
+    </Tooltip>
   ),
   play: async ({ canvas }) => {
-    expect(canvas.getByTestId('demo-state-story')).toBeInTheDocument();
+    await expect(canvas.getByRole('button', { name: 'Hover me' })).toBeInTheDocument();
+  },
+};
+
+/**
+ * Tests hovering to show tooltip content.
+ */
+export const HoverInteraction: Story = {
+  render: (args) => (
+    <Tooltip {...args}>
+      <TooltipTrigger render={<Button variant="outline" />}>
+        Hover for info
+      </TooltipTrigger>
+      <TooltipContent>
+        <p>This is helpful information.</p>
+      </TooltipContent>
+    </Tooltip>
+  ),
+  play: async ({ canvas }) => {
+    await userEvent.hover(canvas.getByRole('button', { name: 'Hover for info' }));
+    await expect(screen.getByText('This is helpful information.')).toBeVisible();
+  },
+};
+
+/**
+ * Tooltip positioned on the bottom.
+ */
+export const BottomSide: Story = {
+  render: (args) => (
+    <Tooltip {...args}>
+      <TooltipTrigger render={<Button variant="outline" />}>
+        Bottom tooltip
+      </TooltipTrigger>
+      <TooltipContent side="bottom">
+        <p>Appears below</p>
+      </TooltipContent>
+    </Tooltip>
+  ),
+  play: async ({ canvas }) => {
+    await expect(canvas.getByRole('button', { name: 'Bottom tooltip' })).toBeInTheDocument();
   },
 };

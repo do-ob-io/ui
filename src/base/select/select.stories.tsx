@@ -1,38 +1,118 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import type { ComponentType } from 'react';
-import { expect } from 'storybook/test';
+import { expect, screen, userEvent } from 'storybook/test';
 
-import { Select } from './select.js';
-
-const Component = Select as unknown as ComponentType<Record<string, unknown>>;
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+  SelectGroup,
+  SelectLabel,
+  SelectSeparator,
+} from './select.js';
 
 const meta = {
-  component: Component,
-  tags: [ 'autodocs' ],
+  component: Select,
   parameters: {
-    layout: 'padded',
+    layout: 'centered',
   },
-} satisfies Meta<typeof Component>;
+  tags: [ 'autodocs' ],
+} satisfies Meta<typeof Select>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+/**
+ * Default select with options.
+ */
 export const Default: Story = {
-  render: () => (
-    <div data-testid="default-story">
-      <Component>Demo</Component>
-    </div>
-  ),
-};
-
-export const DemoState: Story = {
-  render: () => (
-    <div data-testid="demo-state-story">
-      <Component>Demo</Component>
-      <span>Secondary state</span>
-    </div>
+  render: (args) => (
+    <Select {...args}>
+      <SelectTrigger className="w-45">
+        <SelectValue>{(value: string | null) => value ?? 'Select a fruit'}</SelectValue>
+      </SelectTrigger>
+      <SelectContent>
+        <SelectItem value="apple">Apple</SelectItem>
+        <SelectItem value="banana">Banana</SelectItem>
+        <SelectItem value="cherry">Cherry</SelectItem>
+      </SelectContent>
+    </Select>
   ),
   play: async ({ canvas }) => {
-    expect(canvas.getByTestId('demo-state-story')).toBeInTheDocument();
+    await expect(canvas.getByText('Select a fruit')).toBeVisible();
+  },
+};
+
+/**
+ * Tests opening the select dropdown.
+ */
+export const OpenDropdown: Story = {
+  render: (args) => (
+    <Select {...args}>
+      <SelectTrigger className="w-45">
+        <SelectValue>{(value: string | null) => value ?? 'Choose...'}</SelectValue>
+      </SelectTrigger>
+      <SelectContent>
+        <SelectItem value="red">Red</SelectItem>
+        <SelectItem value="blue">Blue</SelectItem>
+        <SelectItem value="green">Green</SelectItem>
+      </SelectContent>
+    </Select>
+  ),
+  play: async ({ canvas }) => {
+    await userEvent.click(canvas.getByText('Choose...'));
+    await expect(screen.getByText('Red')).toBeVisible();
+    await expect(screen.getByText('Blue')).toBeVisible();
+    await expect(screen.getByText('Green')).toBeVisible();
+  },
+};
+
+/**
+ * Select with grouped options.
+ */
+export const Grouped: Story = {
+  render: (args) => (
+    <Select {...args}>
+      <SelectTrigger className="w-50">
+        <SelectValue>{(value: string | null) => value ?? 'Select...'}</SelectValue>
+      </SelectTrigger>
+      <SelectContent>
+        <SelectGroup>
+          <SelectLabel>Fruits</SelectLabel>
+          <SelectItem value="apple">Apple</SelectItem>
+          <SelectItem value="banana">Banana</SelectItem>
+        </SelectGroup>
+        <SelectSeparator />
+        <SelectGroup>
+          <SelectLabel>Vegetables</SelectLabel>
+          <SelectItem value="carrot">Carrot</SelectItem>
+          <SelectItem value="lettuce">Lettuce</SelectItem>
+        </SelectGroup>
+      </SelectContent>
+    </Select>
+  ),
+  play: async ({ canvas }) => {
+    await expect(canvas.getByText('Select...')).toBeVisible();
+  },
+};
+
+/**
+ * Small size select trigger.
+ */
+export const Small: Story = {
+  render: (args) => (
+    <Select {...args}>
+      <SelectTrigger size="sm" className="w-45">
+        <SelectValue>{(value: string | null) => value ?? 'Small select'}</SelectValue>
+      </SelectTrigger>
+      <SelectContent>
+        <SelectItem value="a">Option A</SelectItem>
+        <SelectItem value="b">Option B</SelectItem>
+      </SelectContent>
+    </Select>
+  ),
+  play: async ({ canvas }) => {
+    await expect(canvas.getByText('Small select')).toBeVisible();
   },
 };

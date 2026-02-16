@@ -1,38 +1,73 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import type { ComponentType } from 'react';
 import { expect } from 'storybook/test';
 
 import { Calendar } from './calendar.js';
 
-const Component = Calendar as unknown as ComponentType<Record<string, unknown>>;
-
 const meta = {
-  component: Component,
-  tags: [ 'autodocs' ],
+  component: Calendar,
   parameters: {
-    layout: 'padded',
+    layout: 'centered',
   },
-} satisfies Meta<typeof Component>;
+  tags: [ 'autodocs' ],
+} satisfies Meta<typeof Calendar>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+/**
+ * Default single-date calendar.
+ */
 export const Default: Story = {
-  render: () => (
-    <div data-testid="default-story">
-      <Component>Demo</Component>
-    </div>
-  ),
+  args: {
+    mode: 'single',
+  },
+  play: async ({ canvas }) => {
+    await expect(canvas.getByRole('grid')).toBeInTheDocument();
+  },
 };
 
-export const DemoState: Story = {
-  render: () => (
-    <div data-testid="demo-state-story">
-      <Component>Demo</Component>
-      <span>Secondary state</span>
-    </div>
-  ),
+/**
+ * Calendar with a pre-selected date.
+ */
+export const WithSelectedDate: Story = {
+  args: {
+    mode: 'single',
+    selected: new Date(2025, 0, 15),
+    defaultMonth: new Date(2025, 0),
+  },
   play: async ({ canvas }) => {
-    expect(canvas.getByTestId('demo-state-story')).toBeInTheDocument();
+    await expect(canvas.getByRole('grid')).toBeInTheDocument();
+  },
+};
+
+/**
+ * Calendar with range selection mode.
+ */
+export const RangeSelection: Story = {
+  args: {
+    mode: 'range',
+    defaultMonth: new Date(2025, 0),
+    selected: {
+      from: new Date(2025, 0, 10),
+      to: new Date(2025, 0, 20),
+    },
+  },
+  play: async ({ canvas }) => {
+    await expect(canvas.getByRole('grid')).toBeInTheDocument();
+  },
+};
+
+/**
+ * Calendar with multiple months shown.
+ */
+export const MultipleMonths: Story = {
+  args: {
+    mode: 'single',
+    numberOfMonths: 2,
+    defaultMonth: new Date(2025, 0),
+  },
+  play: async ({ canvas }) => {
+    const grids = canvas.getAllByRole('grid');
+    await expect(grids.length).toBe(2);
   },
 };

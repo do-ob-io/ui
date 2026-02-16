@@ -1,38 +1,120 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import type { ComponentType } from 'react';
-import { expect } from 'storybook/test';
+import { expect, screen, userEvent } from 'storybook/test';
 
-import { Sheet } from './sheet.js';
+import { Button } from '../button/button.js';
 
-const Component = Sheet as unknown as ComponentType<Record<string, unknown>>;
+import {
+  Sheet,
+  SheetTrigger,
+  SheetContent,
+  SheetHeader,
+  SheetFooter,
+  SheetTitle,
+  SheetDescription,
+} from './sheet.js';
 
 const meta = {
-  component: Component,
-  tags: [ 'autodocs' ],
+  component: Sheet,
   parameters: {
-    layout: 'padded',
+    layout: 'centered',
   },
-} satisfies Meta<typeof Component>;
+  tags: [ 'autodocs' ],
+} satisfies Meta<typeof Sheet>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+/**
+ * Default right-side sheet.
+ */
 export const Default: Story = {
-  render: () => (
-    <div data-testid="default-story">
-      <Component>Demo</Component>
-    </div>
-  ),
-};
-
-export const DemoState: Story = {
-  render: () => (
-    <div data-testid="demo-state-story">
-      <Component>Demo</Component>
-      <span>Secondary state</span>
-    </div>
+  render: (args) => (
+    <Sheet {...args}>
+      <SheetTrigger render={<Button variant="outline" />}>
+        Open Sheet
+      </SheetTrigger>
+      <SheetContent>
+        <SheetHeader>
+          <SheetTitle>Sheet Title</SheetTitle>
+          <SheetDescription>Sheet description text.</SheetDescription>
+        </SheetHeader>
+        <div className="p-4">
+          <p className="text-sm text-muted-foreground">Sheet body content.</p>
+        </div>
+        <SheetFooter>
+          <Button>Save</Button>
+        </SheetFooter>
+      </SheetContent>
+    </Sheet>
   ),
   play: async ({ canvas }) => {
-    expect(canvas.getByTestId('demo-state-story')).toBeInTheDocument();
+    await expect(canvas.getByRole('button', { name: 'Open Sheet' })).toBeInTheDocument();
+  },
+};
+
+/**
+ * Tests opening the sheet.
+ */
+export const OpenSheet: Story = {
+  render: (args) => (
+    <Sheet {...args}>
+      <SheetTrigger render={<Button />}>
+        Open
+      </SheetTrigger>
+      <SheetContent>
+        <SheetHeader>
+          <SheetTitle>Right Sheet</SheetTitle>
+          <SheetDescription>This sheet slides from the right.</SheetDescription>
+        </SheetHeader>
+      </SheetContent>
+    </Sheet>
+  ),
+  play: async ({ canvas }) => {
+    await userEvent.click(canvas.getByRole('button', { name: 'Open' }));
+    await expect(screen.getByText('Right Sheet')).toBeVisible();
+  },
+};
+
+/**
+ * Left-side sheet.
+ */
+export const LeftSide: Story = {
+  render: (args) => (
+    <Sheet {...args}>
+      <SheetTrigger render={<Button variant="outline" />}>
+        Left Sheet
+      </SheetTrigger>
+      <SheetContent side="left">
+        <SheetHeader>
+          <SheetTitle>Navigation</SheetTitle>
+          <SheetDescription>Browse the application.</SheetDescription>
+        </SheetHeader>
+      </SheetContent>
+    </Sheet>
+  ),
+  play: async ({ canvas }) => {
+    await expect(canvas.getByRole('button', { name: 'Left Sheet' })).toBeInTheDocument();
+  },
+};
+
+/**
+ * Bottom sheet.
+ */
+export const BottomSheet: Story = {
+  render: (args) => (
+    <Sheet {...args}>
+      <SheetTrigger render={<Button variant="outline" />}>
+        Bottom Sheet
+      </SheetTrigger>
+      <SheetContent side="bottom">
+        <SheetHeader>
+          <SheetTitle>Bottom Panel</SheetTitle>
+          <SheetDescription>Content slides from the bottom.</SheetDescription>
+        </SheetHeader>
+      </SheetContent>
+    </Sheet>
+  ),
+  play: async ({ canvas }) => {
+    await expect(canvas.getByRole('button', { name: 'Bottom Sheet' })).toBeInTheDocument();
   },
 };

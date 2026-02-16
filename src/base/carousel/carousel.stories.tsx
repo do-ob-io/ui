@@ -1,38 +1,80 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import type { ComponentType } from 'react';
 import { expect } from 'storybook/test';
 
-import { Carousel } from './carousel.js';
+import { Card, CardContent } from '../card/card.js';
 
-const Component = Carousel as unknown as ComponentType<Record<string, unknown>>;
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselPrevious,
+  CarouselNext,
+} from './carousel.js';
 
 const meta = {
-  component: Component,
-  tags: [ 'autodocs' ],
+  component: Carousel,
   parameters: {
     layout: 'padded',
   },
-} satisfies Meta<typeof Component>;
+  tags: [ 'autodocs' ],
+} satisfies Meta<typeof Carousel>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+/**
+ * Default horizontal carousel with navigation buttons.
+ */
 export const Default: Story = {
-  render: () => (
-    <div data-testid="default-story">
-      <Component>Demo</Component>
-    </div>
-  ),
-};
-
-export const DemoState: Story = {
-  render: () => (
-    <div data-testid="demo-state-story">
-      <Component>Demo</Component>
-      <span>Secondary state</span>
+  render: (args) => (
+    <div className="mx-auto w-full max-w-xs">
+      <Carousel {...args}>
+        <CarouselContent>
+          {Array.from({ length: 5 }).map((_, index) => (
+            <CarouselItem key={index}>
+              <Card>
+                <CardContent className="flex aspect-square items-center justify-center p-6">
+                  <span className="text-4xl font-semibold">{index + 1}</span>
+                </CardContent>
+              </Card>
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+        <CarouselPrevious />
+        <CarouselNext />
+      </Carousel>
     </div>
   ),
   play: async ({ canvas }) => {
-    expect(canvas.getByTestId('demo-state-story')).toBeInTheDocument();
+    await expect(canvas.getByRole('region')).toBeInTheDocument();
+    await expect(canvas.getByText('1')).toBeVisible();
+  },
+};
+
+/**
+ * Carousel showing multiple items per slide using basis classes.
+ */
+export const MultipleItems: Story = {
+  render: (args) => (
+    <div className="mx-auto w-full max-w-sm">
+      <Carousel {...args}>
+        <CarouselContent className="-ml-2">
+          {Array.from({ length: 8 }).map((_, index) => (
+            <CarouselItem key={index} className="basis-1/3 pl-2">
+              <Card>
+                <CardContent className="flex aspect-square items-center justify-center p-2">
+                  <span className="text-2xl font-semibold">{index + 1}</span>
+                </CardContent>
+              </Card>
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+        <CarouselPrevious />
+        <CarouselNext />
+      </Carousel>
+    </div>
+  ),
+  play: async ({ canvas }) => {
+    await expect(canvas.getByRole('region')).toBeInTheDocument();
   },
 };

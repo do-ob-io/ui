@@ -1,38 +1,48 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import type { ComponentType } from 'react';
 import { expect } from 'storybook/test';
 
 import { Spinner } from './spinner.js';
 
-const Component = Spinner as unknown as ComponentType<Record<string, unknown>>;
-
 const meta = {
-  component: Component,
-  tags: [ 'autodocs' ],
+  component: Spinner,
   parameters: {
-    layout: 'padded',
+    layout: 'centered',
   },
-} satisfies Meta<typeof Component>;
+  tags: [ 'autodocs' ],
+} satisfies Meta<typeof Spinner>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+/**
+ * Default loading spinner.
+ */
 export const Default: Story = {
-  render: () => (
-    <div data-testid="default-story">
-      <Component>Demo</Component>
-    </div>
-  ),
+  play: async ({ canvas }) => {
+    await expect(canvas.getByRole('status')).toBeInTheDocument();
+  },
 };
 
-export const DemoState: Story = {
-  render: () => (
-    <div data-testid="demo-state-story">
-      <Component>Demo</Component>
-      <span>Secondary state</span>
-    </div>
-  ),
+/**
+ * Large spinner.
+ */
+export const Large: Story = {
+  args: {
+    className: 'size-8',
+  },
   play: async ({ canvas }) => {
-    expect(canvas.getByTestId('demo-state-story')).toBeInTheDocument();
+    await expect(canvas.getByRole('status')).toBeInTheDocument();
+  },
+};
+
+/**
+ * Small spinner.
+ */
+export const Small: Story = {
+  args: {
+    className: 'size-3',
+  },
+  play: async ({ canvas }) => {
+    await expect(canvas.getByRole('status')).toBeInTheDocument();
   },
 };

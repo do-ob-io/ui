@@ -1,38 +1,115 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import type { ComponentType } from 'react';
-import { expect } from 'storybook/test';
+import { BoldIcon, ItalicIcon, UnderlineIcon } from 'lucide-react';
+import { expect, userEvent } from 'storybook/test';
 
 import { Toggle } from './toggle.js';
 
-const Component = Toggle as unknown as ComponentType<Record<string, unknown>>;
-
 const meta = {
-  component: Component,
-  tags: [ 'autodocs' ],
+  component: Toggle,
   parameters: {
-    layout: 'padded',
+    layout: 'centered',
   },
-} satisfies Meta<typeof Component>;
+  tags: [ 'autodocs' ],
+  argTypes: {
+    variant: {
+      control: 'select',
+      options: [ 'default', 'outline' ],
+    },
+    size: {
+      control: 'select',
+      options: [ 'default', 'sm', 'lg' ],
+    },
+  },
+} satisfies Meta<typeof Toggle>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+/**
+ * Default toggle with text.
+ */
 export const Default: Story = {
-  render: () => (
-    <div data-testid="default-story">
-      <Component>Demo</Component>
-    </div>
-  ),
-};
-
-export const DemoState: Story = {
-  render: () => (
-    <div data-testid="demo-state-story">
-      <Component>Demo</Component>
-      <span>Secondary state</span>
-    </div>
+  render: (args) => (
+    <Toggle aria-label="Toggle bold" {...args}>
+      <BoldIcon />
+    </Toggle>
   ),
   play: async ({ canvas }) => {
-    expect(canvas.getByTestId('demo-state-story')).toBeInTheDocument();
+    await expect(canvas.getByRole('button', { name: 'Toggle bold' })).toBeInTheDocument();
+  },
+};
+
+/**
+ * Tests pressing the toggle on and off.
+ */
+export const ToggleInteraction: Story = {
+  render: (args) => (
+    <Toggle aria-label="Toggle italic" {...args}>
+      <ItalicIcon />
+    </Toggle>
+  ),
+  play: async ({ canvas }) => {
+    const toggle = canvas.getByRole('button', { name: 'Toggle italic' });
+    await userEvent.click(toggle);
+    await expect(toggle).toHaveAttribute('aria-pressed', 'true');
+    await userEvent.click(toggle);
+    await expect(toggle).toHaveAttribute('aria-pressed', 'false');
+  },
+};
+
+/**
+ * Outline variant toggle.
+ */
+export const Outline: Story = {
+  render: (args) => (
+    <Toggle variant="outline" aria-label="Toggle underline" {...args}>
+      <UnderlineIcon />
+    </Toggle>
+  ),
+  play: async ({ canvas }) => {
+    await expect(canvas.getByRole('button', { name: 'Toggle underline' })).toBeInTheDocument();
+  },
+};
+
+/**
+ * Toggle with text label.
+ */
+export const WithText: Story = {
+  render: (args) => (
+    <Toggle aria-label="Toggle bold" {...args}>
+      <BoldIcon />
+      Bold
+    </Toggle>
+  ),
+  play: async ({ canvas }) => {
+    await expect(canvas.getByText('Bold')).toBeVisible();
+  },
+};
+
+/**
+ * Small size toggle.
+ */
+export const Small: Story = {
+  render: (args) => (
+    <Toggle size="sm" aria-label="Toggle bold" {...args}>
+      <BoldIcon />
+    </Toggle>
+  ),
+  play: async ({ canvas }) => {
+    await expect(canvas.getByRole('button', { name: 'Toggle bold' })).toBeInTheDocument();
+  },
+};
+
+/**
+ * Large size toggle.
+ */
+export const Large: Story = {
+  render: (args) => (
+    <Toggle size="lg" aria-label="Toggle bold" {...args}>
+      <BoldIcon />
+    </Toggle>
+  ),
+  play: async ({ canvas }) => {
+    await expect(canvas.getByRole('button', { name: 'Toggle bold' })).toBeInTheDocument();
   },
 };

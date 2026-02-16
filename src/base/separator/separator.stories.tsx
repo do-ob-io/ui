@@ -1,38 +1,57 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import type { ComponentType } from 'react';
 import { expect } from 'storybook/test';
 
 import { Separator } from './separator.js';
 
-const Component = Separator as unknown as ComponentType<Record<string, unknown>>;
-
 const meta = {
-  component: Component,
-  tags: [ 'autodocs' ],
+  component: Separator,
   parameters: {
-    layout: 'padded',
+    layout: 'centered',
   },
-} satisfies Meta<typeof Component>;
+  tags: [ 'autodocs' ],
+  argTypes: {
+    orientation: {
+      control: 'select',
+      options: [ 'horizontal', 'vertical' ],
+    },
+  },
+} satisfies Meta<typeof Separator>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+/**
+ * Default horizontal separator.
+ */
 export const Default: Story = {
-  render: () => (
-    <div data-testid="default-story">
-      <Component>Demo</Component>
-    </div>
-  ),
-};
-
-export const DemoState: Story = {
-  render: () => (
-    <div data-testid="demo-state-story">
-      <Component>Demo</Component>
-      <span>Secondary state</span>
+  render: (args) => (
+    <div className="w-[300px]">
+      <div className="text-sm">Above</div>
+      <Separator className="my-4" {...args} />
+      <div className="text-sm">Below</div>
     </div>
   ),
   play: async ({ canvas }) => {
-    expect(canvas.getByTestId('demo-state-story')).toBeInTheDocument();
+    await expect(canvas.getByRole('separator')).toBeInTheDocument();
+    await expect(canvas.getByText('Above')).toBeVisible();
+    await expect(canvas.getByText('Below')).toBeVisible();
+  },
+};
+
+/**
+ * Vertical separator between inline elements.
+ */
+export const Vertical: Story = {
+  render: (args) => (
+    <div className="flex h-5 items-center gap-4 text-sm">
+      <span>Left</span>
+      <Separator orientation="vertical" {...args} />
+      <span>Right</span>
+    </div>
+  ),
+  play: async ({ canvas }) => {
+    await expect(canvas.getByRole('separator')).toBeInTheDocument();
+    await expect(canvas.getByText('Left')).toBeVisible();
+    await expect(canvas.getByText('Right')).toBeVisible();
   },
 };

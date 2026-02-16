@@ -1,38 +1,78 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import type { ComponentType } from 'react';
 import { expect } from 'storybook/test';
 
 import { AspectRatio } from './aspect-ratio.js';
 
-const Component = AspectRatio as unknown as ComponentType<Record<string, unknown>>;
-
 const meta = {
-  component: Component,
-  tags: [ 'autodocs' ],
+  component: AspectRatio,
   parameters: {
     layout: 'padded',
   },
-} satisfies Meta<typeof Component>;
+  tags: [ 'autodocs' ],
+} satisfies Meta<typeof AspectRatio>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+/**
+ * Default 16:9 aspect ratio container.
+ */
 export const Default: Story = {
-  render: () => (
-    <div data-testid="default-story">
-      <Component>Demo</Component>
-    </div>
-  ),
-};
-
-export const DemoState: Story = {
-  render: () => (
-    <div data-testid="demo-state-story">
-      <Component>Demo</Component>
-      <span>Secondary state</span>
+  args: {
+    ratio: 16 / 9,
+  },
+  render: (args) => (
+    <div className="w-[450px]">
+      <AspectRatio {...args}>
+        <div className="flex h-full w-full items-center justify-center rounded-md bg-muted text-muted-foreground">
+          16:9
+        </div>
+      </AspectRatio>
     </div>
   ),
   play: async ({ canvas }) => {
-    expect(canvas.getByTestId('demo-state-story')).toBeInTheDocument();
+    await expect(canvas.getByText('16:9')).toBeVisible();
+  },
+};
+
+/**
+ * Square 1:1 aspect ratio.
+ */
+export const Square: Story = {
+  args: {
+    ratio: 1,
+  },
+  render: (args) => (
+    <div className="w-[200px]">
+      <AspectRatio {...args}>
+        <div className="flex h-full w-full items-center justify-center rounded-md bg-muted text-muted-foreground">
+          1:1
+        </div>
+      </AspectRatio>
+    </div>
+  ),
+  play: async ({ canvas }) => {
+    await expect(canvas.getByText('1:1')).toBeVisible();
+  },
+};
+
+/**
+ * 4:3 aspect ratio for photo content.
+ */
+export const Photo: Story = {
+  args: {
+    ratio: 4 / 3,
+  },
+  render: (args) => (
+    <div className="w-[300px]">
+      <AspectRatio {...args}>
+        <div className="flex h-full w-full items-center justify-center rounded-md bg-muted text-muted-foreground">
+          4:3
+        </div>
+      </AspectRatio>
+    </div>
+  ),
+  play: async ({ canvas }) => {
+    await expect(canvas.getByText('4:3')).toBeVisible();
   },
 };

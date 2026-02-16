@@ -1,38 +1,87 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import type { ComponentType } from 'react';
 import { expect } from 'storybook/test';
 
-import { Progress } from './progress.js';
-
-const Component = Progress as unknown as ComponentType<Record<string, unknown>>;
+import { Progress, ProgressLabel, ProgressValue } from './progress.js';
 
 const meta = {
-  component: Component,
-  tags: [ 'autodocs' ],
+  component: Progress,
   parameters: {
     layout: 'padded',
   },
-} satisfies Meta<typeof Component>;
+  tags: [ 'autodocs' ],
+} satisfies Meta<typeof Progress>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+/**
+ * Default progress bar at 50%.
+ */
 export const Default: Story = {
-  render: () => (
-    <div data-testid="default-story">
-      <Component>Demo</Component>
-    </div>
-  ),
-};
-
-export const DemoState: Story = {
-  render: () => (
-    <div data-testid="demo-state-story">
-      <Component>Demo</Component>
-      <span>Secondary state</span>
+  args: {
+    value: 50,
+  },
+  render: (args) => (
+    <div className="w-[400px]">
+      <Progress {...args} />
     </div>
   ),
   play: async ({ canvas }) => {
-    expect(canvas.getByTestId('demo-state-story')).toBeInTheDocument();
+    await expect(canvas.getByRole('progressbar')).toBeInTheDocument();
+  },
+};
+
+/**
+ * Progress at 0%.
+ */
+export const Empty: Story = {
+  args: {
+    value: 0,
+  },
+  render: (args) => (
+    <div className="w-[400px]">
+      <Progress {...args} />
+    </div>
+  ),
+  play: async ({ canvas }) => {
+    await expect(canvas.getByRole('progressbar')).toBeInTheDocument();
+  },
+};
+
+/**
+ * Progress at 100%.
+ */
+export const Complete: Story = {
+  args: {
+    value: 100,
+  },
+  render: (args) => (
+    <div className="w-[400px]">
+      <Progress {...args} />
+    </div>
+  ),
+  play: async ({ canvas }) => {
+    await expect(canvas.getByRole('progressbar')).toBeInTheDocument();
+  },
+};
+
+/**
+ * Progress with label and value display.
+ */
+export const WithLabel: Story = {
+  args: {
+    value: 66,
+  },
+  render: (args) => (
+    <div className="w-[400px]">
+      <Progress {...args}>
+        <ProgressLabel>Uploading...</ProgressLabel>
+        <ProgressValue />
+      </Progress>
+    </div>
+  ),
+  play: async ({ canvas }) => {
+    await expect(canvas.getByText('Uploading...')).toBeVisible();
+    await expect(canvas.getByRole('progressbar')).toBeInTheDocument();
   },
 };

@@ -1,38 +1,71 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import type { ComponentType } from 'react';
 import { expect } from 'storybook/test';
 
-import { Kbd } from './kbd.js';
-
-const Component = Kbd as unknown as ComponentType<Record<string, unknown>>;
+import { Kbd, KbdGroup } from './kbd.js';
 
 const meta = {
-  component: Component,
-  tags: [ 'autodocs' ],
+  component: Kbd,
   parameters: {
-    layout: 'padded',
+    layout: 'centered',
   },
-} satisfies Meta<typeof Component>;
+  tags: [ 'autodocs' ],
+} satisfies Meta<typeof Kbd>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+/**
+ * Default keyboard shortcut display.
+ */
 export const Default: Story = {
-  render: () => (
-    <div data-testid="default-story">
-      <Component>Demo</Component>
-    </div>
-  ),
+  args: {
+    children: '⌘',
+  },
+  play: async ({ canvas }) => {
+    await expect(canvas.getByText('⌘')).toBeVisible();
+  },
 };
 
-export const DemoState: Story = {
+/**
+ * Keyboard shortcut group showing a combination.
+ */
+export const ShortcutGroup: Story = {
   render: () => (
-    <div data-testid="demo-state-story">
-      <Component>Demo</Component>
-      <span>Secondary state</span>
+    <KbdGroup>
+      <Kbd>⌘</Kbd>
+      <Kbd>K</Kbd>
+    </KbdGroup>
+  ),
+  play: async ({ canvas }) => {
+    await expect(canvas.getByText('⌘')).toBeVisible();
+    await expect(canvas.getByText('K')).toBeVisible();
+  },
+};
+
+/**
+ * Multiple key combinations.
+ */
+export const MultipleKeys: Story = {
+  render: () => (
+    <div className="flex gap-4">
+      <KbdGroup>
+        <Kbd>Ctrl</Kbd>
+        <Kbd>C</Kbd>
+      </KbdGroup>
+      <KbdGroup>
+        <Kbd>Ctrl</Kbd>
+        <Kbd>V</Kbd>
+      </KbdGroup>
+      <KbdGroup>
+        <Kbd>Ctrl</Kbd>
+        <Kbd>Shift</Kbd>
+        <Kbd>P</Kbd>
+      </KbdGroup>
     </div>
   ),
   play: async ({ canvas }) => {
-    expect(canvas.getByTestId('demo-state-story')).toBeInTheDocument();
+    await expect(canvas.getByText('C')).toBeVisible();
+    await expect(canvas.getByText('V')).toBeVisible();
+    await expect(canvas.getByText('P')).toBeVisible();
   },
 };

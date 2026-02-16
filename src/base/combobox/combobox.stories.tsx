@@ -1,38 +1,110 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import type { ComponentType } from 'react';
-import { expect } from 'storybook/test';
+import { expect, screen, userEvent } from 'storybook/test';
 
-import { Combobox } from './combobox.js';
-
-const Component = Combobox as unknown as ComponentType<Record<string, unknown>>;
+import {
+  Combobox,
+  ComboboxInput,
+  ComboboxContent,
+  ComboboxList,
+  ComboboxItem,
+  ComboboxEmpty,
+  ComboboxGroup,
+  ComboboxLabel,
+} from './combobox.js';
 
 const meta = {
-  component: Component,
-  tags: [ 'autodocs' ],
+  component: Combobox,
   parameters: {
-    layout: 'padded',
+    layout: 'centered',
   },
-} satisfies Meta<typeof Component>;
+  tags: [ 'autodocs' ],
+} satisfies Meta<typeof Combobox>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
-  render: () => (
-    <div data-testid="default-story">
-      <Component>Demo</Component>
-    </div>
-  ),
-};
+const frameworks = [
+  { value: 'react', label: 'React' },
+  { value: 'vue', label: 'Vue' },
+  { value: 'angular', label: 'Angular' },
+  { value: 'svelte', label: 'Svelte' },
+  { value: 'solid', label: 'Solid' },
+];
 
-export const DemoState: Story = {
-  render: () => (
-    <div data-testid="demo-state-story">
-      <Component>Demo</Component>
-      <span>Secondary state</span>
-    </div>
+/**
+ * Default combobox with search.
+ */
+export const Default: Story = {
+  render: (args) => (
+    <Combobox {...args}>
+      <ComboboxInput placeholder="Select framework..." />
+      <ComboboxContent>
+        <ComboboxList>
+          <ComboboxEmpty>No framework found.</ComboboxEmpty>
+          {frameworks.map((fw) => (
+            <ComboboxItem key={fw.value} value={fw.value}>
+              {fw.label}
+            </ComboboxItem>
+          ))}
+        </ComboboxList>
+      </ComboboxContent>
+    </Combobox>
   ),
   play: async ({ canvas }) => {
-    expect(canvas.getByTestId('demo-state-story')).toBeInTheDocument();
+    await expect(canvas.getByPlaceholderText('Select framework...')).toBeVisible();
+  },
+};
+
+/**
+ * Tests opening and selecting from the combobox.
+ */
+export const OpenAndSelect: Story = {
+  render: (args) => (
+    <Combobox {...args}>
+      <ComboboxInput placeholder="Choose..." />
+      <ComboboxContent>
+        <ComboboxList>
+          <ComboboxEmpty>No results.</ComboboxEmpty>
+          {frameworks.map((fw) => (
+            <ComboboxItem key={fw.value} value={fw.value}>
+              {fw.label}
+            </ComboboxItem>
+          ))}
+        </ComboboxList>
+      </ComboboxContent>
+    </Combobox>
+  ),
+  play: async ({ canvas }) => {
+    await userEvent.click(canvas.getByPlaceholderText('Choose...'));
+    await expect(screen.getByText('React')).toBeVisible();
+  },
+};
+
+/**
+ * Combobox with grouped options.
+ */
+export const Grouped: Story = {
+  render: (args) => (
+    <Combobox {...args}>
+      <ComboboxInput placeholder="Search..." />
+      <ComboboxContent>
+        <ComboboxList>
+          <ComboboxEmpty>No results found.</ComboboxEmpty>
+          <ComboboxGroup>
+            <ComboboxLabel>Popular</ComboboxLabel>
+            <ComboboxItem value="react">React</ComboboxItem>
+            <ComboboxItem value="vue">Vue</ComboboxItem>
+          </ComboboxGroup>
+          <ComboboxGroup>
+            <ComboboxLabel>Emerging</ComboboxLabel>
+            <ComboboxItem value="svelte">Svelte</ComboboxItem>
+            <ComboboxItem value="solid">Solid</ComboboxItem>
+          </ComboboxGroup>
+        </ComboboxList>
+      </ComboboxContent>
+    </Combobox>
+  ),
+  play: async ({ canvas }) => {
+    await expect(canvas.getByPlaceholderText('Search...')).toBeVisible();
   },
 };

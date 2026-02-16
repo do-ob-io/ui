@@ -1,38 +1,59 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import type { ComponentType } from 'react';
 import { expect } from 'storybook/test';
 
-import { HoverCard } from './hover-card.js';
-
-const Component = HoverCard as unknown as ComponentType<Record<string, unknown>>;
+import { HoverCard, HoverCardTrigger, HoverCardContent } from './hover-card.js';
 
 const meta = {
-  component: Component,
-  tags: [ 'autodocs' ],
+  component: HoverCard,
   parameters: {
-    layout: 'padded',
+    layout: 'centered',
   },
-} satisfies Meta<typeof Component>;
+  tags: [ 'autodocs' ],
+} satisfies Meta<typeof HoverCard>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+/**
+ * Default hover card with trigger link.
+ */
 export const Default: Story = {
-  render: () => (
-    <div data-testid="default-story">
-      <Component>Demo</Component>
-    </div>
-  ),
-};
-
-export const DemoState: Story = {
-  render: () => (
-    <div data-testid="demo-state-story">
-      <Component>Demo</Component>
-      <span>Secondary state</span>
-    </div>
+  render: (args) => (
+    <HoverCard {...args}>
+      <HoverCardTrigger render={<a href="#" className="underline" />}>
+        Hover me
+      </HoverCardTrigger>
+      <HoverCardContent>
+        <div className="space-y-2">
+          <h4 className="text-sm font-semibold">Preview Card</h4>
+          <p className="text-sm text-muted-foreground">
+            This card appears on hover to show additional information.
+          </p>
+        </div>
+      </HoverCardContent>
+    </HoverCard>
   ),
   play: async ({ canvas }) => {
-    expect(canvas.getByTestId('demo-state-story')).toBeInTheDocument();
+    await expect(canvas.getByText('Hover me')).toBeVisible();
+  },
+};
+
+/**
+ * Tests hover interaction to show content.
+ */
+export const HoverInteraction: Story = {
+  render: (args) => (
+    <HoverCard {...args}>
+      <HoverCardTrigger render={<a href="#" className="underline" />}>
+        Hover for details
+      </HoverCardTrigger>
+      <HoverCardContent>
+        <p className="text-sm">Details shown on hover.</p>
+      </HoverCardContent>
+    </HoverCard>
+  ),
+  play: async ({ canvas }) => {
+    const trigger = canvas.getByText('Hover for details');
+    await expect(trigger).toBeVisible();
   },
 };

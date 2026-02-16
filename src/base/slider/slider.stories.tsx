@@ -1,38 +1,92 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import type { ComponentType } from 'react';
 import { expect } from 'storybook/test';
 
 import { Slider } from './slider.js';
 
-const Component = Slider as unknown as ComponentType<Record<string, unknown>>;
-
 const meta = {
-  component: Component,
-  tags: [ 'autodocs' ],
+  component: Slider,
   parameters: {
-    layout: 'padded',
+    layout: 'centered',
   },
-} satisfies Meta<typeof Component>;
+  tags: [ 'autodocs' ],
+} satisfies Meta<typeof Slider>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+/**
+ * Default slider with a single thumb.
+ */
 export const Default: Story = {
-  render: () => (
-    <div data-testid="default-story">
-      <Component>Demo</Component>
-    </div>
-  ),
-};
-
-export const DemoState: Story = {
-  render: () => (
-    <div data-testid="demo-state-story">
-      <Component>Demo</Component>
-      <span>Secondary state</span>
+  args: {
+    defaultValue: [ 50 ],
+    max: 100,
+    min: 0,
+  },
+  render: (args) => (
+    <div className="w-[300px]">
+      <Slider {...args} />
     </div>
   ),
   play: async ({ canvas }) => {
-    expect(canvas.getByTestId('demo-state-story')).toBeInTheDocument();
+    await expect(canvas.getByRole('slider')).toBeInTheDocument();
+  },
+};
+
+/**
+ * Range slider with two thumbs.
+ */
+export const Range: Story = {
+  args: {
+    defaultValue: [ 25, 75 ],
+    max: 100,
+    min: 0,
+  },
+  render: (args) => (
+    <div className="w-[300px]">
+      <Slider {...args} />
+    </div>
+  ),
+  play: async ({ canvas }) => {
+    const sliders = canvas.getAllByRole('slider');
+    await expect(sliders.length).toBe(2);
+  },
+};
+
+/**
+ * Slider with custom step.
+ */
+export const WithStep: Story = {
+  args: {
+    defaultValue: [ 40 ],
+    max: 100,
+    min: 0,
+    step: 10,
+  },
+  render: (args) => (
+    <div className="w-[300px]">
+      <Slider {...args} />
+    </div>
+  ),
+  play: async ({ canvas }) => {
+    await expect(canvas.getByRole('slider')).toBeInTheDocument();
+  },
+};
+
+/**
+ * Disabled slider.
+ */
+export const Disabled: Story = {
+  args: {
+    defaultValue: [ 50 ],
+    disabled: true,
+  },
+  render: (args) => (
+    <div className="w-[300px]">
+      <Slider {...args} />
+    </div>
+  ),
+  play: async ({ canvas }) => {
+    await expect(canvas.getByRole('slider')).toBeInTheDocument();
   },
 };
