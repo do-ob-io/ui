@@ -25,7 +25,6 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 const meta = {
-  title: 'base/ChartContainer',
   parameters: {
     layout: 'centered',
   },
@@ -44,7 +43,7 @@ export const Default: Story = {
       <BarChart data={chartData}>
         <CartesianGrid vertical={false} />
         <XAxis dataKey="month" tickLine={false} tickMargin={10} axisLine={false} />
-        <ChartTooltip content={<ChartTooltipContent />} />
+        <ChartTooltip content={<ChartTooltipContent active={false} payload={[]} coordinate={undefined} accessibilityLayer={false} activeIndex={undefined} />} />
         <Bar dataKey="desktop" fill="var(--color-desktop)" radius={4} />
         <Bar dataKey="mobile" fill="var(--color-mobile)" radius={4} />
       </BarChart>
@@ -64,7 +63,7 @@ export const WithLegend: Story = {
       <BarChart data={chartData}>
         <CartesianGrid vertical={false} />
         <XAxis dataKey="month" tickLine={false} tickMargin={10} axisLine={false} />
-        <ChartTooltip content={<ChartTooltipContent />} />
+        <ChartTooltip content={<ChartTooltipContent active={false} payload={[]} coordinate={undefined} accessibilityLayer={false} activeIndex={undefined} />} />
         <ChartLegend content={<ChartLegendContent />} />
         <Bar dataKey="desktop" fill="var(--color-desktop)" radius={4} />
         <Bar dataKey="mobile" fill="var(--color-mobile)" radius={4} />

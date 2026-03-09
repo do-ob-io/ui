@@ -9,6 +9,7 @@
     "**/*.stories.*",
     "**/*.story.*",
     "**/*.test.*",
+    "src/_test",
     "node_modules",
     "dist",
     "build"

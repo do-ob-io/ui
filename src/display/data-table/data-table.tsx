@@ -17,10 +17,10 @@ import {
   useCallback,
 } from 'react';
 
-import { Button } from '../base/button/index.js';
-import { Input } from '../base/input/index.js';
-import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from '../base/pagination/index.js';
-import { Popover, PopoverContent, PopoverTrigger } from '../base/popover/index.js';
+import { Button } from '@/base/button/index.js';
+import { Input } from '@/base/input/index.js';
+import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from '@/base/pagination/index.js';
+import { Popover, PopoverContent, PopoverTrigger } from '@/base/popover/index.js';
 import {
   Table,
   TableBody,
@@ -28,22 +28,13 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '../base/table/index.js';
+} from '@/base/table/index.js';
 
 import type {
   DataTableRowProps } from './data-table-context.js';
 import {
   DataTableContext,
 } from './data-table-context.js';
-
-
-/**
- * DataTable Constants
- */
-const constants = {
-  rowHeight: 53,
-  headerHeight: 42,
-};
 
 /**
  * Table Header component for the DataTable.
@@ -77,7 +68,7 @@ const Header = () => {
                   <Button
                     variant="ghost"
                     size="icon-sm"
-                    className="ml-2"
+                    className="relative top-0.5"
                     onClick={header.column.getToggleSortingHandler()}
                     aria-label={sortLabels[sortType]}
                   >
@@ -90,13 +81,13 @@ const Header = () => {
                   <Popover>
                     <PopoverTrigger
                       render={<Button
-                        variant="ghost"
+                        variant={header.column.getFilterValue() ? 'secondary' : 'ghost'}
                         size="icon-sm"
-                        className="ml-2"
+                        className="relative top-0.5"
                         aria-label={`Filter ${header.id}`}
                       />}
                     >
-                      <FilterIcon className={cn(header.column.getFilterValue() ? 'text-primary' : 'opacity-50')} />
+                      <FilterIcon className={cn(header.column.getFilterValue() ? 'opacity-100' : 'opacity-50')} />
                     </PopoverTrigger>
                     <PopoverContent className="w-60 p-3" align="start">
                       <div className="flex flex-col gap-2">
@@ -202,7 +193,6 @@ const Body = () => {
               row={row}
               data-state={row.getIsSelected() && 'selected'}
               {...rowPropsReduced}
-              style={{ height: constants.rowHeight }}
               onClick={onRowClick ? (event) => onRowClick(row.original, event) : undefined}
               className={cn(
                 onRowClick && 'cursor-pointer hover:shadow/25',
@@ -259,7 +249,7 @@ const DataTablePagination: React.FC = () => {
   const goToPage = useCallback((page: number) => table.setPageIndex(page), [ table ]);
 
   return (
-    <Pagination>
+    <Pagination className="w-auto">
       <PaginationContent>
         <PaginationItem>
           <PaginationPrevious
@@ -382,8 +372,6 @@ export function DataTable<TData>({
   'use no memo'; // table is a mutable ref – Compiler must not cache renders
 
   const rows = table.getRowModel().rows;
-  const tablePageSize = table.getState().pagination.pageSize;
-  const height = tablePageSize * constants.rowHeight + constants.headerHeight + 13;
 
   const context: DataTableContext<TData> = {
     table,
@@ -404,17 +392,16 @@ export function DataTable<TData>({
             'relative',
             className,
           )}
-          style={{ height: paginate ? height : undefined, ...props.style }}
+          style={props.style}
         >
-          {paginate && (<div className="absolute w-full h-3 bottom-0 bg-border z-0" />)}
           <Table className="h-full">
             <Header />
             <Body />
           </Table>
         </div>
-        {paginate && (<div className="flex items-center space-x-2 pt-4">
-          <div className="flex grow">
-            <strong>Total:</strong>&nbsp;{table.getRowCount()}
+        {paginate && (<div className="flex flex-row items-center space-x-2 pt-4">
+          <div className="grow text-sm text-muted-foreground">
+            {table.getRowCount()} records
           </div>
           <DataTablePagination />
         </div>)}

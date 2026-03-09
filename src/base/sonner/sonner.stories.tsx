@@ -6,7 +6,7 @@ import { Button } from '../button/button.js';
 
 import { Toaster } from './sonner.js';
 
-const meta = {
+const meta: Meta<typeof Toaster> = {
   component: Toaster,
   parameters: {
     layout: 'centered',
@@ -21,7 +21,7 @@ const meta = {
       </div>
     ),
   ],
-} satisfies Meta<typeof Toaster>;
+};
 
 export default meta;
 type Story = StoryObj<typeof meta>;
