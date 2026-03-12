@@ -10,6 +10,9 @@ const eslintConfig = defineConfig([
   ]),
   {
     settings: {
+      'better-tailwindcss': {
+        entryPoint: '../../globals.css',
+      },
       'import-x/resolver-next': [
         createTypeScriptImportResolver({
           project: [

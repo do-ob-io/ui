@@ -10,17 +10,18 @@ import type {
 } from '@tanstack/react-table';
 import { ArrowDownIcon, ArrowUpDownIcon, ArrowUpIcon, FilterIcon, Loader2Icon, XIcon } from 'lucide-react';
 import {
+  type FC,
   type HTMLAttributes,
   type ComponentProps,
-  useContext,
+  type MouseEvent as ReactMouseEvent,
+  use,
   useMemo,
-  useCallback,
-} from 'react';
+  useCallback } from 'react';
 
-import { Button } from '@/base/button/index.js';
-import { Input } from '@/base/input/index.js';
-import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from '@/base/pagination/index.js';
-import { Popover, PopoverContent, PopoverTrigger } from '@/base/popover/index.js';
+import { Button } from '@/base/button.js';
+import { Input } from '@/base/input.js';
+import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from '@/base/pagination.js';
+import { Popover, PopoverContent, PopoverTrigger } from '@/base/popover.js';
 import {
   Table,
   TableBody,
@@ -28,7 +29,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from '@/base/table/index.js';
+} from '@/base/table.js';
 
 import type {
   DataTableRowProps } from './data-table-context.js';
@@ -41,7 +42,7 @@ import {
  */
 const Header = () => {
   'use no memo'; // table is a mutable ref – Compiler must not cache renders
-  const { table, sortable, filterable } = useContext(DataTableContext);
+  const { table, sortable, filterable } = use(DataTableContext);
 
   return (
     <TableHeader>
@@ -72,9 +73,15 @@ const Header = () => {
                     onClick={header.column.getToggleSortingHandler()}
                     aria-label={sortLabels[sortType]}
                   >
-                    <ArrowUpDownIcon className={cn(header.column.getIsSorted() && 'hidden')} />
-                    <ArrowUpIcon className={cn(header.column.getIsSorted() === 'asc' ? 'block' : 'hidden')} />
-                    <ArrowDownIcon className={cn(header.column.getIsSorted() === 'desc' ? 'block' : 'hidden')} />
+                    <ArrowUpDownIcon className={cn(header.column.getIsSorted() && `
+                      hidden
+                    `)} />
+                    <ArrowUpIcon className={cn(header.column.getIsSorted() === 'asc' ? `
+                      block
+                    ` : 'hidden')} />
+                    <ArrowDownIcon className={cn(header.column.getIsSorted() === 'desc' ? `
+                      block
+                    ` : 'hidden')} />
                   </Button>
                 ) : null}
                 {filterable && header.column.getCanFilter() && (
@@ -87,7 +94,9 @@ const Header = () => {
                         aria-label={`Filter ${header.id}`}
                       />}
                     >
-                      <FilterIcon className={cn(header.column.getFilterValue() ? 'opacity-100' : 'opacity-50')} />
+                      <FilterIcon className={cn(header.column.getFilterValue() ? `
+                        opacity-100
+                      ` : 'opacity-50')} />
                     </PopoverTrigger>
                     <PopoverContent className="w-60 p-3" align="start">
                       <div className="flex flex-col gap-2">
@@ -132,7 +141,7 @@ export type DataTableRowComponentProps<TData> = {
    * TansStack table row properties.
    */
   row: Row<TData>;
-} & React.ComponentProps<typeof TableRow>;
+} & ComponentProps<typeof TableRow>;
 
 /**
  * Table Row component for the DataTable.
@@ -158,7 +167,7 @@ function DataTableRowComponent<TData>({ row, ...props }: Readonly<DataTableRowCo
  */
 const Body = () => {
   'use no memo'; // table is a mutable ref – Compiler must not cache renders
-  const { table, rows, loading, rowProps, onRowClick } = useContext(DataTableContext);
+  const { table, rows, loading, rowProps, onRowClick } = use(DataTableContext);
   const columns = table.getAllColumns();
 
   return (
@@ -167,7 +176,11 @@ const Body = () => {
         <TableRow>
           <TableCell
             colSpan={columns.length}
-            className="absolute w-full inset-0 flex gap-2 items-center justify-center bg-white/75 dark:bg-black/75 z-10"
+            className="
+              absolute inset-0 z-10 flex w-full items-center justify-center
+              gap-2 bg-white/75
+              dark:bg-black/75
+            "
           >
             <Loader2Icon className="animate-spin" />
             <p>Loading...</p>
@@ -195,7 +208,10 @@ const Body = () => {
               {...rowPropsReduced}
               onClick={onRowClick ? (event) => onRowClick(row.original, event) : undefined}
               className={cn(
-                onRowClick && 'cursor-pointer hover:shadow/25',
+                onRowClick && `
+                  cursor-pointer
+                  hover:shadow/25
+                `,
                 rowPropsReduced.className,
               )}
             />
@@ -217,9 +233,9 @@ const MAX_VISIBLE = 3;
 /**
  * Pagination component for the DataTable.
  */
-const DataTablePagination: React.FC = () => {
+const DataTablePagination: FC = () => {
   'use no memo'; // Compiler produces issues with pagination state not updating correctly
-  const { table } = useContext(DataTableContext);
+  const { table } = use(DataTableContext);
 
   // Array of page indexes, e.g. [0,1,2…]
   const pageIndexes = table.getPageOptions();
@@ -254,7 +270,9 @@ const DataTablePagination: React.FC = () => {
         <PaginationItem>
           <PaginationPrevious
             aria-disabled={!table.getCanPreviousPage()}
-            className={cn(!table.getCanPreviousPage() && 'pointer-events-none opacity-50')}
+            className={cn(!table.getCanPreviousPage() && `
+              pointer-events-none opacity-50
+            `)}
             onClick={() => table.previousPage()}
             isActive={table.getCanPreviousPage()}
           />
@@ -310,7 +328,9 @@ const DataTablePagination: React.FC = () => {
         <PaginationItem>
           <PaginationNext
             aria-disabled={!table.getCanNextPage()}
-            className={cn(!table.getCanNextPage() && 'pointer-events-none opacity-50')}
+            className={cn(!table.getCanNextPage() && `
+              pointer-events-none opacity-50
+            `)}
             onClick={() => table.nextPage()}
             isActive={table.getCanNextPage()}
           />
@@ -352,7 +372,7 @@ export interface DataTableProps<TData> extends HTMLAttributes<HTMLDivElement> {
   /**
    * Callback when a row is clicked. Receives the row data and the click event.
    */
-  onRowClick?: (row: TData, event: React.MouseEvent<HTMLTableRowElement, MouseEvent>) => void;
+  onRowClick?: (row: TData, event: ReactMouseEvent<HTMLTableRowElement, MouseEvent>) => void;
 }
 
 /**

@@ -32,7 +32,9 @@ const columns = [
   columnHelper.accessor('status', {
     header: 'Status',
     cell: (info) => (
-      <span className={info.getValue() === 'active' ? 'text-green-600' : 'text-red-600'}>
+      <span className={info.getValue() === 'active' ? 'text-green-600' : `
+        text-red-600
+      `}>
         {info.getValue()}
       </span>
     ),
