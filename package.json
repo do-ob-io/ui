@@ -2,7 +2,7 @@
   "name": "@do-ob/ui",
   "version": "1.0.0",
   "description": "React user interface components for do-ob applications.",
-  "type": "module",
+  "type": "commonjs",
   "main": "dist/index.js",
   "exports": {
     ".": {
@@ -32,7 +32,7 @@
   "devDependencies": {
     "@do-ob/core": "workspace:^",
     "@do-ob/hook": "workspace:^",
-    "@tanstack/react-table": "8.21.3",
+    "@tanstack/react-table": "9.0.0-alpha.18",
     "@types/lodash": "^4.17.24",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",

@@ -1,77 +1,59 @@
-import { createColumnHelper, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, getSortedRowModel, useReactTable } from '@tanstack/react-table';
+import { createColumnHelper, stockFeatures, useTable } from '@tanstack/react-table';
 
 import type { DataTable } from '@/display/data-table/index.js';
 
-/**
- * Sample data type for the example table.
- */
-export interface Person {
+interface Person {
   id: number;
   name: string;
   email: string;
   role: string;
-  status: 'active' | 'inactive';
+  age: number;
+  visits: number;
+  status: string;
+  progress: number;
 }
 
-const columnHelper = createColumnHelper<Person>();
+const _features = stockFeatures;
+const columnHelper = createColumnHelper<typeof _features, Person>();
 
-const columns = [
+export const columns = [
   columnHelper.accessor('id', {
     header: 'ID',
-    meta: { style: { width: 60 } },
+    cell: (info) => info.getValue(),
   }),
   columnHelper.accessor('name', {
     header: 'Name',
-  }),
-  columnHelper.accessor('email', {
-    header: 'Email',
-  }),
-  columnHelper.accessor('role', {
-    header: 'Role',
-  }),
-  columnHelper.accessor('status', {
-    header: 'Status',
-    cell: (info) => (
-      <span className={info.getValue() === 'active' ? 'text-green-600' : 'text-red-600'}>
-        {info.getValue()}
-      </span>
-    ),
+    cell: (info) => info.getValue(),
   }),
 ];
 
+
 export const sampleData: Person[] = [
-  { id: 1, name: 'Alice Johnson', email: 'alice@example.com', role: 'Engineer', status: 'active' },
-  { id: 2, name: 'Bob Smith', email: 'bob@example.com', role: 'Designer', status: 'active' },
-  { id: 3, name: 'Carol White', email: 'carol@example.com', role: 'Manager', status: 'inactive' },
-  { id: 4, name: 'Dave Brown', email: 'dave@example.com', role: 'Engineer', status: 'active' },
-  { id: 5, name: 'Eve Davis', email: 'eve@example.com', role: 'Designer', status: 'active' },
-  { id: 6, name: 'Frank Miller', email: 'frank@example.com', role: 'QA', status: 'inactive' },
-  { id: 7, name: 'Grace Lee', email: 'grace@example.com', role: 'Engineer', status: 'active' },
-  { id: 8, name: 'Henry Wilson', email: 'henry@example.com', role: 'Manager', status: 'active' },
-  { id: 9, name: 'Ivy Taylor', email: 'ivy@example.com', role: 'Designer', status: 'inactive' },
-  { id: 10, name: 'Jack Anderson', email: 'jack@example.com', role: 'Engineer', status: 'active' },
-  { id: 11, name: 'Karen Thomas', email: 'karen@example.com', role: 'QA', status: 'active' },
-  { id: 12, name: 'Leo Martinez', email: 'leo@example.com', role: 'Engineer', status: 'inactive' },
+  { id: 1, name: 'Alice Johnson', email: 'alice@example.com', role: 'Engineer', age: 28, visits: 45, status: 'active', progress: 75 },
+  { id: 2, name: 'Bob Smith', email: 'bob@example.com', role: 'Designer', age: 32, visits: 38, status: 'active', progress: 85 },
+  { id: 3, name: 'Carol White', email: 'carol@example.com', role: 'Manager', age: 41, visits: 62, status: 'inactive', progress: 50 },
+  { id: 4, name: 'Dave Brown', email: 'dave@example.com', role: 'Engineer', age: 26, visits: 29, status: 'active', progress: 60 },
+  { id: 5, name: 'Eve Davis', email: 'eve@example.com', role: 'Designer', age: 29, visits: 35, status: 'active', progress: 70 },
+  { id: 6, name: 'Frank Miller', email: 'frank@example.com', role: 'QA', age: 35, visits: 51, status: 'inactive', progress: 40 },
+  { id: 7, name: 'Grace Lee', email: 'grace@example.com', role: 'Engineer', age: 27, visits: 42, status: 'active', progress: 80 },
+  { id: 8, name: 'Henry Wilson', email: 'henry@example.com', role: 'Manager', age: 44, visits: 68, status: 'active', progress: 90 },
+  { id: 9, name: 'Ivy Taylor', email: 'ivy@example.com', role: 'Designer', age: 31, visits: 39, status: 'inactive', progress: 45 },
+  { id: 10, name: 'Jack Anderson', email: 'jack@example.com', role: 'Engineer', age: 25, visits: 24, status: 'active', progress: 65 },
+  { id: 11, name: 'Karen Thomas', email: 'karen@example.com', role: 'QA', age: 33, visits: 48, status: 'active', progress: 75 },
+  { id: 12, name: 'Leo Martinez', email: 'leo@example.com', role: 'Engineer', age: 30, visits: 33, status: 'inactive', progress: 55 },
 ];
 
 export function useExampleTable(args: Omit<React.ComponentProps<typeof DataTable<Person>>, 'table'> & {
   readonly data?: Person[];
   readonly pageSize?: number;
 }) {
-  const { data = sampleData, pageSize = 5, ...rest } = args;
+  const { data = sampleData, ...rest } = args;
 
-
-  // eslint-disable-next-line react-hooks/incompatible-library
-  const table = useReactTable<Person>({
+  const table = useTable({
     data,
     columns,
-    getCoreRowModel: getCoreRowModel(),
-    getSortedRowModel: getSortedRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
-    initialState: {
-      pagination: { pageSize },
-    },
+    _features,
+    _rowModels: {},
   });
 
   return { table, ...rest };
