@@ -3,19 +3,13 @@
   "version": "1.0.0",
   "description": "React user interface components for do-ob applications.",
   "type": "module",
-  "main": "dist/index.js",
   "exports": {
-    ".": {
-      "import": "./dist/index.js",
-      "types": "./dist/index.d.ts"
-    },
-    "./base": {
-      "import": "./dist/base/index.js",
-      "types": "./dist/base/index.d.ts"
-    }
+    ".": "./dist/index.mjs",
+    "./base": "./dist/base/index.mjs",
+    "./package.json": "./package.json"
   },
   "scripts": {
-    "build": "tsc -p ./tsconfig.lib.json && tsc-alias -p ./tsconfig.lib.json"
+    "build": "tsdown --config ./tsdown.config.ts"
   },
   "author": "",
   "license": "MIT",
@@ -38,9 +32,8 @@
     "@types/react-dom": "catalog:react-latest",
     "react": "catalog:react-latest",
     "react-dom": "catalog:react-latest",
-    "tsc-alias": "^1.8.16",
-    "typescript": "catalog:typescript-latest",
-    "vite": "catalog:vite-latest"
+    "tsdown": "catalog:vite-latest",
+    "typescript": "catalog:typescript-latest"
   },
   "dependencies": {
     "@base-ui/react": "catalog:react-latest",
@@ -57,5 +50,8 @@
     "sonner": "catalog:react-latest",
     "tw-animate-css": "catalog:react-latest",
     "vaul": "catalog:react-latest"
+  },
+  "inlinedDependencies": {
+    "tailwind-merge": "3.4.0"
   }
 }
