@@ -14,9 +14,9 @@
   "author": "",
   "license": "MIT",
   "peerDependencies": {
-    "@tanstack/react-table": "catalog:react-latest",
-    "react": "catalog:react-latest",
-    "react-dom": "catalog:react-latest"
+    "@tanstack/react-table": "catalog:react",
+    "react": "catalog:react",
+    "react-dom": "catalog:react"
   },
   "peerDependenciesMeta": {
     "@tanstack/react-table": {
@@ -26,30 +26,30 @@
   "devDependencies": {
     "@do-ob/core": "workspace:^",
     "@do-ob/hook": "workspace:^",
-    "@tanstack/react-table": "catalog:react-latest",
-    "@types/lodash": "catalog:typescript-latest",
-    "@types/react": "catalog:react-latest",
-    "@types/react-dom": "catalog:react-latest",
-    "react": "catalog:react-latest",
-    "react-dom": "catalog:react-latest",
-    "tsdown": "catalog:vite-latest",
-    "typescript": "catalog:typescript-latest"
+    "@tanstack/react-table": "catalog:react",
+    "@types/lodash": "catalog:typescript",
+    "@types/react": "catalog:react",
+    "@types/react-dom": "catalog:react",
+    "react": "catalog:react",
+    "react-dom": "catalog:react",
+    "tsdown": "catalog:vite",
+    "typescript": "catalog:typescript"
   },
   "dependencies": {
-    "@base-ui/react": "catalog:react-latest",
-    "cmdk": "catalog:react-latest",
-    "date-fns": "catalog:react-latest",
-    "embla-carousel-react": "catalog:react-latest",
-    "input-otp": "catalog:react-latest",
-    "lucide-react": "catalog:react-latest",
-    "next-themes": "catalog:react-latest",
-    "react-day-picker": "catalog:react-latest",
-    "react-resizable-panels": "catalog:react-latest",
-    "recharts": "catalog:react-latest",
-    "shadcn": "catalog:react-latest",
-    "sonner": "catalog:react-latest",
-    "tw-animate-css": "catalog:react-latest",
-    "vaul": "catalog:react-latest"
+    "@base-ui/react": "catalog:react",
+    "cmdk": "catalog:react",
+    "date-fns": "catalog:react",
+    "embla-carousel-react": "catalog:react",
+    "input-otp": "catalog:react",
+    "lucide-react": "catalog:react",
+    "next-themes": "catalog:react",
+    "react-day-picker": "catalog:react",
+    "react-resizable-panels": "catalog:react",
+    "recharts": "catalog:react",
+    "shadcn": "catalog:react",
+    "sonner": "catalog:react",
+    "tw-animate-css": "catalog:react",
+    "vaul": "catalog:react"
   },
   "inlinedDependencies": {
     "tailwind-merge": "3.4.0"
