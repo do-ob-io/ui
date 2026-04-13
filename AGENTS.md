@@ -5,7 +5,7 @@ Reusable React 19 UI components for do-ob applications, built on Base UI with Ta
 ## Quality Instructions
 
 - **Typecheck**: `tsc --noEmit`
-- **Lint**: `eslint --fix src/`
+- **Lint**: `pnpm lint`
 - **Test**: Storybook stories with `play` functions
 - **Build**: `pnpm build`
 
