@@ -50,11 +50,13 @@ const Header = () => {
         <TableRow key={headerGroup.id}>
           {headerGroup.headers.map((header) => {
             const meta = header.column.columnDef.meta as { style?: Record<string, any> };
-            const sortLabels = {
-              'asc': `Sort ${header.id} ascending`,
-              'desc': `Sort ${header.id} descending`,
-            };
-            const sortType = header.column.getIsSorted() || 'asc';
+            const headerLabel = typeof header.column.columnDef.header === 'string'
+              ? header.column.columnDef.header
+              : header.id;
+            const currentSort = header.column.getIsSorted();
+            const nextSortLabel = currentSort === 'asc'
+              ? `Sort ${headerLabel} descending`
+              : `Sort ${headerLabel} ascending`;
             return (
               <TableHead key={header.id} style={{ ...meta?.style }}>
                 <span>
@@ -71,15 +73,13 @@ const Header = () => {
                     size="icon-sm"
                     className="relative top-0.5"
                     onClick={header.column.getToggleSortingHandler()}
-                    aria-label={sortLabels[sortType]}
+                    aria-label={nextSortLabel}
                   >
-                    <ArrowUpDownIcon className={cn(header.column.getIsSorted() && `
+                    <ArrowUpDownIcon className={cn(currentSort && 'hidden')} />
+                    <ArrowUpIcon className={cn(currentSort === 'asc' ? 'block' : `
                       hidden
                     `)} />
-                    <ArrowUpIcon className={cn(header.column.getIsSorted() === 'asc' ? `
-                      block
-                    ` : 'hidden')} />
-                    <ArrowDownIcon className={cn(header.column.getIsSorted() === 'desc' ? `
+                    <ArrowDownIcon className={cn(currentSort === 'desc' ? `
                       block
                     ` : 'hidden')} />
                   </Button>
@@ -91,7 +91,7 @@ const Header = () => {
                         variant={header.column.getFilterValue() ? 'secondary' : 'ghost'}
                         size="icon-sm"
                         className="relative top-0.5"
-                        aria-label={`Filter ${header.id}`}
+                        aria-label={`Filter ${headerLabel}`}
                       />}
                     >
                       <FilterIcon className={cn(header.column.getFilterValue() ? `
@@ -101,7 +101,7 @@ const Header = () => {
                     <PopoverContent className="w-60 p-3" align="start">
                       <div className="flex flex-col gap-2">
                         <label className="text-sm font-medium" htmlFor={`filter-${header.id}`}>
-                          Filter {String(header.column.columnDef.header ?? header.id)}
+                          Filter {headerLabel}
                         </label>
                         <div className="flex items-center gap-2">
                           <Input
@@ -109,14 +109,14 @@ const Header = () => {
                             placeholder={'Search...'}
                             value={(header.column.getFilterValue() as string) ?? ''}
                             onChange={(e) => header.column.setFilterValue(e.target.value || undefined)}
-                            aria-label={`Filter ${header.id} value`}
+                            aria-label={`Filter ${headerLabel} value`}
                           />
                           {Boolean(header.column.getFilterValue()) && (
                             <Button
                               variant="ghost"
                               size="icon-sm"
                               onClick={() => header.column.setFilterValue(undefined)}
-                              aria-label={`Clear filter ${header.id}`}
+                              aria-label={`Clear filter ${headerLabel}`}
                             >
                               <XIcon />
                             </Button>
@@ -421,7 +421,7 @@ export function DataTable<TData>({
         </div>
         {paginate && (<div className="flex flex-row items-center space-x-2 pt-4">
           <div className="grow text-sm text-muted-foreground">
-            {table.getRowCount()} records
+            Total Records: {table.getRowCount()}
           </div>
           <DataTablePagination />
         </div>)}

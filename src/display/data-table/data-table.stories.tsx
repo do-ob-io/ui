@@ -40,7 +40,7 @@ export const Default: Story = {
   play: async ({ canvas }) => {
     await expect(canvas.getByText('Alice Johnson')).toBeVisible();
     await expect(canvas.getByText('Email')).toBeVisible();
-    await expect(canvas.getByText('Total Records:')).toBeVisible();
+    await expect(canvas.getByText(/Total Records:/)).toBeVisible();
   },
 };
 
@@ -138,7 +138,7 @@ export const FullFeatured: Story = {
     await expect(canvas.getByText('Alice Johnson')).toBeVisible();
     await expect(canvas.getByLabelText('Sort Name ascending')).toBeInTheDocument();
     await expect(canvas.getByLabelText('Filter Name')).toBeInTheDocument();
-    await expect(canvas.getByText('Total Records:')).toBeVisible();
+    await expect(canvas.getByText(/Total Records:/)).toBeVisible();
   },
 };
 
