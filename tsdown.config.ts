@@ -6,4 +6,5 @@ export default defineConfig({
   exports: true,
   minify: true,
   dts: true,
+  unbundle: true,
 });

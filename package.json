@@ -24,8 +24,6 @@
     }
   },
   "devDependencies": {
-    "@do-ob/core": "workspace:^",
-    "@do-ob/hook": "workspace:^",
     "@tanstack/react-table": "catalog:react",
     "@types/lodash": "catalog:typescript",
     "@types/react": "catalog:react",
@@ -37,6 +35,8 @@
   },
   "dependencies": {
     "@base-ui/react": "catalog:react",
+    "@do-ob/core": "workspace:^",
+    "@do-ob/hook": "workspace:^",
     "cmdk": "catalog:react",
     "date-fns": "catalog:react",
     "embla-carousel-react": "catalog:react",
@@ -50,8 +50,5 @@
     "sonner": "catalog:react",
     "tw-animate-css": "catalog:react",
     "vaul": "catalog:react"
-  },
-  "inlinedDependencies": {
-    "tailwind-merge": "3.5.0"
   }
 }
