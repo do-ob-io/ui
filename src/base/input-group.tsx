@@ -1,5 +1,4 @@
-import { cn } from '@do-ob/core/web';
-import { cva, type VariantProps } from '@do-ob/core/web';
+import { cn, cva, type VariantProps } from '@do-ob/core/web';
 import type * as React from 'react';
 
 import { Button } from '@/base/button.js';

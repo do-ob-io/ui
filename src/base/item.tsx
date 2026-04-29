@@ -1,7 +1,6 @@
 import { mergeProps } from '@base-ui/react/merge-props';
 import { useRender } from '@base-ui/react/use-render';
-import { cn } from '@do-ob/core/web';
-import { cva, type VariantProps } from '@do-ob/core/web';
+import { cn, cva, type VariantProps } from '@do-ob/core/web';
 import type * as React from 'react';
 
 import { Separator } from '@/base/separator.js';

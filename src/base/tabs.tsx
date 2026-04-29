@@ -1,8 +1,7 @@
 'use client';
 
 import { Tabs as TabsPrimitive } from '@base-ui/react/tabs';
-import { cn } from '@do-ob/core/web';
-import { cva, type VariantProps } from '@do-ob/core/web';
+import { cn, cva, type VariantProps } from '@do-ob/core/web';
 
 
 function Tabs({

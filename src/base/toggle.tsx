@@ -1,6 +1,5 @@
 import { Toggle as TogglePrimitive } from '@base-ui/react/toggle';
-import { cn } from '@do-ob/core/web';
-import { cva, type VariantProps } from '@do-ob/core/web';
+import { cn, cva, type VariantProps } from '@do-ob/core/web';
 
 
 const toggleVariants = cva(

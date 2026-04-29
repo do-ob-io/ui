@@ -1,8 +1,7 @@
 /* eslint-disable @eslint-react/naming-convention/use-state */
 import { mergeProps } from '@base-ui/react/merge-props';
 import { useRender } from '@base-ui/react/use-render';
-import { cn } from '@do-ob/core/web';
-import { cva, type VariantProps } from '@do-ob/core/web';
+import { cn, cva, type VariantProps } from '@do-ob/core/web';
 import { useIsMobile } from '@do-ob/hook/browser';
 import { PanelLeftIcon } from 'lucide-react';
 import * as React from 'react';
